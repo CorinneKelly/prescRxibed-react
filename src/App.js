@@ -7,9 +7,7 @@ import { bindActionCreators } from 'redux';
 import { getJWTToken } from './actions/account';
 import { connect } from 'react-redux';
 import './App.css'
-import AddPrescription from './components/AddPrescription'
-import Prescription from './components/Prescription'
-import FullSchedule from './components/FullSchedule'
+import Home from './components/Home'
 
 // make sure store is right later
 
@@ -23,9 +21,7 @@ class App extends Component {
           onSuccess = {this.props.getJWTToken}
           onFailure = {this.props.getJWTToken}
          />
-        <AddPrescription  />
-				<Prescription  />
-				<FullSchedule  />
+        <Home />
       </div>
     );
   }

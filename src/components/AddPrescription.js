@@ -6,6 +6,7 @@ class AddPrescription extends Component {
 	constructor() {
 		super()
 		this.handleSubmit = this.handleSubmit.bind(this)
+
 		this.handleFrequency = this.handleFrequency.bind(this)
 		this.addDoseTime = this.addDoseTime.bind(this)
 		this.addDoseMonth = this.addDoseMonth.bind(this)
@@ -51,45 +52,55 @@ class AddPrescription extends Component {
 
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<input type="text" placeholder="Name of medicine" /><br />
-				Start Date: <input type="date" value={today} /><br />
-				<input type="textarea" placeholder="How do you take this medicine?" /><br />
-				<a onClick={this.showStepTwo} >Continue</a>
-				
-				// -----------
 
-				<input type="number" placeholder="How many pills per dose?" /><br />
-				<input type="number" placeholder="Dosage amount?" /><br />
-				 // possible dropdown menu with 'mg' etc 
-				<input type="number" placeholder="Number of pills per bottle?" /><br /> 
-				<input type="number" placeholder="Number of refills?" /><br /> 
-				<a onClick={this.showStepThree} >Continue</a>
+				<div class="stepOne" >
+					<input type="text" placeholder="Name of medicine" /><br />
+					Start Date: <input type="date" value={today} /><br />
+					<input type="textarea" placeholder="Instructions" /><br />
+					<a onClick={this.showStepTwo} >Continue</a>
+				</div>
 				
-				// -----------
+				<div class="stepTwo" >
+					<input type="number" placeholder="# of pills per dose?" /><br />
+					<input type="number" placeholder="Dosage amount?" /><br />
+					 // possible dropdown menu with 'mg' etc 
+					<input type="number" placeholder="# of pills per bottle?" /><br /> 
+					<input type="number" placeholder="# of refills?" /><br /> 
+					<a onClick={this.showStepThree} >Continue</a>
+				</div>
 				
-				Frequency <select name="frequency" onChange={this.handleFrequency}>
-					<option value="daily">Daily</option>
-					<option value="weekly">Weekly</option>
-					<option value="monthly">Monthly</option>
-				</select> <br />
+				<div className="stepThree" >
+					Frequency <select name="frequency" onChange={this.handleFrequency}>
+						<option value="daily">Daily</option>
+						<option value="weekly">Weekly</option>
+						<option value="monthly">Monthly</option>
+					</select> <br />
 
 				// if daily is selected
-				1st dose: <input type="time" />
-				<button onClick={this.addDoseTime}>Add another dose for this day</button>
+					<div className="dailyFrequency" >
+						1st dose: <input type="time" />
+						<button onClick={this.addDoseTime}>Add another dose for this day</button>
+					</div>
 
-				// if weekly is selected
-				<input type="checkbox" value="Monday" checked /> Monday <br />
-				<input type="checkbox" value="Tuesday" checked /> Tuesday <br />
-				<input type="checkbox" value="Wednesday" checked /> Wednesday <br />
-				<input type="checkbox" value="Thursday" checked /> Thursday <br />
-				<input type="checkbox" value="Friday" checked /> Friday <br />
-				<input type="checkbox" value="Saturday" checked /> Saturday <br />
-				<input type="checkbox" value="Sunday" checked /> Sunday <br />
-				
-				// if monthly is selected
-				Choose by date <input type="number" name="monthFreq" min="1" max="31" />
-				<button onClick={this.addDoseMonth}>Add another dose for this month</button>
-				<a onClick={this.showStepFour} >Continue</a>
+					
+					// if weekly is selected
+					<div className="weeklyFrequency" >
+						<input type="checkbox" value="Monday" checked /> Monday <br />
+						<input type="checkbox" value="Tuesday" checked /> Tuesday <br />
+						<input type="checkbox" value="Wednesday" checked /> Wednesday <br />
+						<input type="checkbox" value="Thursday" checked /> Thursday <br />
+						<input type="checkbox" value="Friday" checked /> Friday <br />
+						<input type="checkbox" value="Saturday" checked /> Saturday <br />
+						<input type="checkbox" value="Sunday" checked /> Sunday <br />
+					</div>
+
+					// if monthly is selected
+					<div className="monthlyFrequency" >
+						Choose by date <input type="number" name="monthFreq" min="1" max="31" />
+						<button onClick={this.addDoseMonth}>Add another dose for this month</button>
+						<a onClick={this.showStepFour} >Continue</a>
+					</div>
+				</div>
 				
 				// -----------
 
