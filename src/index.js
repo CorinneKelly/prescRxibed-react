@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import GoogleLogin from 'react-google-login'
 import axios from 'axios'
-import App from './App';
-import './index.css';
+import App from './App'
+import './index.css'
 
 
 const responseGoogle = (response) => {
@@ -13,7 +13,7 @@ const responseGoogle = (response) => {
   .then(function(response){
     console.log('logged in successfully')
     console.log(response)
-  });
+  })
 }
 
 
@@ -22,9 +22,7 @@ const responseGoogle = (response) => {
 ReactDOM.render(
   <div>
     <App />
-    <GoogleLogin
-      //clientId="" add it from evernote
-      
+    <GoogleLogin      
       buttonText = "Login with Google"
       responseType
       onSuccess = {responseGoogle}
@@ -32,4 +30,4 @@ ReactDOM.render(
      />
   </div>,
   document.getElementById('root')
-);
+)
