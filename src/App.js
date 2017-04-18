@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import GoogleLogin from 'react-google-login'
-
 import './App.css'
 import { bindActionCreators } from 'redux'
 import { getJWTToken } from './actions/account'
 import { connect } from 'react-redux'
 import './App.css'
 import Home from './components/Home'
+import BurgerMenu from './components/BurgerMenu'
 
 // make sure store is right later
 
@@ -17,9 +17,10 @@ class App extends Component {
 
   constructor() {
     super()
+
   }
 
-  isloggedin() {
+  isLoggedIn() {
     if (this.props.account) {
       return <Home />
     } else {
@@ -32,10 +33,13 @@ class App extends Component {
     }
   }
 
+
+
   render() {
     return (
       <div className="App" >
-        {this.isloggedin()}
+        <BurgerMenu />
+        {this.isLoggedIn()}
       </div>
     )
   }
@@ -52,6 +56,6 @@ const mapDispatchToProps = (dispatch) => {
   )
 }
 
-export const ConnnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
+export const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
 
 

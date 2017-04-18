@@ -12,27 +12,29 @@ import { AddPrescription } from './components/AddPrescription'
 import { Home } from './components/Home'
 import { Prescription } from './components/Prescription'
 import { Symptom } from './components/Symptom'
-import { NavBar } from './components/NavBar'
+import { BurgerMenu } from './components/BurgerMenu'
 import { NotFound } from './components/NotFound'
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={store}>
+  	<Router history={browserHistory} >
+	  	<div className="appWrapper" >
 
-  	<div className="appWrapper" >
-	    <Route path='/' component={NavBar} />
+		    <Route path='/' component={BurgerMenu} />
 
-	    <Switch>
-	    	<Route exact path='/' component={ConnectedApp} />
-	    	<Route path='/:id' component={Home} />
-	    	<Route path='/addprescription' component={AddPrescription} />
-	    	<Route path='/prescriptions/:prescription' component={Prescription} />
-	    	<Route path='/prescriptions/:prescription/symptoms/:symptom' component={Symptom} />
-	    	<Route component={NotFound} />
-	  	</Switch>
+		    <Switch>
+		    	<Route exact path='/' component={ConnectedApp} />
+		    	<Route path='/:id' component={Home} />
+		    	<Route path='/addprescription' component={AddPrescription} />
+		    	<Route path='/prescriptions/:prescription' component={Prescription} />
+		    	<Route path='/prescriptions/:prescription/symptoms/:symptom' component={Symptom} />
+		    	<Route component={NotFound} />
+		  	</Switch>
 
-  	</div>
+	  	</div>
+	  </Router>
 
   </Provider>,
   document.getElementById('root')
