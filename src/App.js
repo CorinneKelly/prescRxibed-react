@@ -36,7 +36,6 @@ class App extends Component {
     return (
       <div className="App" >
         {this.isloggedin()}
-        
       </div>
     )
   }
