@@ -11,6 +11,8 @@ import Home from './components/Home'
 
 // make sure store is right later
 
+
+
 class App extends Component {
 
   constructor() {
@@ -50,5 +52,7 @@ const mapDispatchToProps = (dispatch) => {
     dispatch
   )
 }
+
 export const ConnnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
+
 
