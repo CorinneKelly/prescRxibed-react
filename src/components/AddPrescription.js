@@ -25,7 +25,7 @@ class AddPrescription extends Component {
 			let date = new Date()
 			let today = moment(date).format('YYYY-MM-DD')
 			return(
-				<div class="stepOne" >
+				<div className="stepOne" >
 					<input type="text" placeholder="Name of medicine" /><br />
 					Start Date: <input type="date" value={today} /><br />
 					<input type="textarea" placeholder="Instructions" /><br />
