@@ -20,15 +20,13 @@ class App extends Component {
 
   }
 
-  isloggedin() {
+  isLoggedIn() {
     if (this.props.account.token) {
       return <Home />
     } else {
       return <Welcome />
     }
   }
-
-
 
   render() {
     return (
@@ -45,12 +43,4 @@ const mapStateToProps = (state) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getJWTToken},
-    dispatch
-  )
-}
-
-export const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
-
+export const ConnectedApp = connect(mapStateToProps)(App)
