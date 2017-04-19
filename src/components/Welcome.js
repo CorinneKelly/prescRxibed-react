@@ -14,7 +14,9 @@ class Welcome extends Component {
         <GoogleLogin
           clientId= "60833227507-6ncphb190ddr1ma1bq5k8ap4piv2ui37.apps.googleusercontent.com"
           buttonText = "Login with Google"
+
           scope = "https://www.googleapis.com/auth/calendar"
+
           onSuccess = {this.props.getJWTToken}
           onFailure = {this.props.getJWTToken}
         />
