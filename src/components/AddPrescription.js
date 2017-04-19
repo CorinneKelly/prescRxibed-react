@@ -140,6 +140,7 @@ class AddPrescription extends Component {
 
 
 	handleSubmit() {
+		debugger
 	}
 
 	handleFrequency() {

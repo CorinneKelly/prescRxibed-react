@@ -32,6 +32,7 @@ class Home extends Component {
 	showPrescriptions(){
 		if (this.state.prescriptions === true){
 			return <Prescriptions />
+			// prescriptions will return a list of <li>prescriptions</li>
 		}
 		else {
 			return null
@@ -39,7 +40,7 @@ class Home extends Component {
 	}
 	showSchedule(){
 		if (this.state.schedule === true){
-			return <FullSchedule />
+			return <li><FullSchedule /></li>
 		}
 		else {
 			return null
@@ -49,13 +50,15 @@ class Home extends Component {
 	render(){
 		return (
 			<div className="Home" >
-				<form action="/prescriptions/new">
-				  <button className="large-button" type="submit">Add a Prescription</button>
-				</form>
-				<button type="button" className="large-button" onClick={this.handleOnClickPrescriptions}>Your Prescriptions</button><br/>
-				{this.showPrescriptions()}
-				<button type="button" className="large-button" onClick={this.handleOnClickSchedule}>Schedule</button>
-				{this.showSchedule()}
+				<ul>
+					<li><a href="/prescriptions/new"><button className="large-button" >Add a Prescription</button></a></li>
+
+					<li><button type="button" className="large-button" onClick={this.handleOnClickPrescriptions}>Your Prescriptions</button></li>
+							{this.showPrescriptions()}
+
+					<li><button type="button" className="large-button" onClick={this.handleOnClickSchedule}>Schedule</button></li>
+							{this.showSchedule()}
+				</ul>
 
 			</div>
 		)

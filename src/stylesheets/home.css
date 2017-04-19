@@ -1,8 +1,18 @@
+.Welcome {
+  margin-top: 40px;
+}
+
 .home {
   flex-direction: column;
   text-align: center;
 
 }
+
+  .home ul {
+    list-style-type: none;
+    list-style: none;
+
+  }
 
 .large-button {
   background: #3498db;

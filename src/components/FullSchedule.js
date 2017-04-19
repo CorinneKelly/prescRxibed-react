@@ -1,11 +1,14 @@
 import React from 'react'
+// import GoogleCalendar from 'react-google-calendar-events-list'
 
 class FullSchedule extends React.Component {
 	render() {
 		return (
-			<div>
-				This is a calendar
-			</div>
+"hello"			// <GoogleCalendar 
+			// 	calendarId: {this.props.userEmail},
+			// 	description: "?"
+
+			// />
 		)
 	}
 }
