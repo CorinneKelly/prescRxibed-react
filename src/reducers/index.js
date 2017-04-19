@@ -1,7 +1,9 @@
 import {combineReducers} from 'redux'
+import {routerReducer } from 'react-router-redux'
 
 import accountReducer from './accountReducer'
 
 export default combineReducers({
-  account: accountReducer
+  account: accountReducer,
+  router: routerReducer,
 })
