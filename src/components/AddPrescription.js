@@ -7,13 +7,15 @@ class AddPrescription extends Component {
 		super()
 
 		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleInputChange = this.handleInputChange.bind(this)
 		this.handleFrequency = this.handleFrequency.bind(this)
 		this.backButton = this.backButton.bind(this)
 		this.showNextStep = this.showNextStep.bind(this)
 
 		this.state={
 			step: 1,
-			frequency: "daily"
+			frequency: "daily",
+			prescription: {}
 		}
 	}
 
@@ -34,9 +36,9 @@ class AddPrescription extends Component {
 			let today = moment(date).format('YYYY-MM-DD')
 			return(
 				<div className="stepOne" >
-					<input type="text" placeholder="Name of medicine" /><br />
-					Start Date: <input type="date" value={today} /><br />
-					<input type="textarea" placeholder="Instructions" /><br />
+					<input type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} /><br />
+					Start Date: <input type="date" value={today} name="schedule[startDate]" /><br />
+					<input type="textarea" placeholder="Instructions" name="prescription[instructions]" /><br />
 				</div>
 			)
 		}else{
@@ -47,11 +49,11 @@ class AddPrescription extends Component {
 	renderStepTwo(){
 		if(this.state.step === 2){
 			return (
-			<div class="stepTwo" >
-				<input type="number" placeholder="# per dose?" />
-				<input type="text" placeholder="units (pill, mL, etc.)"/> <br />
-				<input type="number" placeholder="amount per bottle?" /><br />
-				<input type="number" placeholder="# of refills?" /><br />
+			<div className="stepTwo" >
+				<input type="number" placeholder="# per dose?" name="prescription[dosage]" />
+				<input type="text" placeholder="units (pill, mL, etc.)" name="prescription[units]" /> <br />
+				<input type="number" placeholder="amount per bottle?" name="prescription[quantity]" /><br />
+				<input type="number" placeholder="# of refills?" name="prescription[refills]" /><br />
 			</div>)
 		} else {
 		return null
@@ -62,7 +64,7 @@ class AddPrescription extends Component {
 		if(this.state.step === 3){
 			return (
 				<div className="stepThree" >
-					Frequency <select id="frequency" name="frequency" onChange={this.handleFrequency}>
+					Frequency <select id="frequency" name="schedule[frequency]" onChange={this.handleFrequency}>
 						<option value="daily">Daily</option>
 						<option value="weekly">Weekly</option>
 						<option value="monthly">Monthly</option>
@@ -78,10 +80,10 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.frequency  === "daily"){
 			return(
 				<div className="dailyFrequency" >
-					Time of dose: <input type="time" /><br/>
-					Time of dose: <input type="time" /><br/>
-					Time of dose: <input type="time" /><br/>
-					Time of dose: <input type="time" />
+					Time of dose: <input type="time" name="schedule[hours][]" /><br/>
+					Time of dose: <input type="time" name="schedule[hours][]" /><br/>
+					Time of dose: <input type="time" name="schedule[hours][]" /><br/>
+					Time of dose: <input type="time" name="schedule[hours][]" />
 				</div>
 			)
 		}else{
@@ -93,13 +95,13 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.frequency === "weekly"){
 			return(
 				<div className="weeklyFrequency" >
-					<input type="checkbox" value="Monday" checked /> Monday <br />
-					<input type="checkbox" value="Tuesday" checked /> Tuesday <br />
-					<input type="checkbox" value="Wednesday" checked /> Wednesday <br />
-					<input type="checkbox" value="Thursday" checked /> Thursday <br />
-					<input type="checkbox" value="Friday" checked /> Friday <br />
-					<input type="checkbox" value="Saturday" checked /> Saturday <br />
-					<input type="checkbox" value="Sunday" checked /> Sunday <br />
+					<input type="checkbox" value="Monday" checked name="schedule[weekdays][]"/> Monday <br />
+					<input type="checkbox" value="Tuesday" checked name="schedule[weekdays][]"/> Tuesday <br />
+					<input type="checkbox" value="Wednesday" checked name="schedule[weekdays][]"/> Wednesday <br />
+					<input type="checkbox" value="Thursday" checked name="schedule[weekdays][]"/> Thursday <br />
+					<input type="checkbox" value="Friday" checked name="schedule[weekdays][]"/> Friday <br />
+					<input type="checkbox" value="Saturday" checked name="schedule[weekdays][]"/> Saturday <br />
+					<input type="checkbox" value="Sunday" checked name="schedule[weekdays][]"/> Sunday <br />
 				</div>
 			)
 		}else{
@@ -111,10 +113,10 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.frequency === "monthly"){
 			return(
 				<div className="monthlyFrequency" >
-					Choose dates:<br/> <input type="number" name="monthFreq" min="1" max="31" /><br/>
-					<input type="number" name="monthFreq" min="1" max="31" /><br/>
-					<input type="number" name="monthFreq" min="1" max="31" /><br/>
-					<input type="number" name="monthFreq" min="1" max="31" />
+					Choose dates:<br/> <input type="number" min="1" max="31" name="schedule[monthDates][]" /><br/>
+					<input type="number" min="1" max="31" name="schedule[monthDates][]" /><br/>
+					<input type="number" min="1" max="31" name="schedule[monthDates][]" /><br/>
+					<input type="number" min="1" max="31" name="schedule[monthDates][]" />
 				</div>
 			)
 		}else{
@@ -128,8 +130,8 @@ class AddPrescription extends Component {
 			return(
 				<div>
 					<p>This section is optional, feel free to skip it by clicking "I'm done"</p>
-					<input type="text" placeholder="Name of Doctor" /><br />
-					Expiration Date <input type="date" /><br />
+					<input type="text" placeholder="Name of Doctor" name="prescription[doctor]" /><br />
+					Expiration Date <input type="date" name="schedule[expiration]" /><br />
 					<input type="submit" value="I'm Done" />
 				</div>
 			)
@@ -141,6 +143,14 @@ class AddPrescription extends Component {
 
 	handleSubmit() {
 		debugger
+	}
+
+	handleInputChange(field, nestedParent, event){
+		debugger
+		event.preventDefault()
+		this.setState({
+			{nestedParent}: {...this.state.nestedParent, {field}: event.target.value}
+		})
 	}
 
 	handleFrequency() {
