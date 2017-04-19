@@ -49,7 +49,7 @@ class Home extends Component {
 	render(){
 		return (
 			<div className="Home" >
-				<form action="/addprescription">
+				<form action="/prescriptions/new">
 				  <button className="large-button" type="submit">Add a Prescription</button>
 				</form>
 				<button type="button" className="large-button" onClick={this.handleOnClickPrescriptions}>Your Prescriptions</button><br/>
