@@ -5,25 +5,33 @@ class BurgerMenu extends Component {
 
 	constructor() {
 		super()
+		this.state={
+			visible: false,
+			classToggle: "burger-menu-items"
+		}
+
 		this.handleClick = this.handleClick.bind(this)
 	}
 	
 	showMenuItems() {
-
+		if (this.state.visible) {
+			
+		}
 	}
 
 	handleClick() {
 		event.preventDefault()
 		this.setState({
-			visible: true
+			visible: !this.state.visible,
+			// classToggle: (this.state.classToggle === "burger-menu-items" ? "burger-menu-items-view" : "burger-menu-items")
 		})
 	}
 
 	render() {
 		return (
-			<div>
-				<img src="burgerIcon.svg" height="60" width="auto" onClick={this.handleClick} />			
-				{this.showMenuItems()}
+			<div className="burger-menu">
+				<img src="burgerIcon.svg" height="40" width="auto" onClick={this.handleClick} />			
+				{this.state.visible ? <MenuItem className={this.state.classToggle}/> : null}
 			</div>
 		)
 	}
