@@ -2,7 +2,6 @@ import axios from 'axios'
 
 export function getJWTToken(response) {
   return (dispatch) => {
-    debugger
     axios
     .post('http://localhost:4000/v1/sessions', {account: {googleToken: response.accessToken, googleId: response.googleId, name: response.profileObj.name}})
     .then(function(response){
@@ -17,4 +16,9 @@ export function getJWTToken(response) {
       })
     })
   }
+}
+
+export function setAuthHeader(){
+  debugger
+  return {headers: {"token": localStorage.token}}
 }

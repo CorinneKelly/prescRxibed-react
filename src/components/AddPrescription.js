@@ -1,5 +1,9 @@
 import moment from 'moment'
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { postPrescriptionEvent } from '../actions/prescription'
+import { connect } from 'react-redux'
+
 
 class AddPrescription extends Component {
 
@@ -18,6 +22,50 @@ class AddPrescription extends Component {
 			prescription: {}
 		}
 	}
+	handleSubmit(event) {
+		event.preventDefault()
+		let fakeState = {
+			prescription: {
+				name: "DrugName",
+				instructions: "Take This",
+				dosage: 2,
+				units: "pills",
+				quantity: 60,
+				refills: 3,
+				doctor: ""
+			},
+			schedule: {
+				start_date: "2017-04-19",
+				end_date: "2017-07-19",
+				frequency: "Daily",
+				hours: ["9:00", "12:00", "18:00"],
+				weekdays: [],
+				month_days: [],
+				expiration_date: "2018-04-19"
+			}
+		}
+		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
+
+	}
+
+	handleInputChange(field, nestedParent, event){
+		debugger
+		// event.preventDefault()
+		// this.setState({
+		// 	{nestedParent}: {...this.state.nestedParent, {field}: event.target.value}
+		// })
+	}
+
+	handleFrequency() {
+		// should display appropriate selections depending on selection value
+
+		var e = document.getElementById("frequency");
+		var freq = e.options[e.selectedIndex].value;
+		this.setState({
+			frequency: freq
+		})
+	}
+
 
 	backButton(e){
 		e.preventDefault()
@@ -38,6 +86,7 @@ class AddPrescription extends Component {
 				<div className="stepOne" >
 					<input type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} /><br />
 					Start Date: <input type="date" value={today} name="schedule[startDate]" /><br />
+					End Date: <input type="date"  name="schedule[endDate]" /><br />
 					<input type="textarea" placeholder="Instructions" name="prescription[instructions]" /><br />
 				</div>
 			)
@@ -113,10 +162,10 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.frequency === "monthly"){
 			return(
 				<div className="monthlyFrequency" >
-					Choose dates:<br/> <input type="number" min="1" max="31" name="schedule[monthDates][]" /><br/>
-					<input type="number" min="1" max="31" name="schedule[monthDates][]" /><br/>
-					<input type="number" min="1" max="31" name="schedule[monthDates][]" /><br/>
-					<input type="number" min="1" max="31" name="schedule[monthDates][]" />
+					Choose dates:<br/> <input type="number" min="1" max="31" name="schedule[monthDays][]" /><br/>
+					<input type="number" min="1" max="31" name="schedule[monthDays][]" /><br/>
+					<input type="number" min="1" max="31" name="schedule[monthDays][]" /><br/>
+					<input type="number" min="1" max="31" name="schedule[monthDays][]" />
 				</div>
 			)
 		}else{
@@ -138,29 +187,6 @@ class AddPrescription extends Component {
 		}else{
 			return null
 		}
-	}
-
-
-	handleSubmit() {
-		debugger
-	}
-
-	handleInputChange(field, nestedParent, event){
-		debugger
-		event.preventDefault()
-		this.setState({
-			{nestedParent}: {...this.state.nestedParent, {field}: event.target.value}
-		})
-	}
-
-	handleFrequency() {
-		// should display appropriate selections depending on selection value
-
-		var e = document.getElementById("frequency");
-		var freq = e.options[e.selectedIndex].value;
-		this.setState({
-			frequency: freq
-		})
 	}
 
 	showNextStep(e) {
@@ -192,4 +218,14 @@ class AddPrescription extends Component {
 
 }
 
-export default AddPrescription
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    postPrescriptionEvent},
+    dispatch
+  )
+}
+
+
+
+
+export default connect(null, mapDispatchToProps)(AddPrescription)
