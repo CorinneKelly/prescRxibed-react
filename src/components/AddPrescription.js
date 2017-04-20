@@ -1,5 +1,9 @@
 import moment from 'moment'
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { postPrescriptionEvent } from '../actions/prescription'
+import { connect } from 'react-redux'
+
 
 class AddPrescription extends Component {
 
@@ -21,8 +25,33 @@ class AddPrescription extends Component {
 				frequency: "daily"
 			}
 		}
-
 	}
+  
+	handleSubmit(event) {
+		event.preventDefault()
+		let fakeState = {
+			prescription: {
+				name: "DrugName",
+				instructions: "Take This",
+				dosage: 2,
+				units: "pills",
+				quantity: 60,
+				refills: 3,
+				doctor: ""
+			},
+			schedule: {
+				start_date: "2017-04-19",
+				end_date: "2017-07-19",
+				frequency: "Daily",
+				hours: ["9:00", "12:00", "18:00"],
+				weekdays: [],
+				month_days: [],
+				expiration_date: "2018-04-19"
+			}
+		}
+		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
+	}
+
 
 	renderStepOne() {
 		if(this.state.step === 1) {
@@ -32,6 +61,7 @@ class AddPrescription extends Component {
 			return(
 				<div className="stepOne" >
 					<input type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} /><br />
+
 					Start Date: <input type="date" value={today} name="schedule[startDate]" onChange={this.handleInputChange.bind(this, "startDate", "schedule")} /><br />
 					<input type="textarea" placeholder="Instructions" name="prescription[instructions]" onChange={this.handleInputChange.bind(this, "instructions", "prescription")} /><br />
 					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
@@ -110,6 +140,7 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.schedule.frequency === "monthly") {
 			return(
 				<div className="monthlyFrequency" >
+
 					Choose dates:<br/> <input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
 					<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
 					<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
@@ -137,6 +168,7 @@ class AddPrescription extends Component {
 			return null
 		}
 	}
+
 
 	handleInputChange(field, nestedParent, event){
 		event.preventDefault()
@@ -166,8 +198,8 @@ class AddPrescription extends Component {
 		})
 	}
 
-	backButton(e){
-		e.preventDefault()
+	backButton(event){
+		event.preventDefault()
 		if(this.state.step !== 1){
 			let backStep = this.state.step - 1
 			this.setState({
@@ -176,9 +208,6 @@ class AddPrescription extends Component {
 		}
 	}
 
-	handleSubmit() {
-		debugger
-	}
 
 	render() {
 		return (
@@ -198,4 +227,14 @@ class AddPrescription extends Component {
 
 }
 
-export default AddPrescription
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    postPrescriptionEvent},
+    dispatch
+  )
+}
+
+
+
+
+export default connect(null, mapDispatchToProps)(AddPrescription)
