@@ -9,15 +9,15 @@ import Home from './components/Home'
 import Welcome from './components/Welcome'
 import BurgerMenu from './components/BurgerMenu'
 
-// make sure store is right later
-
-
-
 class App extends Component {
 
   constructor() {
     super()
-
+    this.state = {
+      menuOpened: false,
+      menuIcon: "burgerIcon.svg"
+    }
+    this.exposeBurgerMenu = this.exposeBurgerMenu.bind(this)
   }
 
   isLoggedIn() {
@@ -27,11 +27,32 @@ class App extends Component {
       return <Welcome />
     }
   }
+  
+  exposeBurgerMenu() {
+    
+    if(this.state.menuOpened) {
+      document.getElementById("root").style.transform = "translate(0, 0)"
+      this.setState({
+        menuOpened: false,
+        menuIcon: "burgerIcon.svg"
+      })      
+    } else {
+      document.getElementById("root").style.transform = "translate(200px, 0)"
+      this.setState({
+        menuOpened: true,
+        menuIcon: "x.svg"
+      })
+      
+    }
+
+  }
+  
 
   render() {
     return (
         
       <div className="App" >
+        <BurgerMenu handleClick={this.exposeBurgerMenu} menuIcon={this.state.menuIcon} />
         {this.isLoggedIn()}
       </div>
     )
