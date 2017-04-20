@@ -166,8 +166,8 @@ class AddPrescription extends Component {
 		})
 	}
 
-	backButton(e){
-		e.preventDefault()
+	backButton(event){
+		event.preventDefault()
 		if(this.state.step !== 1){
 			let backStep = this.state.step - 1
 			this.setState({
@@ -176,9 +176,6 @@ class AddPrescription extends Component {
 		}
 	}
 
-	handleSubmit() {
-		debugger
-	}
 
 	render() {
 		return (
