@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import GoogleLogin from 'react-google-login'
+import {GoogleLogin} from 'react-google-login-component';
 import { bindActionCreators } from 'redux'
 import { getJWTToken } from '../actions/account'
 import { connect } from 'react-redux'
@@ -11,13 +11,13 @@ class Welcome extends Component {
 			<div className="Welcome" >
         <h1>Welcome to Your Prescription Tracker</h1>
         <h3>Login with Google to start managing your prescriptions</h3>
-        <GoogleLogin
-          clientId= "60833227507-11381756v8udc4kutj454916kl3m0ta8.apps.googleusercontent.com"
-          buttonText = "Login with Google"
-          onSuccess = {()=>console.log("Failed")}
-          onFailure = {()=>console.log("Failed")}
 
-        />
+				<GoogleLogin socialId="60833227507-8v5bc1e54tjf098p279be3kn7prei20v.apps.googleusercontent.com"
+										class="google-login"
+										scope="profile"
+										responseHandler={this.props.getJWTToken}
+										buttonText="Login With Google"/>
+
 			</div>
 		)
 	}

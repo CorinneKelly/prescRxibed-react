@@ -19,7 +19,7 @@ import AddPrescription from './components/AddPrescription'
 import { Home } from './components/Home'
 import { Prescription } from './components/Prescription'
 import Symptom from './components/Symptom'
-import {SymptomForm} from './components/SymptomForm'
+import SymptomForm from './components/SymptomForm'
 import { BurgerMenu } from './components/BurgerMenu'
 import { NotFound } from './components/NotFound'
 
@@ -41,11 +41,13 @@ ReactDOM.render(
   <Provider store={store}>
   	<Router history={history}>
       <div>
-        <Route path="/" component={BurgerMenu} />
         < Route exact path="/" component={ConnectedApp} />
         < Route path="/prescriptions/new" component={AddPrescription}  />
         <Route path='/:id' component={Home} />
         <Route path='/prescriptions/:prescription' component={Prescription} />
+        <Route path='/symptomform/:symptomId' component={SymptomForm} />
+        <Route path='/symptomform-check' component={SymptomForm} />
+        <Route path='/symptom-check' component={Symptom} />
         <Route path='/prescriptions/:prescription/symptoms/:symptom' component={Symptom} />
         <Route component={NotFound} />
       </div>

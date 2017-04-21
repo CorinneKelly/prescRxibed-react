@@ -24,7 +24,9 @@ class Prescription extends Component {
 
 	renderSchedule(){
 		//retrieve and format dosing schedule for this Rx
+
 	}
+
 	showDetails(){
 		this.setState({
 			display: "details"
@@ -44,14 +46,16 @@ class Prescription extends Component {
 	}
 
 
+	//diplay list of symptoms being tracked
+	//along with opportunity to add symptom
 	renderSymptoms(){
 		if (this.state.display==="symptoms"){
 			//const symptoms = symptom array from api
-			let symptoms = []
 			let symptomList = symptoms.map((symptom)=>{
 				return `<li> ${symptom} </li>`
 			})
-			symptomList.push('<input type="text" placeholder="Add new symptom"/input>')
+			symptomList.push("<input type="text" placeholder="Add new symptom"/input>")
+
 			return `<ul>{symptomList}</ul>`
 		}else{
 			return null
@@ -71,7 +75,27 @@ class Prescription extends Component {
 
 	render() {
 		return (
-			<input type="text" />
+			<div>
+
+				<div>
+				//need to retrieve next scheduled dose info to include in next line
+					Schedule: <button onClick={this.showSchedule}> next scheduled dose </button>
+				</div>
+				<div>
+					 <button onClick={this.showDetails}> Prescription Details </button>
+				</div>
+				<div>
+					 <button onClick={this.showSymptoms}> Symptom Tracker </button>
+				</div>
+				<div>
+					<button onClick={this.showDrugInfo}> Drug Information </button>
+				</div>
+				{this.renderSchedule()}
+				{this.renderDetails()}
+				{this.renderSymptoms()}
+				{this.renderDrugInfo()}
+
+			</div>
 		)
 	}
 }

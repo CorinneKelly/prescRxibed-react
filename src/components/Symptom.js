@@ -1,8 +1,26 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import { AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts'
+import { Image } from 'cloudinary-react'
+
+const data = [
+      // {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
+      {name: "4-20", uv: 1},
+      // name: this.props.dateOfEntry, uv: this.props.symptom.severity?
+      {name: "4-21", uv: 5},
+      {name: "4-22", uv: 3}
+			// uv= upper value
+]
 
 class Symptom extends Component {
 
-render() {
+  
+// h1: this.props.symptom.name
+// for new symptoms onClick will assign Id and then go to that specific symptomform/id page
+	// symptom list will be mapped from: this.props.symptoms.description
+// this.props.symptom.images. will be used in symptomImages Map
+
+	render() {
+
 		var symptomDescList =	[{description: "desc1"}, {description: "desc2"}, {description: "desc3"}, {description: "desc4"}].map((symptom) => {
 			return <li>{symptom.description}</li>
 		})

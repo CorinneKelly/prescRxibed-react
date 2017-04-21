@@ -103,7 +103,6 @@ class SymptomForm extends Component {
 
 					<div>
 						{this.state.uploadFileCloudinaryUrl === '' ? null :
-
 						<div>
 							<p>You just uploaded:</p>
 							<p>{this.state.uploadedFile.name}</p>
@@ -123,12 +122,13 @@ class SymptomForm extends Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    postSymptom},
-    dispatch
-  )
-}
+
+	const mapDispatchToProps = (dispatch) => {
+	  return bindActionCreators({
+	    postSymptom},
+	    dispatch
+	  )
+	}
 
 
 
