@@ -51,10 +51,11 @@ class Prescription extends Component {
 	renderSymptoms(){
 		if (this.state.display==="symptoms"){
 			//const symptoms = symptom array from api
+			let symptoms = []
 			let symptomList = symptoms.map((symptom)=>{
 				return `<li> ${symptom} </li>`
 			})
-			symptomList.push("<input type="text" placeholder="Add new symptom"/input>")
+			symptomList.push('<input type="text" placeholder="Add new symptom"/input>')
 
 			return `<ul>{symptomList}</ul>`
 		}else{
