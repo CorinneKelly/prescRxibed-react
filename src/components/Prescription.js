@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 class Prescription extends Component {
+
 	constructor(){
 		super()
 
@@ -24,6 +25,8 @@ class Prescription extends Component {
 	renderSchedule(){
 		//retrieve and format dosing schedule for this Rx
 
+	}
+
 	showDetails(){
 		this.setState({
 			display: "details"
@@ -42,6 +45,7 @@ class Prescription extends Component {
 		})
 	}
 
+
 	//diplay list of symptoms being tracked
 	//along with opportunity to add symptom
 	renderSymptoms(){
@@ -51,6 +55,7 @@ class Prescription extends Component {
 				return `<li> ${symptom} </li>`
 			})
 			symptomList.push("<input type="text" placeholder="Add new symptom"/input>")
+
 			return `<ul>{symptomList}</ul>`
 		}else{
 			return null
