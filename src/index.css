@@ -1,3 +1,5 @@
+/*burger menu*/
+
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +7,7 @@ body {
 }
 
 #root {
+	background-color: #31375D;
 	transition-duration: 1s;
 	position: absolute;
 	height: 100%;
@@ -42,3 +45,110 @@ body {
 .burger-menu-items-view {
 	transform:translateX(0);
 }
+
+/*home page with three buttons */
+
+/*dkblu: #31375D*/
+/*lt purple #93708D*/
+/*ltblue #D0E7F0*/
+/*ltblue: #ABCFE0*/
+/*white: #F2F3F5*/
+/*peach: #EEB5B7*/
+/*bright blu: #27CECF*/
+
+.Home {
+	height: 100%;
+	background-color: #31375D
+}
+
+
+.Home ul li {
+	background-color: rgba(49, 55, 93, 0.8);
+	color: #F2F3F5;
+	transition: transform 1s ease-in-out;
+	-webkit-transition: -webkit-transform 1s ease-in-out;
+}
+
+.Home ul {
+	margin-top: 60px;
+	left: 0;
+}
+
+.list-item {
+	display: flex;
+	transition: transform 1s ease-in-out;
+	border-color: #D0E7F0;
+}
+
+.image-flex {
+	flex: 10%;
+}
+
+.list-flex {
+	flex: 60%;
+	background-color: #31375D;
+	color: #F2F3F5;
+	font-size: 2em;
+}
+
+/*make a class on Home page to assign color"white" and put hover action on that*/
+
+	.list-flex:hover{
+		color: #27CECF;
+	}
+
+button {
+	outline:0;
+	border: none;
+}
+
+.pres-page-list-item {
+	background-color: #27CECF;
+	color: #31375D;
+}
+
+#add-pres-link {
+	text-decoration: none;
+	color: #F2F3F5;
+}
+
+	#add-pres-link:hover {
+		color: #27CECF;
+	}
+
+.prescription-page-list {
+	background-color: #27CECF;
+}
+
+.closed-bottle {
+	background-repeat: no-repeat;
+}
+
+.open-bottle {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+	background-repeat: no-repeat;
+}
+
+/*add PRescription PAge*/
+
+.add-presc-page ul {
+	margin-top: 60px;
+	margin-left: 10px
+}
+
+.add-pres-list-item {
+	
+}
+
+.add-pres-input {
+	background-color: #D0E7F0;
+}
+
+	.add-pres-input::placeholder {
+		color: #93708D;
+		
+	}
+
+
+

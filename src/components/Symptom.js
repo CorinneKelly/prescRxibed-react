@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts'
 import { Image } from 'cloudinary-react'
+import BurgerMenu from './BurgerMenu'
+
 
 const data = [
       // {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
@@ -29,7 +31,8 @@ class Symptom extends Component {
 
 	  return(
 	  	<div>
-
+	  		
+	  		<BurgerMenu />
 	  		<h1>Symptom Name</h1>
 	  		<a href="/symptomform/{symptomId}">How are you feeling today?</a>
 

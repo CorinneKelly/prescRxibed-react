@@ -19,6 +19,5 @@ export function getJWTToken(response) {
 }
 
 export function setAuthHeader(){
-  debugger
   return {headers: {"token": localStorage.token}}
 }
