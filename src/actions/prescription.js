@@ -6,7 +6,6 @@ let config = setAuthHeader()
 
 export const postPrescriptionEvent = (prescriptionData) => {
   return (dispatch) => {
-    debugger
     axios
     .post('http://localhost:4000/v1/prescriptions', {prescriptionData: prescriptionData}, config)
     .then(
