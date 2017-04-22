@@ -87,7 +87,7 @@ class Prescription extends Component {
 		//retrieve and format dosing schedule for this Rx
 	}
 
-	}
+	
 
 	showDetails(){
 		this.setState({
