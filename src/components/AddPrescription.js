@@ -143,6 +143,8 @@ class AddPrescription extends Component {
 				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="amount per bottle?" name="prescription[quantity]" onChange={this.handleInputChange.bind(this, "quantity", "prescription")} /></li>
 				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="# of refills?" name="prescription[refills]" onChange={this.handleInputChange.bind(this, "refills", "prescription")} /></li>
 				<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
+				<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
+
 			</ul>)
 		} else {
 		return null
@@ -158,6 +160,7 @@ class AddPrescription extends Component {
 						<option value="weekly">Weekly</option>
 						<option value="monthly">Monthly</option>
 					</select> <br />
+
 				</div>
 			)
 		}else{
@@ -176,6 +179,8 @@ class AddPrescription extends Component {
 					{this.renderfreqFields("hours")}
 					<button onClick={this.addfreqField.bind(null,"hours")}>Add Another Time</button><br />
 					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
+
 				</ul>
 			)
 		}else{
@@ -223,6 +228,8 @@ class AddPrescription extends Component {
 					  <label><Checkbox value="SU"/>Sunday</label>
 					</CheckboxGroup>
 					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
+
 				</div>
 			)
 		}else{
@@ -263,6 +270,8 @@ class AddPrescription extends Component {
 					{this.renderfreqFields("month_days")}
 					<button onClick={this.addfreqField.bind(null, "month_days")}>Add Another Day</button><br />
 					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
+
 				</div>
 			)
 		}else{
@@ -277,6 +286,8 @@ class AddPrescription extends Component {
 					<p>This section is optional, feel free to skip it by clicking "I'm done"</p>
 					<input className="list-item add-pres-list-item" type="text" placeholder="Name of Doctor" name="prescription[doctor]" /><br />
 					Expiration Date <input className="list-item add-pres-list-item" type="date" name="schedule[expiration]" /><br />
+					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
+
 					<input className="list-flex" type="submit" value="I'm Done" />
 				</ul>
 			)
@@ -342,7 +353,6 @@ class AddPrescription extends Component {
 					{this.renderStepThreeMonthly()}
 					{this.renderStepFour()}
 
-					<button className="list-flex" onClick={this.backButton}>Go Back</button>
 				</form>
 			</div>
 
