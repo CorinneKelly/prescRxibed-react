@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export function getJWTToken(response) {
-  debugger
   return (dispatch) => {
     axios
     .post('http://localhost:4000/v1/sessions', {account: {googleToken: response.Zi.access_token, googleId: response.El, name: response.w3.U3}})

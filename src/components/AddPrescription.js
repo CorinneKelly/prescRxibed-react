@@ -3,7 +3,11 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { postPrescriptionEvent } from '../actions/prescription'
 import { connect } from 'react-redux'
+
 import BurgerMenu from './BurgerMenu'
+
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
 
 
 
@@ -19,15 +23,16 @@ class AddPrescription extends Component {
 		this.backButton = this.backButton.bind(this)
 		this.showNextStep = this.showNextStep.bind(this)
 
-		this.addHoursField = this.addHoursField.bind(this)
-		this.renderHoursFields = this.renderHoursFields.bind(this)
+		this.addfreqField = this.addfreqField.bind(this)
+		this.renderfreqFields = this.renderfreqFields.bind(this)
+		this.handleWeekdaysChange = this.handleWeekdaysChange.bind(this)
 
 		this.state = {
 			step: 1,
 			schedule: {
 				frequency: "daily",
 				hours: [''],
-				weekdays: [''],
+				weekdays: ["SU","MO","TU","WE","TH",'FR','SA'],
 				month_days: [''],
 			},
 			prescription: {
@@ -67,7 +72,7 @@ class AddPrescription extends Component {
 	}
 
 	handleSubmit(event) {
-		debugger
+
 		event.preventDefault()
 
 		let fakeState = {
@@ -93,6 +98,7 @@ class AddPrescription extends Component {
 			}
 		}
 		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
+
 
 	}
 
@@ -147,7 +153,7 @@ class AddPrescription extends Component {
 		if(this.state.step === 3) {
 			return (
 				<div className="stepThree" >
-					Frequency <select id="frequency" name="schedule[frequency]" onChange={this.handleFrequency}>
+					Frequency <select id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
 						<option value="daily">Daily</option>
 						<option value="weekly">Weekly</option>
 						<option value="monthly">Monthly</option>
@@ -167,53 +173,101 @@ class AddPrescription extends Component {
 
 				<ul className="dailyFrequency" id="dailyFrequency">
 					<li className="list-item add-pres-list-item">Time of dose: <input className="list-flex add-pres-input" type="time" name="schedule[hours][]" onChange={this.handleInputChange.bind(this, "hours", "schedule")} /></li>
-					<li className="list-item add-pres-list-item"><button onClick={this.addDailyTime}>Add Another Time</button></li>
-					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
+					{this.renderfreqFields("hours")}
+					<button onClick={this.addfreqField.bind(null,"hours")}>Add Another Time</button><br />
+					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
 				</ul>
-
 			)
 		}else{
 			return null
 		}
 	}
+
+		addfreqField(freqField,event) {
+			event.preventDefault()
+			let newFieldState = this.state.schedule[freqField]
+			newFieldState.push("")
+			this.setState({
+				schedule: {...this.state.schedule, [freqField]: newFieldState}
+			})
+		}
+
+		renderfreqFields(freqField){
+			let inputs = this.state.schedule[freqField]
+			let mappedInputs = inputs.map((input, i)=>{
+				if (freqField === "hours"){
+					return <input type="time"  id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} />
+				} else {
+					return <input type="number" min="1" max="31" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} />
+				}
+			})
+			return(
+				<div>
+					{mappedInputs}
+				</div>)
+		}
 
 	renderStepThreeWeekly() {
 		if(this.state.step === 3 && this.state.schedule.frequency === "weekly") {
+			let weekdays = this.state.schedule.weekdays
 			return(
 
-				<ul className="weeklyFrequency" >
-					<li><input type="checkbox" value="Monday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Monday </li>
-					<li><input type="checkbox" value="Tuesday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Tuesday </li>
-					<li><input type="checkbox" value="Wednesday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Wednesday </li>
-					<li><input type="checkbox" value="Thursday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Thursday </li>
-					<li><input type="checkbox" value="Friday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Friday </li>
-					<li><input type="checkbox" value="Saturday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Saturday </li>
-					<li><input type="checkbox" value="Sunday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Sunday </li>
-					<li><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
-				</ul>
-
+				<div>
+					<CheckboxGroup name="weekdays" value={weekdays} onChange={this.handleWeekdaysChange}>
+					  <label><Checkbox value="MO"/>Monday</label>
+					  <label><Checkbox value="TU"/>Tuesday</label>
+					  <label><Checkbox value="WE"/>Wednesday</label>
+					  <label><Checkbox value="TH"/>Thursday</label>
+					  <label><Checkbox value="FR"/>Friday</label>
+					  <label><Checkbox value="SA"/>Saturday</label>
+					  <label><Checkbox value="SU"/>Sunday</label>
+					</CheckboxGroup>
+					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+				</div>
 			)
 		}else{
 			return null
 		}
 	}
 
-	renderStepThreeMonthly() {
-		if(this.state.step === 3 && this.state.schedule.frequency === "monthly") {
-			return(
-				<ul className="monthlyFrequency" >
+	handleWeekdaysChange(newWeekdays){
+		this.setState({
+			schedule: {...this.state.schedule, weekdays: newWeekdays}
+		});
+	}
 
-					<li>Choose dates:<br/> <input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /></li>
-					<li><input className="list-item add-pres-list-item" type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /></li>
-					<li><input className="list-item add-pres-list-item" type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /></li>
-					<li><input className="list-item add-pres-list-item" type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")}/>< /li>
-					<li><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
-				</ul>
+	// renderStepThreeMonthly() {
+	// 	if(this.state.step === 3 && this.state.schedule.frequency === "monthly") {
+	// 		return(
+	// 			<div className="monthlyFrequency" >
+	//
+	// 				Choose dates:<br/> <input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
+	// 				<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
+	// 				<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
+	// 				<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} />
+	// 				<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+	// 			</div>
+	// 		)
+	// 	} else {
+	// 		return null
+	// 	}
+	//
+	// }
+
+	renderStepThreeMonthly() {
+		if(this.state.step === 3 && this.state.schedule.frequency  === "monthly") {
+			return(
+
+				<div className="monthlyFrequency" id="monthlyFrequency">
+					Day of dose:<br/>
+					{this.renderfreqFields("month_days")}
+					<button onClick={this.addfreqField.bind(null, "month_days")}>Add Another Day</button><br />
+					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+				</div>
 			)
-		} else {
+		}else{
 			return null
 		}
-
 	}
 
 	renderStepFour() {
@@ -233,7 +287,6 @@ class AddPrescription extends Component {
 
 
 	handleInputChange(field, nestedParent, event){
-		debugger
 
 		event.preventDefault()
 		let input = this.state[nestedParent][field]
@@ -257,28 +310,6 @@ class AddPrescription extends Component {
 		})
 	}
 
-	addHoursField(event) {
-		debugger
-		event.preventDefault()
-		let newHours = this.state.schedule.hours
-		newHours.push("")
-		this.setState({
-			schedule: {...this.state.schedule, hours: newHours}
-		})
-	}
-
-
-	renderHoursFields(){
-		debugger
-		let inputs = this.state.schedule.hours
-		let mappedInputs = inputs.map((input, i)=>{
-			return <input type="time" name="schedule[hours][]" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, "hours", "schedule")} />
-		})
-		return(
-			<div>
-				{mappedInputs}
-			</div>)
-	}
 
 	showNextStep(event) {
 		event.preventDefault()
