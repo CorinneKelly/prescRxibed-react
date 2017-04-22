@@ -19,18 +19,57 @@ class AddPrescription extends Component {
 		this.backButton = this.backButton.bind(this)
 		this.showNextStep = this.showNextStep.bind(this)
 
-		this.addDailyTime = this.addDailyTime.bind(this)
+		this.addHoursField = this.addHoursField.bind(this)
+		this.renderHoursFields = this.renderHoursFields.bind(this)
 
 		this.state = {
 			step: 1,
 			schedule: {
-				frequency: "daily"
-			}
+				frequency: "daily",
+				hours: [''],
+				weekdays: [''],
+				month_days: [''],
+			},
+			prescription: {
+			},
 		}
 	}
-  
+
+	clearEmptyScheduleArrays(){
+		let schedule = this.state.schedule
+		switch (schedule.frequency) {
+			case "daily":
+				schedule["weekdays"] = []
+				schedule["month_days"] = []
+				break;
+			case "weekly":
+				schedule["hours"] = []
+				schedule["month_days"] = []
+				break;
+			case "monthly":
+				schedule["hours"] = []
+				schedule["weekdays"] = []
+		}
+
+		Object.keys(schedule).forEach((key)=>{
+			if (["hours", "weekdays", "month_days"].includes(key)){
+				schedule[key].forEach((el,i,array)=>{
+					if (el === ''){
+						array.splice(i,1)
+					}
+				})
+			}
+		})
+
+		this.setState({
+			schedule: schedule
+		})
+	}
+
 	handleSubmit(event) {
+		debugger
 		event.preventDefault()
+
 		let fakeState = {
 			prescription: {
 				name: "DrugName",
@@ -54,6 +93,7 @@ class AddPrescription extends Component {
 			}
 		}
 		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
+
 	}
 
 
@@ -119,14 +159,18 @@ class AddPrescription extends Component {
 		}
 	}
 
+
+
 	renderStepThreeDaily() {
 		if(this.state.step === 3 && this.state.schedule.frequency  === "daily") {
 			return(
+
 				<ul className="dailyFrequency" id="dailyFrequency">
 					<li className="list-item add-pres-list-item">Time of dose: <input className="list-flex add-pres-input" type="time" name="schedule[hours][]" onChange={this.handleInputChange.bind(this, "hours", "schedule")} /></li>
 					<li className="list-item add-pres-list-item"><button onClick={this.addDailyTime}>Add Another Time</button></li>
 					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
 				</ul>
+
 			)
 		}else{
 			return null
@@ -136,6 +180,7 @@ class AddPrescription extends Component {
 	renderStepThreeWeekly() {
 		if(this.state.step === 3 && this.state.schedule.frequency === "weekly") {
 			return(
+
 				<ul className="weeklyFrequency" >
 					<li><input type="checkbox" value="Monday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Monday </li>
 					<li><input type="checkbox" value="Tuesday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Tuesday </li>
@@ -146,6 +191,7 @@ class AddPrescription extends Component {
 					<li><input type="checkbox" value="Sunday" checked name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Sunday </li>
 					<li><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
 				</ul>
+
 			)
 		}else{
 			return null
@@ -187,24 +233,51 @@ class AddPrescription extends Component {
 
 
 	handleInputChange(field, nestedParent, event){
+		debugger
+
 		event.preventDefault()
-		this.setState({
-			[nestedParent]: {...this.state[nestedParent], [field]: event.target.value}
-		})
+		let input = this.state[nestedParent][field]
+		if (typeof input === "object"){
+			input[event.target.id] = event.target.value
+			this.setState({
+				[nestedParent]: {...this.state[nestedParent], [field]: input}
+			})
+		} else {
+			this.setState({
+				[nestedParent]: {...this.state[nestedParent], [field]: event.target.value}
+			})
+		}
 	}
 
 	handleFrequency() {
 		var e = document.getElementById("frequency")
 		var freq = e.options[e.selectedIndex].value
 		this.setState({
-			schedule: {...this.state.schedule, frequency: freq} 
+			schedule: {...this.state.schedule, frequency: freq}
 		})
 	}
 
-	addDailyTime(event) {
+	addHoursField(event) {
+		debugger
 		event.preventDefault()
-		document.getElementById("dailyFrequency").create(<input type="time" name="schedule[hours][]" onChange={this.handleInputChange.bind(this, "hours", "schedule")} />)
-		// return(<input type="time" name="schedule[hours][]" onChange={this.handleInputChange.bind(this, "hours", "schedule")} />)
+		let newHours = this.state.schedule.hours
+		newHours.push("")
+		this.setState({
+			schedule: {...this.state.schedule, hours: newHours}
+		})
+	}
+
+
+	renderHoursFields(){
+		debugger
+		let inputs = this.state.schedule.hours
+		let mappedInputs = inputs.map((input, i)=>{
+			return <input type="time" name="schedule[hours][]" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, "hours", "schedule")} />
+		})
+		return(
+			<div>
+				{mappedInputs}
+			</div>)
 	}
 
 	showNextStep(event) {
@@ -227,6 +300,7 @@ class AddPrescription extends Component {
 
 	render() {
 		return (
+
 			<div className="add-presc-page">
 				<BurgerMenu />
 				<form onSubmit={this.handleSubmit}>
@@ -241,6 +315,7 @@ class AddPrescription extends Component {
 					<button className="list-flex" onClick={this.backButton}>Go Back</button>
 				</form>
 			</div>
+
 		)
 	}
 

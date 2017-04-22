@@ -14,6 +14,7 @@ const data = [
 ]
 
 class Symptom extends Component {
+
   
 // h1: this.props.symptom.name
 // for new symptoms onClick will assign Id and then go to that specific symptomform/id page
@@ -21,6 +22,7 @@ class Symptom extends Component {
 // this.props.symptom.images. will be used in symptomImages Map
 
 	render() {
+
 		var symptomDescList =	[{description: "desc1"}, {description: "desc2"}, {description: "desc3"}, {description: "desc4"}].map((symptom) => {
 			return <li>{symptom.description}</li>
 		})

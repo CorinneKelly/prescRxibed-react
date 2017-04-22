@@ -82,7 +82,7 @@ class SymptomForm extends Component {
 	}
 
 	render() {
-		
+
 		return (
 			<div>
 				<p>How do you feel today</p>
@@ -103,7 +103,6 @@ class SymptomForm extends Component {
 
 					<div>
 						{this.state.uploadFileCloudinaryUrl === '' ? null :
-						
 						<div>
 							<p>You just uploaded:</p>
 							<p>{this.state.uploadedFile.name}</p>
@@ -122,6 +121,7 @@ class SymptomForm extends Component {
 		)
 	}
 }
+
 
 	const mapDispatchToProps = (dispatch) => {
 	  return bindActionCreators({

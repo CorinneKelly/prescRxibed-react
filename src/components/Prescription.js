@@ -62,6 +62,7 @@ const fakeTest = [{
 		]
 
 class Prescription extends Component {
+
 	constructor(){
 		super()
 
@@ -86,6 +87,8 @@ class Prescription extends Component {
 		//retrieve and format dosing schedule for this Rx
 	}
 
+	}
+
 	showDetails(){
 		this.setState({
 			display: "details"
@@ -104,16 +107,20 @@ class Prescription extends Component {
 		})
 	}
 
+
 	//diplay list of symptoms being tracked
 	//along with opportunity to add symptom
 	renderSymptoms(){
 		if (this.state.display==="symptoms"){
 			//const symptoms = symptom array from api
+
 			// let symptomList = symptoms.map((symptom)=>{
 			// 	return `<li> ${symptom} </li>`
 			// })
 			// symptomList.push("<input type='text' placeholder='Add new symptom' />")
 			// return {symptomList}
+
+
 		}else{
 			return null
 		}
