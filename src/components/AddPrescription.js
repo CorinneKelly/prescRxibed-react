@@ -3,10 +3,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { postPrescriptionEvent } from '../actions/prescription'
 import { connect } from 'react-redux'
-
 import BurgerMenu from './BurgerMenu'
-
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
 
 
 
