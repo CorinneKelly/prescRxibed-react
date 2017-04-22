@@ -10,13 +10,15 @@ class Welcome extends Component {
 		return (
 			<div className="Welcome" >
         <h1>Welcome to Your Prescription Tracker</h1>
-        <h3>Login with Google to start managing your prescriptions</h3>
+
+        <h3>Connect with Google to start managing your prescriptions</h3>
+
 
 				<GoogleLogin socialId="60833227507-8v5bc1e54tjf098p279be3kn7prei20v.apps.googleusercontent.com"
 										class="google-login"
 										scope="profile"
 										responseHandler={this.props.getJWTToken}
-										buttonText="Login With Google"/>
+										buttonText="Connect With Google"/>
 
 			</div>
 		)

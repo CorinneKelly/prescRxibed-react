@@ -24,7 +24,7 @@ class App extends Component {
     if (this.props.account.token) {
       return <Home />
     } else {
-      return <Welcome />
+      return <Home />
     }
   }
   

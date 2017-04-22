@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { postPrescriptionEvent } from '../actions/prescription'
 import { connect } from 'react-redux'
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import BurgerMenu from './BurgerMenu'
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
+
 
 
 
@@ -70,29 +72,32 @@ class AddPrescription extends Component {
 	handleSubmit(event) {
 
 		event.preventDefault()
-		this.clearEmptyScheduleArrays()
-		debugger
-		// let fakeState = {
-		// 	prescription: {
-		// 		name: "DrugName",
-		// 		instructions: "Take This",
-		// 		dosage: 2,
-		// 		units: "pills",
-		// 		quantity: 60,
-		// 		refills: 3,
-		// 		doctor: ""
-		// 	},
-		// 	schedule: {
-		// 		start_date: "2017-04-19",
-		// 		end_date: "2017-07-19",
-		// 		frequency: "Daily",
-		// 		hours: ["9:00", "12:00", "18:00"],
-		// 		weekdays: [],
-		// 		month_days: [],
-		// 		expiration_date: "2018-04-19"
-		// 	}
-		// }
-		this.props.postPrescriptionEvent(this.state)//should pass in this.state instead of fakeState
+
+		let fakeState = {
+			prescription: {
+				name: "DrugName",
+				instructions: "Take This",
+				dosage: 2,
+				units: "pills",
+				quantity: 60,
+				refills: 3,
+				doctor: ""
+			},
+			schedule: {
+				start_date: "2017-04-19",
+				end_date: "2017-07-19",
+				frequency: "Daily",
+				// format time with double digits "09"
+				hours: ["9:00", "12:00", "18:00"],
+				weekdays: [],
+				// need to specify a time of day
+				month_days: [],
+				expiration_date: "2018-04-19"
+			}
+		}
+		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
+
+
 	}
 
 
@@ -102,13 +107,25 @@ class AddPrescription extends Component {
 			let date = new Date()
 			let today = moment(date).format('YYYY-MM-DD')
 			return(
-				<div className="stepOne" >
-					<input type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} /><br />
+				<ul className="stepOne" >
 
-					Start Date: <input type="date" value={today} name="schedule[startDate]" onChange={this.handleInputChange.bind(this, "startDate", "schedule")} /><br />
-					<input type="textarea" placeholder="Instructions" name="prescription[instructions]" onChange={this.handleInputChange.bind(this, "instructions", "prescription")} /><br />
-					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
-				</div>
+					<li className="list-item add-pres-list-item">
+						<input className="list-flex add-pres-input" type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} />
+					</li>
+					
+					<li className="list-item add-pres-list-item">
+						<div className="list-flex add-pres-input">Start date: </div>
+						<input className="list-flex add-pres-input" type="date" value={today} name="schedule[startDate]" onChange={this.handleInputChange.bind(this, "startDate", "schedule")} />
+					</li>
+
+					<li className="list-item">
+						<input className="list-flex add-pres-input" type="textarea" placeholder="Instructions" name="prescription[instructions]" onChange={this.handleInputChange.bind(this, "instructions", "prescription")} /><br />
+					</li>
+
+					<li className="list-item">
+						<button className="list-flex" onClick={this.showNextStep}>Continue</button> <br />
+					</li>
+				</ul>
 			)
 		}else{
 			return null
@@ -118,13 +135,13 @@ class AddPrescription extends Component {
 	renderStepTwo() {
 		if(this.state.step === 2) {
 			return (
-			<div className="stepTwo" >
-				<input type="number" placeholder="# per dose?" name="prescription[dosage]" onChange={this.handleInputChange.bind(this, "dosage", "prescription")} />
-				<input type="text" placeholder="units (pill, mL, etc.)" name="prescription[units]" onChange={this.handleInputChange.bind(this, "units", "prescription")} /> <br />
-				<input type="number" placeholder="amount per bottle?" name="prescription[quantity]" onChange={this.handleInputChange.bind(this, "quantity", "prescription")} /><br />
-				<input type="number" placeholder="# of refills?" name="prescription[refills]" onChange={this.handleInputChange.bind(this, "refills", "prescription")} /><br />
-				<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
-			</div>)
+			<ul className="stepTwo" >
+				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="# per dose?" name="prescription[dosage]" onChange={this.handleInputChange.bind(this, "dosage", "prescription")} /></li>
+				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="text" placeholder="units (pill, mL, etc.)" name="prescription[units]" onChange={this.handleInputChange.bind(this, "units", "prescription")} /> </li>
+				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="amount per bottle?" name="prescription[quantity]" onChange={this.handleInputChange.bind(this, "quantity", "prescription")} /></li>
+				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="# of refills?" name="prescription[refills]" onChange={this.handleInputChange.bind(this, "refills", "prescription")} /></li>
+				<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
+			</ul>)
 		} else {
 		return null
 		}
@@ -151,12 +168,13 @@ class AddPrescription extends Component {
 	renderStepThreeDaily() {
 		if(this.state.step === 3 && this.state.schedule.frequency  === "daily") {
 			return(
-				<div className="dailyFrequency" id="dailyFrequency">
-					Time of dose:<br/>
+
+				<ul className="dailyFrequency" id="dailyFrequency">
+					<li className="list-item add-pres-list-item">Time of dose: <input className="list-flex add-pres-input" type="time" name="schedule[hours][]" onChange={this.handleInputChange.bind(this, "hours", "schedule")} /></li>
 					{this.renderfreqFields("hours")}
 					<button onClick={this.addfreqField.bind(null,"hours")}>Add Another Time</button><br />
 					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
-				</div>
+				</ul>
 			)
 		}else{
 			return null
@@ -191,16 +209,7 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.schedule.frequency === "weekly") {
 			let weekdays = this.state.schedule.weekdays
 			return(
-				// <div className="weeklyFrequency" >
-				// 	<input type="checkbox" value="Monday" id="0"  name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Monday <br />
-				// 	<input type="checkbox" value="Tuesday" id="1"  name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Tuesday <br />
-				// 	<input type="checkbox" value="Wednesday" id="2"  name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Wednesday <br />
-				// 	<input type="checkbox" value="Thursday" id="3" name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Thursday <br />
-				// 	<input type="checkbox" value="Friday" id="4" name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Friday <br />
-				// 	<input type="checkbox" value="Saturday" id="5"  name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Saturday <br />
-				// 	<input type="checkbox" value="Sunday" id="6"  name="schedule[weekdays][]" onChange={this.handleInputChange.bind(this, "weekdays", "schedule")} /> Sunday <br />
-				// 	<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
-				// </div>
+
 				<div>
 					<CheckboxGroup name="weekdays" value={weekdays} onChange={this.handleWeekdaysChange}>
 					  <label><Checkbox value="MO"/>Monday</label>
@@ -246,6 +255,7 @@ class AddPrescription extends Component {
 	renderStepThreeMonthly() {
 		if(this.state.step === 3 && this.state.schedule.frequency  === "monthly") {
 			return(
+
 				<div className="monthlyFrequency" id="monthlyFrequency">
 					Day of dose:<br/>
 					{this.renderfreqFields("month_days")}
@@ -261,12 +271,12 @@ class AddPrescription extends Component {
 	renderStepFour() {
 		if(this.state.step === 4) {
 			return(
-				<div>
+				<ul>
 					<p>This section is optional, feel free to skip it by clicking "I'm done"</p>
-					<input type="text" placeholder="Name of Doctor" name="prescription[doctor]" /><br />
-					Expiration Date <input type="date" name="schedule[expiration]" /><br />
-					<input type="submit" value="I'm Done" />
-				</div>
+					<input className="list-item add-pres-list-item" type="text" placeholder="Name of Doctor" name="prescription[doctor]" /><br />
+					Expiration Date <input className="list-item add-pres-list-item" type="date" name="schedule[expiration]" /><br />
+					<input className="list-flex" type="submit" value="I'm Done" />
+				</ul>
 			)
 		} else {
 			return null
@@ -319,16 +329,22 @@ class AddPrescription extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				{this.renderStepOne()}
-				{this.renderStepTwo()}
-				{this.renderStepThree()}
-				{this.renderStepThreeDaily()}
-				{this.renderStepThreeWeekly()}
-				{this.renderStepThreeMonthly()}
-				{this.renderStepFour()}
-				<button className="go-back-button" onClick={this.backButton}>Go Back</button>
-			</form>
+
+			<div className="add-presc-page">
+				<BurgerMenu />
+				<form onSubmit={this.handleSubmit}>
+					{this.renderStepOne()}
+					{this.renderStepTwo()}
+					{this.renderStepThree()}
+					{this.renderStepThreeDaily()}
+					{this.renderStepThreeWeekly()}
+					{this.renderStepThreeMonthly()}
+					{this.renderStepFour()}
+
+					<button className="list-flex" onClick={this.backButton}>Go Back</button>
+				</form>
+			</div>
+
 		)
 	}
 
