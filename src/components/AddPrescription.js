@@ -25,6 +25,10 @@ class AddPrescription extends Component {
 		this.renderfreqFields = this.renderfreqFields.bind(this)
 		this.handleWeekdaysChange = this.handleWeekdaysChange.bind(this)
 
+		// sets default start date to today
+		let date = new Date()
+		let today = moment(date).format('YYYY-MM-DD')
+
 		this.state = {
 			step: 1,
 			schedule: {
@@ -32,6 +36,7 @@ class AddPrescription extends Component {
 				hours: [''],
 				weekdays: ["SU","MO","TU","WE","TH",'FR','SA'],
 				month_days: [''],
+				startDate: today
 			},
 			prescription: {
 			},
@@ -103,19 +108,16 @@ class AddPrescription extends Component {
 
 	renderStepOne() {
 		if(this.state.step === 1) {
-			// sets default start date to today
-			let date = new Date()
-			let today = moment(date).format('YYYY-MM-DD')
 			return(
 				<ul className="stepOne" >
 
 					<li className="list-item add-pres-list-item">
 						<input className="list-flex add-pres-input" type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} />
 					</li>
-					
+
 					<li className="list-item add-pres-list-item">
-						<div className="list-flex add-pres-input">Start date: </div>
-						<input className="list-flex add-pres-input" type="date" value={today} name="schedule[startDate]" onChange={this.handleInputChange.bind(this, "startDate", "schedule")} />
+						<div className="start-date">Start date:  </div>
+						<input className="list-flex add-pres-input" type="date" value={this.state.schedule.startDate} name="schedule[startDate]" onChange={this.handleInputChange.bind(this, "startDate", "schedule")} />
 					</li>
 
 					<li className="list-item">
@@ -285,7 +287,6 @@ class AddPrescription extends Component {
 
 
 	handleInputChange(field, nestedParent, event){
-
 		event.preventDefault()
 		let input = this.state[nestedParent][field]
 		if (typeof input === "object"){

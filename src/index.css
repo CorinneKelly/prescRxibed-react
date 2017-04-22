@@ -88,7 +88,7 @@ body {
 .list-flex {
 	flex: 60%;
 	background-color: #31375D;
-	color: #F2F3F5;
+	color: #93708D;
 	font-size: 2em;
 }
 
@@ -139,7 +139,7 @@ button {
 }
 
 .add-pres-list-item {
-	
+
 }
 
 .add-pres-input {
@@ -148,8 +148,13 @@ button {
 
 	.add-pres-input::placeholder {
 		color: #93708D;
-		
+
 	}
+
+.start-date {
+  color: #93708D;
+  font-size: 2em;
+}
 
 .pres-test {
 	animation: FadeIn 1s linear;
@@ -209,4 +214,3 @@ button {
 .google-login:focus {
   background: #E74B37;
 }
-
