@@ -19,9 +19,23 @@ export default class Prescriptions extends React.Component {
 		// return <li><img className="image-flex" src={`this.state.pillImg[${index}%2]`} /><Prescription /></li>			
 		// })
 
+		let prescriptions = [
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillWhiteish.svg" /><div className="list-flex" >Test 1</div></li>,
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillBlue.svg" /><div className="list-flex" >Test 2</div></li>,
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillWhiteish.svg" /><div className="list-flex" >Test 3</div></li>,
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillBlue.svg" /><div className="list-flex" >Test 4</div></li>,
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillWhiteish.svg" /><div className="list-flex" >Test 5</div></li>,
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillBlue.svg" /><div className="list-flex" >Test 6</div></li>,
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillWhiteish.svg" /><div className="list-flex" >Test 7</div></li>,
+		<li className="list-item pres-individual-test" ><img className="image-flex" height="60" width="auto" src="pillBlue.svg" /><div className="list-flex" >Test 8</div></li>,
+		]
+
 		return (
-			<div>
-				This is a list of links with your perscriptions
+			<div className="pres-test">
+				{prescriptions}
+				document.querySelector(".pres-individual-test").each(function(i){
+				
+			})
 			</div>
 		)
 	}

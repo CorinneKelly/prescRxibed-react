@@ -5,7 +5,8 @@ import BurgerMenu from './BurgerMenu'
 class FullSchedule extends React.Component {
 	render() {
 		return (
-"hello"			// <GoogleCalendar 
+			<BurgerMenu />
+		// <GoogleCalendar 
 			// 	calendarId: {this.props.userEmail},
 			// 	description: "?"
 

@@ -48,7 +48,7 @@ ReactDOM.render(
         <Route path='/symptomform-check' component={SymptomForm} />
         <Route path='/symptom-check' component={Symptom} />
         <Route path='/home-check' component={Home} />
-        <Route path='/prescriptions/:prescription/symptoms/:symptom' component={Symptom} />
+        <Route path='/symptom' component={Symptom} />
         <Route component={NotFound} />
       </div>
 	  </Router>

@@ -10,14 +10,9 @@ class Home extends Component {
 		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
 		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
 		this.state = {
-			schedule: false,
-			prescriptions: false,
 
 			presOpen: false,
 			schedOpen: false,
-
-			presAngle: 180,
-			schedAngle: 180,
 
 			presImage: "closedBottlePink.svg",
 			schedImage: "closedBottlePink.svg",
@@ -27,33 +22,54 @@ class Home extends Component {
 
 	handleOnClickSchedule(event) {
 		event.preventDefault()
+		if (!this.state.schedOpen) {
+			document.getElementById("sched-image").animate([
+		    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
+		    { transform: `rotateX(180deg) rotateY(3600deg) rotateZ(0deg)`}
+		  ], {
+		    duration: 1000,
+		    easing: "ease-in-out",
+		    fill: "forwards"
+		  })
 
-		document.getElementById("sched-image").animate([
-	    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
-	    { transform: `rotateX(180deg) rotateY(3600deg) rotateZ(0deg)`}
-	  ], {
-	    duration: 1000,
-	    easing: "ease-in-out",
-	    fill: "forwards"
-	  })
+			this.setState({
+				presOpen: false,
+				schedOpen: !this.state.schedOpen,
+				schedImage: "openBottlePink.svg",
+				presImage: "closedBottlePink.svg"
+			})
 
-		this.setState ({
-			schedule: !this.state.schedule,
-			presOpen: false,
-			schedOpen: true,
-			schedImage: "openBottlePink.svg"
-		})
+			document.getElementById("pres-image").animate([
+				{ transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
+				    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`}
+				  ], {
+				    duration: 1000,
+				    easing: "ease-in-out",
+				    fill: "forwards"
+				  })
 
-
+		} else {
+				document.getElementById("sched-image").animate([
+				{ transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
+				    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`}
+				  ], {
+				    duration: 1000,
+				    easing: "ease-in-out",
+				    fill: "forwards"
+				  })
+			this.setState({
+				schedImage: "closedBottlePink.svg",
+				schedOpen: !this.state.schedOpen
+			})
+		}
 	}
+
 
 	handleOnClickPrescriptions(event) {
 		event.preventDefault()
-		let oldState = this.state.presAngle
-		this.setState({
-			presAngle: this.state.presAngle + 180
-		})
-		document.getElementById("pres-image").animate([
+
+		if (!this.state.presOpen) {
+			document.getElementById("pres-image").animate([
 			    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
 			    { transform: `rotateX(180deg) rotateY(3600deg) rotateZ(0deg)`}
 			  ], {
@@ -62,30 +78,67 @@ class Home extends Component {
 			    fill: "forwards"
 			  })
 
-		this.setState ({
-			prescriptions: !this.state.prescriptions,
-			presOpen: true,
-			schedOpen: false,
-			presImage: "openBottlePink.svg"
-		})
+			this.setState ({
+				presOpen: !this.state.presOpen,
+				schedOpen: false,
+				presImage: "openBottlePink.svg",
+				schedImage: "closedBottlePink.svg"
+			})
+
+			document.getElementById("sched-image").animate([
+				{ transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
+				    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`}
+				  ], {
+				    duration: 1000,
+				    easing: "ease-in-out",
+				    fill: "forwards"
+				  })
+		} else {
+			document.getElementById("pres-image").animate([
+				{ transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
+				    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`}
+				  ], {
+				    duration: 1000,
+				    easing: "ease-in-out",
+				    fill: "forwards"
+				  })
+			this.setState({
+				presImage: "closedBottlePink.svg",
+				presOpen: !this.state.presOpen
+			})
+		}
 	}
 
 	showPrescriptions(){
-		if (this.state.prescriptions === true){
+		if (this.state.presOpen && this.state.schedOpen){
+			this.setState({
+				schedOpen: false
+			})
 			return <Prescriptions />
 			// prescriptions will return a list of <li>prescriptions</li>
-		}
-		else {
+		} else if(this.state.presOpen){
+			this.setState({
+				schedOpen: false
+			})
+			return <Prescriptions />
+		} else {
 			return null
 		}
 	}
 
 	showSchedule(){
-		if (this.state.schedule === true){
+		if (this.state.schedOpen && this.state.presOpen){
+			this.setState({
+				presOpen: false
+			})
 			return <li><FullSchedule /></li>
-		}
-		else {
-			return null
+		} else if (this.state.schedOpen) {
+			this.setState({
+				presOpen: false
+			})
+			return <li><FullSchedule /></li>
+		} else {
+			return null	
 		}
 	}
 
