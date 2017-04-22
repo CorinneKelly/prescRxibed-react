@@ -170,7 +170,7 @@ class AddPrescription extends Component {
 			return(
 
 				<ul className="dailyFrequency" id="dailyFrequency">
-					<li className="list-item add-pres-list-item">Time of dose: <input className="list-flex add-pres-input" type="time" name="schedule[hours][]" onChange={this.handleInputChange.bind(this, "hours", "schedule")} /></li>
+					<li className="list-item add-pres-list-item">Time of dose: </li>
 					{this.renderfreqFields("hours")}
 					<button onClick={this.addfreqField.bind(null,"hours")}>Add Another Time</button><br />
 					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
