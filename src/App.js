@@ -11,48 +11,22 @@ import BurgerMenu from './components/BurgerMenu'
 
 class App extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-      menuOpened: false,
-      menuIcon: "burgerIcon.svg"
-    }
-    this.exposeBurgerMenu = this.exposeBurgerMenu.bind(this)
-  }
-
   isLoggedIn() {
     if (this.props.account.token) {
       return <Home />
     } else {
-      return <Home />
+      return <Welcome />
     }
   }
   
-  exposeBurgerMenu() {
-    
-    if(this.state.menuOpened) {
-      document.getElementById("root").style.transform = "translate(0, 0)"
-      this.setState({
-        menuOpened: false,
-        menuIcon: "burgerIcon.svg"
-      })      
-    } else {
-      document.getElementById("root").style.transform = "translate(200px, 0)"
-      this.setState({
-        menuOpened: true,
-        menuIcon: "x.svg"
-      })
-      
-    }
 
-  }
   
 
   render() {
     return (
         
       <div className="App" >
-        <BurgerMenu handleClick={this.exposeBurgerMenu} menuIcon={this.state.menuIcon} />
+        <BurgerMenu />
         {this.isLoggedIn()}
       </div>
     )
