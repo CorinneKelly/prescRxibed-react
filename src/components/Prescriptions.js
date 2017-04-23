@@ -33,9 +33,7 @@ export default class Prescriptions extends React.Component {
 		return (
 			<div className="pres-test">
 				{prescriptions}
-				document.querySelector(".pres-individual-test").each(function(i){
-				
-			})
+
 			</div>
 		)
 	}

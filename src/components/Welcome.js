@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import {GoogleLogin} from 'react-google-login-component';
+import { GoogleLogin } from 'react-google-login-component';
 import { bindActionCreators } from 'redux'
 import { getJWTToken } from '../actions/account'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 class Welcome extends Component {
 	render(){
 		return (
-			<div className="Welcome" >
+			<div className="welcome-wrapper" >
         <h1>Welcome to Your Prescription Tracker</h1>
 
         <h3>Connect with Google to start managing your prescriptions</h3>

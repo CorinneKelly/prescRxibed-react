@@ -24,6 +24,7 @@ class AddPrescription extends Component {
 		this.addfreqField = this.addfreqField.bind(this)
 		this.renderfreqFields = this.renderfreqFields.bind(this)
 		this.handleWeekdaysChange = this.handleWeekdaysChange.bind(this)
+		this.clearEmptyScheduleArrays = this.clearEmptyScheduleArrays.bind(this)
 
 		// sets default start date to today
 		let date = new Date()
@@ -36,7 +37,7 @@ class AddPrescription extends Component {
 				hours: [''],
 				weekdays: ["SU","MO","TU","WE","TH",'FR','SA'],
 				month_days: [''],
-				startDate: today
+				start_date: today
 			},
 			prescription: {
 				dosage:""
@@ -45,6 +46,7 @@ class AddPrescription extends Component {
 	}
 
 	clearEmptyScheduleArrays(){
+
 		let schedule = this.state.schedule
 		switch (schedule.frequency) {
 			case "daily":
@@ -59,7 +61,7 @@ class AddPrescription extends Component {
 				schedule["hours"] = []
 				schedule["weekdays"] = []
 		}
-
+		
 		Object.keys(schedule).forEach((key)=>{
 			if (["hours", "weekdays", "month_days"].includes(key)){
 				schedule[key].forEach((el,i,array)=>{
@@ -77,30 +79,8 @@ class AddPrescription extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-
-		let fakeState = {
-			prescription: {
-				name: "DrugName",
-				instructions: "Take This",
-				dosage: 2,
-				units: "pills",
-				quantity: 60,
-				refills: 3,
-				doctor: ""
-			},
-			schedule: {
-				start_date: "2017-04-19",
-				end_date: "2017-07-19",
-				frequency: "Daily",
-				// format time with double digits "09"
-				hours: ["9:00", "12:00", "18:00"],
-				weekdays: [],
-				// need to specify a time of day
-				month_days: [],
-				expiration_date: "2018-04-19"
-			}
-		}
-		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
+		this.clearEmptyScheduleArrays()
+		this.props.postPrescriptionEvent(this.state)//should pass in this.state instead of fakeState
 
 
 	}
@@ -117,7 +97,7 @@ class AddPrescription extends Component {
 
 					<li className="list-item add-pres-list-item">
 						<div className="start-date">Start date:  </div>
-						<input className="list-flex add-pres-input" type="date" value={this.state.schedule.startDate} name="schedule[startDate]" onChange={this.handleInputChange.bind(this, "startDate", "schedule")} />
+						<input className="list-flex add-pres-input" type="date" value={this.state.schedule.start_date} name="schedule[start_date]" onChange={this.handleInputChange.bind(this, "start_date", "schedule")} />
 					</li>
 
 					<li className="list-item">
