@@ -80,7 +80,17 @@ body {
 	margin-top: 60px;
 }
 
+.stepThree {
+  list-style: none;
+}
+
+.stepFour {
+  list-style: none;
+}
+
+
 .list-item {
+  text-align: center;
 	display: flex;
 	transition: transform 1s ease-in-out;
 	/*border-color: #D0E7F0;*/
@@ -99,13 +109,23 @@ body {
 	margin-right: 50px;
 	flex: 60%;
 	background-color: #31375D;
+
 	color: #F2F3F5;
 	font-size: 1.5em;
+
 }
 
 	.list-flex:hover{
 		color: #27CECF;
 	}
+
+.weekday {
+  text-align: center;
+  font-size: 1.5em;
+}
+  .weekday:hover {
+    color: #27CECF
+  }
 
 button {
 	outline:0;
@@ -148,7 +168,25 @@ button {
 }
 
 .add-pres-list-item {
-	
+
+}
+
+#dailyFrequency {
+  text-align: center;
+}
+
+.freq {
+  text-align: center;
+  background-color: #31375D;
+	color: #93708D;
+	font-size: 2em;
+}
+  .freq:hover{
+		color: #27CECF;
+	}
+
+#frequency {
+  text-align: center;
 }
 
 .add-pres-input {
@@ -157,8 +195,14 @@ button {
 
 	.add-pres-input::placeholder {
 		color: #93708D;
-		
+
 	}
+
+.start-date {
+  background-color: #D0E7F0;
+  color: #93708D;
+  font-size: 2em;
+}
 
 .pres-test {
 	animation: FadeIn 1s linear;
@@ -218,6 +262,7 @@ button {
 .google-login:focus {
   background: #E74B37;
 }
+
 
 /*symptom form*/
 .page-title {
@@ -281,3 +326,4 @@ textarea {
 .symp-log-heading {
 	margin-top: 20px;
 }
+
