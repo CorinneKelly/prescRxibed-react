@@ -109,6 +109,8 @@ body {
 	margin-right: 50px;
 	flex: 60%;
 	background-color: #31375D;
+  font-size: 2em;
+}
 
 .list-flex-smaller {
 	flex: 60%;
