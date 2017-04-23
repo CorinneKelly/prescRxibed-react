@@ -78,7 +78,6 @@ class AddPrescription extends Component {
 	}
 
 	handleSubmit(event) {
-debugger
 		event.preventDefault()
 		this.clearEmptyScheduleArrays()
 		this.props.postPrescriptionEvent(this.state)//should pass in this.state instead of fakeState
@@ -136,7 +135,7 @@ debugger
 		if(this.state.step === 3) {
 			return (
 				<ul className="stepThree">
-					<li className="freq">Frequency: <select id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
+					<li className="freq">Frequency: <select className="list-flex-smaller" id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
 						<option value="daily">Daily</option>
 						<option value="weekly">Weekly</option>
 						<option value="monthly">Monthly</option>
@@ -181,9 +180,9 @@ debugger
 			let inputs = this.state.schedule[freqField]
 			let mappedInputs = inputs.map((input, i)=>{
 				if (freqField === "hours"){
-					return <input type="time"  id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} />
+					return <li className="list-item add-pres-list-item"><input type="time" className="list-flex add-pres-input" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")}/></li>
 				} else {
-					return <input type="number" min="1" max="31" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} />
+					return <li className="list-item add-pres-list-item"><input type="number" className="list-flex add-pres-input" min="1" max="31" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} /></li>
 				}
 			})
 			return(
@@ -269,7 +268,7 @@ debugger
 					<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="date" name="schedule[expiration]" /></li>
 					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
 
-					<li className="freq"><button className="list-flex" onClick={this.handleSubmit}>I'm Done </button></li>
+					<li className="freq"><button className="list-flex-smaller" onClick={this.handleSubmit}>I'm Done </button></li>
 				</ul>
 			)
 		} else {
