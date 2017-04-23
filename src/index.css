@@ -110,7 +110,6 @@ body {
 	flex: 60%;
 	background-color: #31375D;
 
-<<<<<<< HEAD
 .list-flex-smaller {
 	flex: 60%;
 	background-color: #31375D;
@@ -119,12 +118,6 @@ body {
 }
 
 /*make a class on Home page to assign color"white" and put hover action on that*/
-=======
-	color: #F2F3F5;
-	font-size: 1.5em;
-
-}
->>>>>>> 486752a56e1e8f09b8517aa13d29f5df1dda0484
 
 	.list-flex:hover{
 		color: #27CECF;
@@ -278,7 +271,7 @@ button {
 /*symptom form*/
 .page-title {
 	text-align: center;
-	
+
 }
 
 
@@ -337,4 +330,3 @@ textarea {
 .symp-log-heading {
 	margin-top: 20px;
 }
-
