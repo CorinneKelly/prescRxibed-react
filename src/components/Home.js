@@ -146,7 +146,7 @@ class Home extends Component {
 
 
 		return (
-			<div className="Home" >
+			<div className="home-wrapper" >
 				<ul className="home-list">
 					<li className="list-item">
 						<img className="image-flex" src="add-pillPink.svg"/>

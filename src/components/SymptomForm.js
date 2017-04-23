@@ -4,6 +4,7 @@ import { postSymptom } from '../actions/symptoms'
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
+import BurgerMenu from './BurgerMenu'
 
 const CLOUDINARY_UPLOAD_PRESET = 'AddSymptomImg'
 const CLOUDINARY_UPLOAD_URL = 'https:api.cloudinary.com/v1_1/prescriptionmanager/upload'
@@ -17,13 +18,14 @@ class SymptomForm extends Component {
 			symptomTextDesc: '',
 			uploadFileCloudinaryUrl: '',
 			imageCloudinaryIds: [],
-			symptomName: ('symp name' || '') //this.props.symptomName change when props exist
+			symptomName: ('fever' || '') //this.props.symptomName change when props exist
 		}
 		this.outputUpdate = this.outputUpdate.bind(this)
 		this.symptomTextDesc = this.symptomTextDesc.bind(this)
 		this.onImageDrop = this.onImageDrop.bind(this)
 		this.deleteImgPreview = this.deleteImgPreview.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
+		this.onOpenClick = this.onOpenClick.bind(this)
 	}
 
 	outputUpdate(event) {
@@ -81,41 +83,58 @@ class SymptomForm extends Component {
 		this.props.postSymptom(this.state)
 	}
 
+	onOpenClick() {
+    this.dropzone.open()
+  }
+
 	render() {
 
 		return (
-			<div>
-				<p>How do you feel today</p>
-				{this.state.symptomName}<br />
+			<div className="symptom-form-wrapper">
+				<BurgerMenu />
+				<h1 className="page-title">How does your {this.state.symptomName} feel today</h1>
 				<form onSubmit={this.handleSubmit} >
-					<label htmlFor="currSev">Current Severity: </label>
-					<input type="range" id="currSev" min="0" max="5" step="1" onChange={this.outputUpdate} />
-					<output htmlFor="currSev" id="symp-severity">{this.state.outputData}</output><br />
+					<ul>
+						<li className="list-item" >
+							<label className="curr-severity-text" htmlFor="currSev">Current Severity:</label>
+							<input className="curr-severity-text" type="range" id="currSev" min="0" max="5" step="1" onChange={this.outputUpdate} />
+							<output className="curr-severity-text" htmlFor="currSev" id="symp-severity">{this.state.outputData}</output><br />
+						</li>
 
-					<textarea rows="10" cols="50" placeholder="Tell me how you feel" onChange={this.symptomTextDesc} />
-					<Dropzone
-						multiple={false}
-						accept="image/*"
-						onDrop={this.onImageDrop} >
+						<li className="list-item" >
+							<textarea className="add-pres-input" rows="10" placeholder="Tell me how you feel" onChange={this.symptomTextDesc} />
+						</li>
 
-						<p>Drop image here</p>
-					</Dropzone>
+						<li className="list-item upload-list-item" >
+							<Dropzone
+								multiple={false}
+								accept="image/*"
+								onDrop={this.onImageDrop}
+								className="image-flex" id="dropzone" >
 
-					<div>
-						{this.state.uploadFileCloudinaryUrl === '' ? null :
-						<div>
-							<p>You just uploaded:</p>
-							<p>{this.state.uploadedFile.name}</p>
-							<img src={this.state.uploadFileCloudinaryUrl} />
-							<p> Changed your mind?</p><button onClick={this.deleteImgPreview}>DELETE PREVIEW</button>
+								<p>Drag & drop image</p>
+								<p>or click to select file</p>
+							</Dropzone>
 
-						</div>
-						}
+						</li>
 
-					</div>
+						<li className="list-item" >
+							{this.state.uploadFileCloudinaryUrl === '' ? null :
+								<div>
+									<p>You just uploaded:</p>
+									<p>{this.state.uploadedFile.name}</p>
+									<img src={this.state.uploadFileCloudinaryUrl} />
+									<p> Changed your mind?</p><button onClick={this.deleteImgPreview}>DELETE PREVIEW</button>
 
-					<input type="submit" onSubmit={this.handleSubmit} value="Finished" />
+								</div>
+							}
+						</li>
 
+
+						<li className="list-item" >
+							<input className="symptom-submit" type="submit" onSubmit={this.handleSubmit} value="Finished" />
+						</li>
+					</ul>
 				</form>
 			</div>
 		)
