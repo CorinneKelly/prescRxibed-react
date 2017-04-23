@@ -16,16 +16,15 @@ class SymptomForm extends Component {
 		this.state = {
 			outputData: 5,
 			symptomTextDesc: '',
-			uploadFileCloudinaryUrl: '',
-			imageCloudinaryIds: [],
+			uploadedFiles: [],
+			// imageCloudinaryIds: [],
 			symptomName: ('fever' || '') //this.props.symptomName change when props exist
 		}
 		this.outputUpdate = this.outputUpdate.bind(this)
 		this.symptomTextDesc = this.symptomTextDesc.bind(this)
-		this.onImageDrop = this.onImageDrop.bind(this)
 		this.deleteImgPreview = this.deleteImgPreview.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
-		this.onOpenClick = this.onOpenClick.bind(this)
+		this.handleImageUpload = this.handleImageUpload.bind(this)
 	}
 
 	outputUpdate(event) {
@@ -42,12 +41,12 @@ class SymptomForm extends Component {
 		})
 	}
 
-	onImageDrop(files) {
+	onImageDrop(file) {
 		this.setState({
-			uploadedFile: files[0]
+			uploadedFiles: [...this.state.uploadedFiles, {fileName: file}]
 		})
 
-		this.handleImageUpload(files[0])
+		this.handleImageUpload(file)
 	}
 
 	handleImageUpload(file) {
@@ -55,16 +54,10 @@ class SymptomForm extends Component {
 												.field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
 												.field('file', file)
 		upload.end((err, response) => {
-			if (err) {
-				console.error(err)
-				// display alert "file was not able to upload"
-			}
 
 			if (response.body.secure_url !== '') {
-				debugger
 			this.setState({
-				imageCloudinaryIds: [...this.state.imageCloudinaryIds, response.body.public_id],
-				uploadFileCloudinaryUrl: response.body.secure_url
+				uploadedFiles: [...this.state.uploadedFiles, {fileName: file[0].name, publicID: response.body.public_id, url: response.body.secure_url}]
 
 			})
 		}
@@ -73,8 +66,12 @@ class SymptomForm extends Component {
 
 	deleteImgPreview(event) {
 		event.preventDefault()
-		this.setState({
-			uploadFileCloudinaryUrl: ''
+		this.state.uploadedFiles.find((fileObj, index) => {
+			if (fileObj.fileName === event.target.value) {
+				this.setState({
+					uploadedFiles: [...this.state.uploadedFiles.slice(0, index), ...this.state.uploadedFiles.slice(index + 1)]
+				})
+			}
 		})
 	}
 
@@ -83,11 +80,21 @@ class SymptomForm extends Component {
 		this.props.postSymptom(this.state)
 	}
 
-	onOpenClick() {
-    this.dropzone.open()
-  }
-
 	render() {
+
+			if (this.state.uploadedFiles.length > 0) {
+				var currUploads = this.state.uploadedFiles.map((file) => {
+					return (
+						<div className="image-flex" >
+							{`${file.fileName}`} <br/>
+							<img src={`${file.url}`} /><br/>
+							<button onClick={this.deleteImgPreview} value={`${file.fileName}`}>DELETE</button>
+						</div>
+					)
+				})
+			} else {
+				var currUploads = ""
+			}
 
 		return (
 			<div className="symptom-form-wrapper">
@@ -107,9 +114,9 @@ class SymptomForm extends Component {
 
 						<li className="list-item upload-list-item" >
 							<Dropzone
-								multiple={false}
+								multiple={true}
 								accept="image/*"
-								onDrop={this.onImageDrop}
+								onDrop={this.handleImageUpload}
 								className="image-flex" id="dropzone" >
 
 								<p>Drag & drop image</p>
@@ -119,12 +126,18 @@ class SymptomForm extends Component {
 						</li>
 
 						<li className="list-item" >
-							{this.state.uploadFileCloudinaryUrl === '' ? null :
+							{this.state.uploadedFiles.length === 0 ? null :
 								<div>
 									<p>You just uploaded:</p>
-									<p>{this.state.uploadedFile.name}</p>
-									<img src={this.state.uploadFileCloudinaryUrl} />
-									<p> Changed your mind?</p><button onClick={this.deleteImgPreview}>DELETE PREVIEW</button>
+
+
+										<div className="list-item"> 
+											{currUploads}
+										</div>
+
+
+
+									
 
 								</div>
 							}
