@@ -2,22 +2,29 @@ import React, { Component } from 'react'
 import AddPrescription from './AddPrescription'
 import Prescriptions from './Prescriptions'
 import FullSchedule from './FullSchedule'
+import { connect } from 'react-redux'
+import { getPrescriptions } from '../actions/prescription'
+import { bindActionCreators } from 'redux'
+
+
 
 
 class Home extends Component {
 	constructor (){
 		super()
-		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
-		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
 		this.state = {
-
 			presOpen: false,
 			schedOpen: false,
 
 			presImage: "closedBottlePink.svg",
-			schedImage: "closedBottlePink.svg",
-
+			schedImage: "closedBottlePink.svg"
 		}
+		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
+		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
+	}
+
+	componentWillMount(){
+		this.props.getPrescriptions()
 	}
 
 	handleOnClickSchedule(event) {
@@ -78,13 +85,6 @@ class Home extends Component {
 			    fill: "forwards"
 			  })
 
-			this.setState ({
-				presOpen: !this.state.presOpen,
-				schedOpen: false,
-				presImage: "openBottlePink.svg",
-				schedImage: "closedBottlePink.svg"
-			})
-
 			document.getElementById("sched-image").animate([
 				{ transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
 				    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`}
@@ -93,12 +93,20 @@ class Home extends Component {
 				    easing: "ease-in-out",
 				    fill: "forwards"
 				  })
+
+			this.setState ({
+				presOpen: !this.state.presOpen,
+				schedOpen: false,
+				presImage: "openBottlePink.svg",
+				schedImage: "closedBottlePink.svg"
+			})
+
 		} else {
 			document.getElementById("pres-image").animate([
 				{ transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
 				    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`}
 				  ], {
-				    duration: 1000,
+				    duration: 1,
 				    easing: "ease-in-out",
 				    fill: "forwards"
 				  })
@@ -110,32 +118,32 @@ class Home extends Component {
 	}
 
 	showPrescriptions(){
-		if (this.state.presOpen && this.state.schedOpen){
-			this.setState({
-				schedOpen: false
-			})
+		// if (this.state.presOpen){
+			// this.setState({
+			// 	schedOpen: false
+			// })
 			return <Prescriptions />
 			// prescriptions will return a list of <li>prescriptions</li>
-		} else if(this.state.presOpen){
-			this.setState({
-				schedOpen: false
-			})
-			return <Prescriptions />
-		} else {
-			return null
-		}
+		// } else if(this.state.presOpen){
+		// 	// this.setState({
+		// 	// 	schedOpen: false
+		// 	// })
+		// 	return <Prescriptions />
+		// } else {
+		// 	return null
+		// }
 	}
 
 	showSchedule(){
-		if (this.state.schedOpen && this.state.presOpen){
-			this.setState({
-				presOpen: false
-			})
+		if (this.state.schedOpen){
+			// this.setState({
+			// 	presOpen: false
+			// })
 			return <li><FullSchedule /></li>
 		} else if (this.state.schedOpen) {
-			this.setState({
-				presOpen: false
-			})
+			// this.setState({
+			// 	presOpen: false
+			// })
 			return <li><FullSchedule /></li>
 		} else {
 			return null	
@@ -144,12 +152,11 @@ class Home extends Component {
 
 	render(){
 
-
 		return (
 			<div className="home-wrapper" >
 				<ul className="home-list">
 					<li className="list-item">
-						<img className="image-flex" src="add-pillPink.svg"/>
+						<img className="image-flex" src="add-pillPink.svg" height="90" />
 						<button className="list-flex" ><a href="/add-prescription" id="add-pres-link" >
 						Add a Prescription
 						</a></button>
@@ -161,7 +168,7 @@ class Home extends Component {
 						Your Prescriptions
 						</button>
 					</li>
-							{this.showPrescriptions()}
+							{this.state.presOpen ? <Prescriptions /> : null}
 
 					<li className="list-item">
 						<img className="image-flex" id="sched-image" src={this.state.schedImage} />
@@ -177,4 +184,11 @@ class Home extends Component {
 	}
 }
 
-export default Home
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		getPrescriptions
+	}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Home)

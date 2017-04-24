@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import GoogleLogin from 'react-google-login'
-import './App.css'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './App.css'
