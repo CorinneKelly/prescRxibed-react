@@ -22,7 +22,8 @@ import Symptom from './components/Symptom'
 import SymptomForm from './components/SymptomForm'
 import { BurgerMenu } from './components/BurgerMenu'
 import { NotFound } from './components/NotFound'
-
+import { setAuthHeader, getJWTToken } from './actions/account'
+import { getPrescriptions, postPrescriptionEvent } from './actions/prescription'
 
 // npm i --save react-router-redux@next react-router-dom
 // import createHistory from 'history/createBrowserHistory'
@@ -34,7 +35,12 @@ import { NotFound } from './components/NotFound'
 
 const history = createHistory()
 const rMiddleware = routerMiddleware(history)
-const store = createStore(rootReducer, applyMiddleware(thunk, rMiddleware))
+export const store = createStore(rootReducer, applyMiddleware(thunk, rMiddleware))
+
+setAuthHeader()
+// getJWTToken(response)
+getPrescriptions()
+// postPrescriptionEvent(presData)
 
 
 ReactDOM.render(
@@ -42,12 +48,12 @@ ReactDOM.render(
   	<Router history={history}>
       <div>
         < Route exact path="/" component={ConnectedApp} />
-        < Route path="/add-prescription" component={AddPrescription}  />
-        <Route path='/prescription' component={Prescription} />
+        < Route path='/add-prescription' component={AddPrescription}  />
+        <Route path='/prescriptions/:prescriptionId' component={Prescription} />
         <Route path='/symptomform' component={SymptomForm} />
         <Route path='/symptomform-check' component={SymptomForm} />
         <Route path='/symptom-check' component={Symptom} />
-        <Route path='/home-check' component={Home} />
+        <Route path='/home' component={Home} />
         <Route path='/symptom' component={Symptom} />
         <Route component={NotFound} />
       </div>

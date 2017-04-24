@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux'
 import { postPrescriptionEvent } from '../actions/prescription'
 import { connect } from 'react-redux'
 import BurgerMenu from './BurgerMenu'
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
-
+import { Checkbox, CheckboxGroup } from 'react-checkbox-group'
 
 
 
@@ -33,9 +32,9 @@ class AddPrescription extends Component {
 		this.state = {
 			step: 1,
 			schedule: {
-				frequency: "daily",
+				frequency: 'daily',
 				hours: [''],
-				weekdays: ["SU","MO","TU","WE","TH",'FR','SA'],
+				weekdays: ['SU','MO','TU','WE','TH','FR','SA'],
 				month_days: [''],
 				start_date: today
 			},
@@ -52,11 +51,11 @@ class AddPrescription extends Component {
 			case "daily":
 				schedule["weekdays"] = []
 				schedule["month_days"] = []
-				break;
+				break
 			case "weekly":
 				schedule["hours"] = []
 				schedule["month_days"] = []
-				break;
+				break
 			case "monthly":
 				schedule["hours"] = []
 				schedule["weekdays"] = []
@@ -78,11 +77,9 @@ class AddPrescription extends Component {
 	}
 
 	handleSubmit(event) {
-debugger
 		event.preventDefault()
 		this.clearEmptyScheduleArrays()
 		this.props.postPrescriptionEvent(this.state)//should pass in this.state instead of fakeState
-
 
 	}
 

@@ -68,7 +68,7 @@ class Symptom extends Component {
 
 						  </defs>
 						  <XAxis dataKey="date" />
-						  <YAxis />
+						  <YAxis type="number" domain={[0, 5]} />
 						  <Tooltip />
 						  <Area type="monotone" dataKey="uv" stroke="#F2F3F5" fillOpacity={1} fill="url(#colorUv)" />
 						</AreaChart>
