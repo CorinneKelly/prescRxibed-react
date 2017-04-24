@@ -17,7 +17,7 @@ class Home extends Component {
 			schedOpen: false,
 
 			presImage: "closedBottlePink.svg",
-			schedImage: "closedBottlePink.svg"
+			schedImage: "calendarPink.svg"
 		}
 		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
 		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
@@ -32,7 +32,7 @@ class Home extends Component {
 		if (!this.state.schedOpen) {
 			document.getElementById("sched-image").animate([
 		    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
-		    { transform: `rotateX(180deg) rotateY(3600deg) rotateZ(0deg)`}
+		    { transform: `rotateX(360deg) rotateY(1800deg) rotateZ(360deg)`}
 		  ], {
 		    duration: 1000,
 		    easing: "ease-in-out",
@@ -42,7 +42,6 @@ class Home extends Component {
 			this.setState({
 				presOpen: false,
 				schedOpen: !this.state.schedOpen,
-				schedImage: "openBottlePink.svg",
 				presImage: "closedBottlePink.svg"
 			})
 
@@ -65,7 +64,6 @@ class Home extends Component {
 				    fill: "forwards"
 				  })
 			this.setState({
-				schedImage: "closedBottlePink.svg",
 				schedOpen: !this.state.schedOpen
 			})
 		}
@@ -78,7 +76,7 @@ class Home extends Component {
 		if (!this.state.presOpen) {
 			document.getElementById("pres-image").animate([
 			    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
-			    { transform: `rotateX(180deg) rotateY(3600deg) rotateZ(0deg)`}
+			    { transform: `rotateX(540deg) rotateY(1800deg) rotateZ(0deg)`}
 			  ], {
 			    duration: 1000,
 			    easing: "ease-in-out",
@@ -98,7 +96,6 @@ class Home extends Component {
 				presOpen: !this.state.presOpen,
 				schedOpen: false,
 				presImage: "openBottlePink.svg",
-				schedImage: "closedBottlePink.svg"
 			})
 
 		} else {
@@ -155,23 +152,23 @@ class Home extends Component {
 		return (
 			<div className="home-wrapper" >
 				<ul className="home-list">
-					<li className="list-item">
-						<img className="image-flex" src="add-pillPink.svg" height="90" />
-						<button className="list-flex" ><a href="/add-prescription" id="add-pres-link" >
+					<li className="list-item home-list-item">
+						<img className="image-flex" src="add-pillPink.svg" width="90" height="85" />
+						<a href="/add-prescription" className="list-flex" id="add-pres-link" >
 						Add a Prescription
-						</a></button>
+						</a>
 					</li>
 
-					<li className="list-item">
-						<img className="image-flex" id="pres-image" src={this.state.presImage} />
+					<li className="list-item home-list-item">
+						<img className="image-flex" id="pres-image" width="90" src={this.state.presImage} />
 						<button className="list-flex" onClick={this.handleOnClickPrescriptions} >
 						Your Prescriptions
 						</button>
 					</li>
 							{this.state.presOpen ? <Prescriptions /> : null}
 
-					<li className="list-item">
-						<img className="image-flex" id="sched-image" src={this.state.schedImage} />
+					<li className="list-item home-list-item">
+						<img className="image-flex" id="sched-image" width="90" src={this.state.schedImage} />
 						<button className="list-flex" onClick={this.handleOnClickSchedule} >
 						Schedule
 						</button>

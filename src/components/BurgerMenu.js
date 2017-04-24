@@ -7,7 +7,7 @@ class BurgerMenu extends Component {
 		super(props)
 		  this.state = {
 	      menuOpened: false,
-	      menuIcon: "burgerIcon.svg"
+	      menuIcon: "../burgerIcon.svg"
 	    }
 
 	    this.exposeBurgerMenu = this.exposeBurgerMenu.bind(this)
@@ -19,13 +19,13 @@ class BurgerMenu extends Component {
       document.getElementById("root").style.transform = "translate(0, 0)"
       this.setState({
         menuOpened: false,
-        menuIcon: "burgerIcon.svg"
+        menuIcon: "../burgerIcon.svg"
       })      
     } else {
       document.getElementById("root").style.transform = "translate(200px, 0)"
       this.setState({
         menuOpened: true,
-        menuIcon: "x.svg"
+        menuIcon: "../x.svg"
       })
       
     }

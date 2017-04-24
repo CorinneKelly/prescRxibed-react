@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import createHistory from 'history/createBrowserHistory'
+
 import {
   ConnectedRouter as Router,
   routerMiddleware,
   Link
 } from 'react-router-redux'
+
 import { Route } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import { Provider } from 'react-redux'

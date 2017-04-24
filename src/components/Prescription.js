@@ -10,54 +10,51 @@ class Prescription extends Component {
 
 		this.state = {
 			display: ""
+
 		}
 
-		this.showSchedule = this.showSchedule.bind(this)
 		this.showDetails = this.showDetails.bind(this)
 		this.showSymptoms = this.showSymptoms.bind(this)
-		this.showDrugInfo = this.showDrugInfo.bind(this)
+		this.renderDetails = this.renderDetails.bind(this)
 	}
-
-	showSchedule(){
-		this.setState({
-			display: "schedule"
-		})
-	}
-
-	renderSchedule(){
-		//retrieve and format dosing schedule for this Rx
-	}
-
-	
 
 	showDetails(){
-		this.setState({
-			display: "details"
-		})
+		if (this.state.display === "presDetails") {
+			this.setState({
+				display: ""
+			})
+			
+		} else {
+			this.setState({
+				display: "presDetails"
+			})			
+		}
 	}
 
 	renderDetails(){
-		var currRx = this.props.prescription.allPrescriptions[this.props.match.params.prescriptionId]
-		return (
-			<div>
-				<li className="list-item">
-					<div className="image-flex">Dosage: {currRx.dosage} {currRx.units}</div>
-				</li>
+		if (this.state.display === "presDetails") {
+			var currRx = this.props.prescription.allPrescriptions[this.props.match.params.prescriptionId]
+			return (
+				<div>
+					<li className="list-item">
+						<div className="image-flex">Dosage: {currRx.dosage} {currRx.units}</div>
+					</li>
 
-				<li className="list-item">
-					<div className="image-flex">Instructions: {currRx.instructions}</div>
-				</li>
+					<li className="list-item">
+						<div className="image-flex">Instructions: {currRx.instructions}</div>
+					</li>
 
-				<li className="list-item">
-					<div className="image-flex">{currRx.refills} refill(s) left</div>
-				</li>
+					<li className="list-item">
+						<div className="image-flex">{currRx.refills} refill(s) left</div>
+					</li>
 
-				<li className="list-item">
-					{currRx.doctor !== null ? currRx.doctor : null}
-				</li>
+					<li className="list-item">
+						{currRx.doctor !== null ? currRx.doctor : null}
+					</li>
 
-			</div>
-		)
+				</div>
+			)}
+		
 	}
 
 	showSymptoms(){
@@ -66,9 +63,6 @@ class Prescription extends Component {
 		})
 	}
 
-
-	//diplay list of symptoms being tracked
-	//along with opportunity to add symptom
 	renderSymptoms(){
 		if (this.state.display==="symptoms"){
 			//const symptoms = symptom array from api
@@ -85,33 +79,22 @@ class Prescription extends Component {
 		}
 	}
 
-	showDrugInfo(){
-		this.setState({
-			display: "drugInfo"
-		})
-	}
 
 
 	render() {
 		return (
-			<div>
+			<div >
 				<BurgerMenu />
-				<ul className="prescription-page-list">
-					<li className="list-item">
-						<img className="image-flex" id="urmum" src="../calendarDkBlue.svg" />
-						<button className="list-flex pres-page-list-item" onClick={this.showSchedule}>Check Dosage Schedule</button>
-					</li>
-					{this.renderSchedule()}
-					
-					<li className="list-item">
-						<img className="image-flex" src="../rxBottleDkBlue.svg" />
-						<button className="list-flex pres-page-list-item" onClick={this.showDetails}> Prescription Details </button>
+				<ul>
+					<li className="list-item  pres-page-list-item">
+						<img className="image-flex" src="../rxBottleBrightBlue.svg" />
+						<button className="list-flex" onClick={this.showDetails}> Prescription Details </button>
 					</li>
 					{this.renderDetails()}
 					
-					<li className="list-item">
-						<img className="image-flex" src="../symptomTrackerDkBlue.svg" />
-						<button className="list-flex pres-page-list-item" onClick={this.showSymptoms}> Symptom Tracker </button>
+					<li className="list-item  pres-page-list-item">
+						<img className="image-flex" src="../symptomTrackerBrightBlue.svg" />
+						<button className="list-flex" onClick={this.showSymptoms}> Symptom Tracker </button>
 					</li>
 					{this.renderSymptoms()}
 					

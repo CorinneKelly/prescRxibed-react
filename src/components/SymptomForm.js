@@ -88,7 +88,7 @@ class SymptomForm extends Component {
 						<div className="image-flex" >
 							{`${file.fileName}`} <br/>
 							<img src={`${file.url}`} /><br/>
-							<button onClick={this.deleteImgPreview} value={`${file.fileName}`}>DELETE</button>
+							<button className="list-flex" onClick={this.deleteImgPreview} value={`${file.fileName}`}>DELETE</button>
 						</div>
 					)
 				})
@@ -157,7 +157,7 @@ class SymptomForm extends Component {
 
 	const mapDispatchToProps = (dispatch) => {
 	  return bindActionCreators({
-	    postSymptom},
+	    postSymptomEvent},
 	    dispatch
 	  )
 	}

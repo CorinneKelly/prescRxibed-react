@@ -1,33 +1,32 @@
 import axios from 'axios'
+import { push } from 'react-router-redux'
+import { setAuthHeader } from './account'
+import { store } from '../index'
 
-export function postSymptom(response) {
+export const postSymptomEvent = (symptomData) => {
   return (dispatch) => {
     axios
-    // .post('http://localhost:4000/v1/sessions', {account: {googleToken: response.accessToken, googleId: response.googleId, name: response.profileObj.name}})
-    // .then(function(response){
-    //   let token = response.data.jwt
-    //   localStorage.setItem('token', token)
-    //   dispatch({
-    //     type: 'SET_TOKEN',
-    //     payload: {
-    //       token: token,
-    //       fullname: response.data.fullname
-    //     }
-    //   })
-    // })
+    .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData}, config)
+    .then(
+      store.dispatch(push('/'))
+    )
   }
 }
 
 
-// export function getSymptoms(id){
-// 	return (dispatch) => {
-// 		axios
-// 		.get (url/prescriptions/id/symptoms, config)
-// 		.then(function(response){
-// 			dispatch({
-// 				type: "ADD_SYMPTOM",
-// 				payload: symptoms //symptoms will be an array of all symptom objects
-// 			})
-// 		})
-// 	}
-// }
+export const getPrescriptions = () => {
+  return (dispatch) => {
+    axios
+    .get('http://localhost:4000/v1/symptoms', config)
+    .then(function(response){
+        console.log(response)
+        
+      dispatch({
+        type: 'SET_SYMPTOMS',
+        payload: {
+          // allPrescriptions: allPrescriptions
+        }
+      })
+    })
+  }
+}
