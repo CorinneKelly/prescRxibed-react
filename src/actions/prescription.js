@@ -80,3 +80,26 @@ export const getPrescription = (prescriptionId) => {
   }
 }
 
+export const deletePrescription = (prescriptionId) => {
+    let config = setAuthHeader()
+    config.headers['Content-Type'] = 'application/json'
+    // debugger
+  return (dispatch) => {
+    axios
+    .delete(`http://localhost:4000/v1/prescriptions/${prescriptionId}`, config, 'Access-Control-Allow-Origin')
+    .then(function(response){
+      console.log("give yourself a round of applause")
+      let allPrescriptions = response.data
+      dispatch({
+        type: 'SET_PRESCRIPTIONS',
+        payload: {
+          allPrescriptions: allPrescriptions
+        }
+      })
+    })
+    .then(
+      // store.dispatch(push('/presciptions'))
+    )
+  }
+}
+

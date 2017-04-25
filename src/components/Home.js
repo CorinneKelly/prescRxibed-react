@@ -3,7 +3,7 @@ import AddPrescription from './AddPrescription'
 import Prescriptions from './Prescriptions'
 import FullSchedule from './FullSchedule'
 import { connect } from 'react-redux'
-import { getPrescriptions } from '../actions/prescription'
+import { getPrescriptions, deletePrescription } from '../actions/prescription'
 import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import { store } from '../index'
@@ -20,6 +20,21 @@ class Home extends Component {
 		}
 		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
 		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
+		this.handleDelete = this.handleDelete.bind(this)
+		this.handleOnMouseOverPres = this.handleOnMouseOverPres.bind(this)
+		this.handleOnMouseOutPres = this.handleOnMouseOutPres.bind(this)
+	}
+
+	handleDelete(prescriptionId){
+		this.props.deletePrescription(prescriptionId)
+	}
+
+	handleOnMouseOverPres(prescriptionId, deleteImage){
+		document.getElementById(`pres-list-item${prescriptionId}`).setAttribute('src', deleteImage)
+	}
+
+	handleOnMouseOutPres(prescriptionId, originalImage){
+		document.getElementById(`pres-list-item${prescriptionId}`).setAttribute('src', originalImage)
 	}
 
 	handleOnClickSchedule(event) {
@@ -111,9 +126,6 @@ class Home extends Component {
 		}
 	}
 
-	showPrescriptions(){
-		return <Prescriptions />
-	}
 
 	showSchedule(){
 		if (this.state.schedOpen){
@@ -137,12 +149,12 @@ class Home extends Component {
 					</li>
 
 					<li className="list-item home-list-item">
-						<img className="image-flex" id="pres-image" width="90" src={this.state.presImage} />
+						<img className="image-flex" id="pres-image" width="90" src={this.state.presImage}  />
 						<button className="list-flex" onClick={this.handleOnClickPrescriptions} >
 						Your Prescriptions
 						</button>
 					</li>
-							{this.state.presOpen ? <Prescriptions /> : null}
+							{this.state.presOpen ? <Prescriptions handleDelete={this.handleDelete} handleOnMouseOverPres={this.handleOnMouseOverPres} handleOnMouseOutPres={this.handleOnMouseOutPres} /> : null}
 
 					<li className="list-item home-list-item">
 						<img className="image-flex" id="sched-image" width="90" src={this.state.schedImage} />
@@ -161,7 +173,7 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getPrescriptions
+		getPrescriptions, deletePrescription
 	}, dispatch)
 }
 

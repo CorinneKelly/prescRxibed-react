@@ -99,6 +99,10 @@ body {
 		background-color:#F2F3F5 ;
 	}
 
+/*.pres-list-item-home-image:hover {
+	background: url('../../deleteCanBrBlue.svg');
+}*/
+
 .image-flex {
 	flex: auto;
 	/*border-top: 2px solid #F2F3F5;*/
@@ -336,3 +340,23 @@ textarea {
 .symp-log-heading {
 	margin-top: 20px;
 }
+
+@keyframes FadeIn { 
+  0% {
+    opacity: 0;
+    transform: scale(.1);
+  }
+
+  85% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/*.list-item-fade {
+	animation: FadeIn 1s linear;
+  animation-fill-mode: both;
+}*/

@@ -3,14 +3,31 @@ import { connect } from 'react-redux'
 import PrescriptionListItem from './PrescriptionListItem'
 
 class Prescriptions extends Component {
+	getHandleDelete(){
+		return this.props.handleDelete
+	}
+
+	getMouseOver(){
+		return this.props.handleOnMouseOverPres
+	}
+
+	getMouseOut(){
+		return this.props.handleOnMouseOutPres
+	}
 
 	render() {
+		// debugger
 		var prescriptions = this.props.prescription.allPrescriptions.map((pres, index) => {
+			
 			return (
 				<PrescriptionListItem
 					prescriptionDetails={pres}
-					idx={pres.id}
-					imageSource={index%2 ? "pillBlue.svg" : "pillWhiteish.svg"}
+					presID={pres.id}
+					handleOnMouseOverPres={this.getMouseOver()}
+					handleOnMouseOutPres={this.getMouseOut()}
+					handleDelete={this.getHandleDelete()}
+					originalImageSource={index%2 ? "pillBlue.svg" : "pillWhiteish.svg"}
+					deleteImageSource={index%2 ? "deleteCanBrBlue.svg" : "deleteCanWhite.svg"}
 				/> )
 				
 			
