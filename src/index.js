@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import createHistory from 'history/createBrowserHistory'
+
 import {
   ConnectedRouter as Router,
   routerMiddleware,
-  Link
+  Link,
+  push
 } from 'react-router-redux'
+
 import { Route } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -37,9 +40,9 @@ const history = createHistory()
 const rMiddleware = routerMiddleware(history)
 export const store = createStore(rootReducer, applyMiddleware(thunk, rMiddleware))
 
-setAuthHeader()
+// setAuthHeader()
 // getJWTToken(response)
-getPrescriptions()
+// getPrescriptions()
 // postPrescriptionEvent(presData)
 
 
@@ -47,14 +50,12 @@ ReactDOM.render(
   <Provider store={store}>
   	<Router history={history}>
       <div>
-        < Route exact path="/" component={ConnectedApp} />
-        < Route path='/add-prescription' component={AddPrescription}  />
-        <Route path='/prescriptions/:prescriptionId' component={Prescription} />
-        <Route path='/symptomform' component={SymptomForm} />
-        <Route path='/symptomform-check' component={SymptomForm} />
-        <Route path='/symptom-check' component={Symptom} />
-        <Route path='/home' component={Home} />
-        <Route path='/symptom' component={Symptom} />
+        <Route exact path="/" component={ConnectedApp} />
+        <Route exact path='/add-prescription' component={AddPrescription}  />
+        <Route exact path='/prescriptions/:prescriptionId/newsymptom' component={SymptomForm} />
+        <Route exact path='/prescriptions/:prescriptionId' component={Prescription} />
+        <Route exact path='/symptoms/:symptomId' component={Symptom} />
+        <Route exact path='/home' component={Home} />
         <Route component={NotFound} />
       </div>
 	  </Router>

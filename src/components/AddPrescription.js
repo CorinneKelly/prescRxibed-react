@@ -331,9 +331,8 @@ class AddPrescription extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    postPrescriptionEvent},
-    dispatch
-  )
+    postPrescriptionEvent
+	  }, dispatch)
 }
 
 

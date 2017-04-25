@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import { postSymptom } from '../actions/symptoms'
+import { postSymptomEvent } from '../actions/symptom'
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
@@ -14,30 +14,31 @@ class SymptomForm extends Component {
 	constructor() {
 		super()
 		this.state = {
-			outputData: 5,
-			symptomTextDesc: '',
+			severity: 5,
+			description: '',
 			uploadedFiles: [],
-			// imageCloudinaryIds: [],
-			symptomName: ('fever' || '') //this.props.symptomName change when props exist
+			name: ("this.props.symptom.name" || "") 
 		}
 		this.outputUpdate = this.outputUpdate.bind(this)
 		this.symptomTextDesc = this.symptomTextDesc.bind(this)
 		this.deleteImgPreview = this.deleteImgPreview.bind(this)
+
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleImageUpload = this.handleImageUpload.bind(this)
+		this.handleInputChange = this.handleInputChange.bind(this)
 	}
 
 	outputUpdate(event) {
 		event.preventDefault()
 		this.setState({
-			outputData: event.target.value
+			severity: event.target.value
 		})
 	}
 
 	symptomTextDesc(event){
 		event.preventDefault()
 		this.setState({
-			symptomTextDesc: event.target.value
+			description: event.target.value
 		})
 	}
 
@@ -75,20 +76,27 @@ class SymptomForm extends Component {
 		})
 	}
 
+	handleInputChange(event){
+		event.preventDefault()
+		this.setState({
+			name: event.target.value
+		})
+	}
+
 	handleSubmit(event){
 		event.preventDefault()
-		this.props.postSymptom(this.state)
+		debugger
+		this.props.postSymptomEvent(this.state, this.props.match.params.prescriptionId)
 	}
 
 	render() {
-
 			if (this.state.uploadedFiles.length > 0) {
 				var currUploads = this.state.uploadedFiles.map((file) => {
 					return (
 						<div className="image-flex" >
 							{`${file.fileName}`} <br/>
 							<img src={`${file.url}`} /><br/>
-							<button onClick={this.deleteImgPreview} value={`${file.fileName}`}>DELETE</button>
+							<button className="list-flex" onClick={this.deleteImgPreview} value={`${file.fileName}`}>DELETE</button>
 						</div>
 					)
 				})
@@ -99,13 +107,16 @@ class SymptomForm extends Component {
 		return (
 			<div className="symptom-form-wrapper">
 				<BurgerMenu />
-				<h1 className="page-title">How does your {this.state.symptomName} feel today</h1>
+				<h1 className="page-title">
+				How does your  
+				<input type="text" value={this.state.symptomName} onChange={this.handleInputChange}/>
+				 feel today</h1>
 				<form onSubmit={this.handleSubmit} >
 					<ul>
 						<li className="list-item" >
 							<label className="curr-severity-text" htmlFor="currSev">Current Severity:</label>
 							<input className="curr-severity-text" type="range" id="currSev" min="0" max="5" step="1" onChange={this.outputUpdate} />
-							<output className="curr-severity-text" htmlFor="currSev" id="symp-severity">{this.state.outputData}</output><br />
+							<output className="curr-severity-text" htmlFor="currSev" id="symp-severity">{this.state.severity}</output><br />
 						</li>
 
 						<li className="list-item" >
@@ -129,21 +140,12 @@ class SymptomForm extends Component {
 							{this.state.uploadedFiles.length === 0 ? null :
 								<div>
 									<p>You just uploaded:</p>
-
-
 										<div className="list-item"> 
 											{currUploads}
 										</div>
-
-
-
-									
-
 								</div>
 							}
 						</li>
-
-
 						<li className="list-item" >
 							<input className="symptom-submit" type="submit" onSubmit={this.handleSubmit} value="Finished" />
 						</li>
@@ -157,9 +159,8 @@ class SymptomForm extends Component {
 
 	const mapDispatchToProps = (dispatch) => {
 	  return bindActionCreators({
-	    postSymptom},
-	    dispatch
-	  )
+	    postSymptomEvent
+	  }, dispatch)
 	}
 
 

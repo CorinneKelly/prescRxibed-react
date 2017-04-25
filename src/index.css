@@ -91,7 +91,12 @@ body {
 	display: flex;
 	transition: transform 1s ease-in-out;
 	/*border-color: #D0E7F0;*/
+	margin-right: 50px;
 }
+
+.home-list-item:hover .pres-page-list-item:hover{
+		background-color:#F2F3F5 ;
+	}
 
 .image-flex {
 	flex: auto;
@@ -109,7 +114,8 @@ body {
 	color: #F2F3F5;
 	font-size: 1.5em;
 	text-decoration: none;
-
+	vertical-align: text-bottom;
+}
 
 
 .list-flex-smaller {
@@ -124,6 +130,7 @@ body {
 
 	.list-flex:hover{
 		color: #27CECF;
+		background-color: #F2F3F5;
 	}
 
 .weekday {
@@ -139,23 +146,17 @@ button {
 	border: none;
 }
 
-.pres-page-list-item {
+/*.pres-page-list-item {
 	background-color: #27CECF;
 	color: #31375D;
-}
+}*/
 
-#add-pres-link {
-	text-decoration: none;
-	color: #F2F3F5;
-}
 
-	#add-pres-link:hover {
-		color: #27CECF;
-	}
 
-.prescription-page-list {
+
+/*.prescription-page-list {
 	background-color: #27CECF;
-}
+}*/
 
 .closed-bottle {
 	background-repeat: no-repeat;
@@ -202,6 +203,7 @@ button {
 
 	.add-pres-input::placeholder {
 		color: #93708D;
+		font-size: 1.5em;
 
 	}
 

@@ -9,7 +9,7 @@ class Prescriptions extends Component {
 			return (
 				<PrescriptionListItem
 					prescriptionDetails={pres}
-					idx={index}
+					idx={pres.id}
 					imageSource={index%2 ? "pillBlue.svg" : "pillWhiteish.svg"}
 				/> )
 				
