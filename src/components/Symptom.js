@@ -24,13 +24,10 @@ const data =
 class Symptom extends Component {
 	constructor(){
 		super()
-		this.setState({
-			symptomId: this.props.match.params.symptomId
-		})
 	}
 
 	componentWillMount(){
-		this.props.getSymptom(this.state.symptomId)
+		this.props.getSymptom(this.props.match.params.symptomId)
 	}
 
 	render() {
@@ -58,11 +55,11 @@ class Symptom extends Component {
 	  		<BurgerMenu />
 	  		<ul>
 		  		<li className="list-item">
-		  			<h1 className="page-title image-flex">'this.state(or props).symptom.name'</h1>
+		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.specificSymptom.name}</h1>
 	  			</li>
 	  			
 		  		<li className="list-item">
-			  		<a className="page-title image-flex symp-form-link" href="/symptomform">How is your 'this.state(or props).symptom.name' feeling today?</a>
+			  		<a className="page-title image-flex symp-form-link" href="/symptomform">How is your {this.props.symptom.specificSymptom.name} feeling today?</a>
 		  		</li>
 		  		
 		  		<li className="list-item">
@@ -102,4 +99,10 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Symptom)
+const mapStateToProps = (state) => {
+	return {
+		symptom: state.symptom
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Symptom)

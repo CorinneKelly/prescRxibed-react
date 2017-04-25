@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://localhost:3000/symptoms/2 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
+    <!--
+      Notice the use of  in the tag above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  <style type="text/css">/*burger menu*/
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #31375D;
+  color: #F2F3F5;
+}
+
+#root {
+	transition-duration: 1s;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.burger-menu {
+	top: 0;
+	position: absolute;
+	left: -200px;
+	width: 200px;
+	height: 100%;
+	text-align: left;
+	background-color: #93708D;
+}
+
+#menu-activator {
+	position: fixed;
+	top: 15px;
+	left: 15px;
+}
+
+
+.burger-menu-list-items {
+	text-decoration: none;
+	color: #F2F3F5;
+	margin: 20px 0;
+}
+
+	.burger-menu-list-items:hover{
+		color: #27CECF;
+	}
+
+.burger-menu-list {
+	list-style: none;
+	color: #31375D;
+}
+
+/*home page with three buttons */
+
+/*dkblu: #31375D*/
+/*lt purple #93708D*/
+/*ltblue #D0E7F0*/
+/*ltblue: #ABCFE0*/
+/*white: #F2F3F5*/
+/*peach: #EEB5B7*/
+/*bright blu: #27CECF*/
+
+.home-wrapper {
+	height: 100%;
+	background-color: #31375D
+}
+
+.welcome-wrapper {
+	margin: 0 50px;
+}
+
+.home-wrapper ul li {
+	/*background-color: rgba(49, 55, 93, 0.8);*/
+	color: #F2F3F5;
+	transition: -webkit-transform 1s ease-in-out;
+	transition: transform 1s ease-in-out;
+	transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
+	-webkit-transition: -webkit-transform 1s ease-in-out;
+}
+
+.home-wrapper ul {
+	margin-top: 60px;
+}
+
+.stepThree {
+  list-style: none;
+}
+
+.stepFour {
+  list-style: none;
+}
+
+
+.list-item {
+  text-align: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	transition: -webkit-transform 1s ease-in-out;
+	transition: transform 1s ease-in-out;
+	transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
+	/*border-color: #D0E7F0;*/
+	margin-right: 50px;
+}
+
+.home-list-item:hover .pres-page-list-item:hover{
+		background-color:#F2F3F5 ;
+	}
+
+.image-flex {
+	-webkit-box-flex: 1;
+	    -ms-flex: auto;
+	        flex: auto;
+	/*border-top: 2px solid #F2F3F5;*/
+	/*border-bottom: 2px solid #F2F3F5;*/
+	background-color: ##31375D;
+}
+
+.list-flex {
+	margin-right: 50px;
+	-webkit-box-flex: 60%;
+	    -ms-flex: 60%;
+	        flex: 60%;
+	background-color: #31375D;
+
+	
+	color: #F2F3F5;
+	font-size: 1.5em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+}
+
+
+.list-flex-smaller {
+	-webkit-box-flex: 60%;
+	    -ms-flex: 60%;
+	        flex: 60%;
+	background-color: #31375D;
+	color: #93708D;
+	font-size: 1em;
+
+}
+
+/*make a class on Home page to assign color"white" and put hover action on that*/
+
+	.list-flex:hover{
+		color: #27CECF;
+		background-color: #F2F3F5;
+	}
+
+.weekday {
+  text-align: center;
+  font-size: 1.5em;
+}
+  .weekday:hover {
+    color: #27CECF
+  }
+
+button {
+	outline:0;
+	border: none;
+}
+
+/*.pres-page-list-item {
+	background-color: #27CECF;
+	color: #31375D;
+}*/
+
+
+
+
+/*.prescription-page-list {
+	background-color: #27CECF;
+}*/
+
+.closed-bottle {
+	background-repeat: no-repeat;
+}
+
+.open-bottle {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	    transform: rotate(180deg);
+	background-repeat: no-repeat;
+}
+
+/*add Prescription Page*/
+
+.add-presc-page ul {
+	margin-top: 60px;
+	margin-left: 10px
+}
+
+.add-pres-list-item {
+
+}
+
+#dailyFrequency {
+  text-align: center;
+}
+
+.freq {
+  text-align: center;
+  background-color: #31375D;
+	color: #93708D;
+	font-size: 2em;
+}
+  .freq:hover{
+		color: #27CECF;
+	}
+
+#frequency {
+  text-align: center;
+}
+
+.add-pres-input {
+	background-color: #D0E7F0;
+}
+
+	.add-pres-input::-webkit-input-placeholder {
+		color: #93708D;
+		font-size: 1.5em;
+
+	}
+
+	.add-pres-input::-moz-placeholder {
+		color: #93708D;
+		font-size: 1.5em;
+
+	}
+
+	.add-pres-input:-ms-input-placeholder {
+		color: #93708D;
+		font-size: 1.5em;
+
+	}
+
+	.add-pres-input::placeholder {
+		color: #93708D;
+		font-size: 1.5em;
+
+	}
+
+.start-date {
+  background-color: #D0E7F0;
+  color: #93708D;
+  font-size: 2em;
+}
+
+.pres-test {
+	-webkit-animation: FadeIn 1s linear;
+	        animation: FadeIn 1s linear;
+	-webkit-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+	.pres-individual-test li:nth-child {
+		-webkit-animation-delay: 1s;
+		        animation-delay: 1s;
+	}
+
+
+
+
+/* Shared */
+.google-login {
+  box-sizing: border-box;
+  position: relative;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #FFF;
+}
+.google-login:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.google-login:focus {
+  outline: none;
+}
+.google-login:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
+
+
+
+/* Google */
+.google-login {
+  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+  background: #DD4B39;
+}
+.google-login:before {
+  border-right: #BB3F30 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+}
+.google-login:hover,
+.google-login:focus {
+  background: #E74B37;
+}
+
+
+/*symptom form*/
+.page-title {
+	text-align: center;
+
+}
+
+
+.symptom-form-wrapper {
+	text-align: center;
+	margin: 0 50px;
+	font-family: 'Dosis', sans-serif;
+}
+
+textarea {
+	width: 100%;
+}
+
+.curr-severity-text {
+	-webkit-box-flex: 1;
+	    -ms-flex: auto;
+	        flex: auto;
+	text-align: center;
+	margin: 20px 0px;
+}
+
+#dropzone {
+	border: 2px dashed #F2F3F5;
+	padding: 20px 10px 20px 0;
+	margin: 20px 10px 20px 0;
+}
+
+	#dropzone:hover {
+		border: 2px solid #27CECF;
+		color: #27CECF;
+	}
+
+.upload-list-item {
+}
+
+.symptom-submit {
+	-webkit-box-flex: 1;
+	    -ms-flex: auto;
+	        flex: auto;
+	height: 30px;
+	background-color: #ABCFE0;
+	color: #31375D;
+	font-size: 1em;
+}
+
+	.symptom-submit:hover {
+		background-color: #F2F3F5;
+		color: #27CECF;
+
+	}
+.symp-header {
+}
+
+.symp-form-link {
+	text-decoration: none;
+	color: #F2F3F5;
+	margin-bottom: 20px;
+}
+
+.symp-log-heading {
+	margin-top: 20px;
+}
+</style><style type="text/css">.App {
+  text-align: center;
+}
+
+.App-logo {
+  -webkit-animation: App-logo-spin infinite 20s linear;
+          animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@-webkit-keyframes App-logo-spin {
+  from { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@keyframes App-logo-spin {
+  from { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+</style><style type="text/css">.rbc-btn {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button.rbc-btn {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button[disabled].rbc-btn {
+  cursor: not-allowed;
+}
+button.rbc-input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.rbc-calendar {
+  box-sizing: border-box;
+  height: 100%;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-direction: column;
+  -ms-flex-align: stretch;
+      -webkit-box-align: stretch;
+          align-items: stretch;
+}
+.rbc-calendar *,
+.rbc-calendar *:before,
+.rbc-calendar *:after {
+  box-sizing: inherit;
+}
+.rbc-abs-full,
+.rbc-row-bg {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.rbc-ellipsis,
+.rbc-event-label,
+.rbc-row-segment .rbc-event-content,
+.rbc-show-more {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rbc-rtl {
+  direction: rtl;
+}
+.rbc-off-range {
+  color: #b3b3b3;
+}
+.rbc-header {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 3px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 90%;
+  min-height: 0;
+}
+.rbc-header > a,
+.rbc-header > a:active,
+.rbc-header > a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+.rbc-row-content {
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 4;
+}
+.rbc-today {
+  background-color: #eaf6ff;
+}
+.rbc-toolbar {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+      -webkit-box-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.rbc-toolbar .rbc-toolbar-label {
+  width: 100%;
+  padding: 0 10px;
+  text-align: center;
+}
+.rbc-toolbar button {
+  color: #373a3c;
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+  background: none;
+  background-image: none;
+  border: 1px solid #ccc;
+  padding: .375rem 1rem;
+  border-radius: 4px;
+  line-height: normal;
+  white-space: nowrap;
+}
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active {
+  background-image: none;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.rbc-toolbar button:active:hover,
+.rbc-toolbar button.rbc-active:hover,
+.rbc-toolbar button:active:focus,
+.rbc-toolbar button.rbc-active:focus {
+  color: #373a3c;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+.rbc-toolbar button:focus {
+  color: #373a3c;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.rbc-toolbar button:hover {
+  color: #373a3c;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.rbc-btn-group {
+  display: inline-block;
+  white-space: nowrap;
+}
+.rbc-btn-group > button:first-child:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.rbc-btn-group > button:last-child:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.rbc-rtl .rbc-btn-group > button:first-child:not(:last-child) {
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.rbc-rtl .rbc-btn-group > button:last-child:not(:first-child) {
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.rbc-btn-group > button:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+.rbc-btn-group button + button {
+  margin-left: -1px;
+}
+.rbc-rtl .rbc-btn-group button + button {
+  margin-left: 0;
+  margin-right: -1px;
+}
+.rbc-btn-group + .rbc-btn-group,
+.rbc-btn-group + button {
+  margin-left: 10px;
+}
+.rbc-event {
+  cursor: pointer;
+  padding: 2px 5px;
+  background-color: #3174ad;
+  border-radius: 5px;
+  color: #fff;
+}
+.rbc-event.rbc-selected {
+  background-color: #265985;
+}
+.rbc-event-label {
+  font-size: 80%;
+}
+.rbc-event-overlaps {
+  box-shadow: -1px 1px 5px 0px rgba(51, 51, 51, 0.5);
+}
+.rbc-event-continues-prior {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.rbc-event-continues-after {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.rbc-event-continues-earlier {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.rbc-event-continues-later {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.rbc-row {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: row;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          flex-direction: row;
+}
+.rbc-row-segment {
+  padding: 0 1px 1px 1px;
+}
+.rbc-selected-cell {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.rbc-show-more {
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 4;
+  font-weight: bold;
+  font-size: 85%;
+  height: auto;
+  line-height: normal;
+  white-space: nowrap;
+}
+.rbc-month-view {
+  position: relative;
+  border: 1px solid #DDD;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-direction: column;
+  -ms-flex: 1 0 0px;
+      -webkit-box-flex: 1;
+          flex: 1 0 0;
+  width: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  height: 100%;
+}
+.rbc-month-view .rbc-header {
+  border-bottom: 1px solid #DDD;
+}
+.rbc-month-view .rbc-header + .rbc-header {
+  border-left: 1px solid #DDD;
+}
+.rbc-rtl .rbc-month-view .rbc-header + .rbc-header {
+  border-left-width: 0;
+  border-right: 1px solid #DDD;
+}
+.rbc-month-header {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: row;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          flex-direction: row;
+}
+.rbc-month-row {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  position: relative;
+  -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-direction: column;
+  -ms-flex: 1 0 0px;
+      -webkit-box-flex: 1;
+          flex: 1 0 0;
+  overflow: hidden;
+  height: 100%;
+}
+.rbc-month-row + .rbc-month-row {
+  border-top: 1px solid #DDD;
+}
+.rbc-date-cell {
+  padding-right: 5px;
+  text-align: right;
+}
+.rbc-date-cell.rbc-now {
+  font-weight: bold;
+}
+.rbc-date-cell > a,
+.rbc-date-cell > a:active,
+.rbc-date-cell > a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+.rbc-row-bg {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: row;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          flex-direction: row;
+  -ms-flex: 1 0 0px;
+      -webkit-box-flex: 1;
+          flex: 1 0 0;
+  overflow: hidden;
+}
+.rbc-day-bg + .rbc-day-bg {
+  border-left: 1px solid #DDD;
+}
+.rbc-rtl .rbc-day-bg + .rbc-day-bg {
+  border-left-width: 0;
+  border-right: 1px solid #DDD;
+}
+.rbc-overlay {
+  position: absolute;
+  z-index: 5;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+}
+.rbc-overlay > * + * {
+  margin-top: 1px;
+}
+.rbc-overlay-header {
+  border-bottom: 1px solid #e5e5e5;
+  margin: -10px -10px 5px -10px;
+  padding: 2px 10px;
+}
+.rbc-agenda-view {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-direction: column;
+  -ms-flex: 1 0 0px;
+      -webkit-box-flex: 1;
+          flex: 1 0 0;
+  overflow: auto;
+}
+.rbc-agenda-view table {
+  width: 100%;
+  border: 1px solid #DDD;
+}
+.rbc-agenda-view table tbody > tr > td {
+  padding: 5px 10px;
+  vertical-align: top;
+}
+.rbc-agenda-view table .rbc-agenda-time-cell {
+  padding-left: 15px;
+  padding-right: 15px;
+  text-transform: lowercase;
+}
+.rbc-agenda-view table tbody > tr > td + td {
+  border-left: 1px solid #DDD;
+}
+.rbc-rtl .rbc-agenda-view table tbody > tr > td + td {
+  border-left-width: 0;
+  border-right: 1px solid #DDD;
+}
+.rbc-agenda-view table tbody > tr + tr {
+  border-top: 1px solid #DDD;
+}
+.rbc-agenda-view table thead > tr > th {
+  padding: 3px 5px;
+  text-align: left;
+  border-bottom: 1px solid #DDD;
+}
+.rbc-rtl .rbc-agenda-view table thead > tr > th {
+  text-align: right;
+}
+.rbc-agenda-time-cell {
+  text-transform: lowercase;
+}
+.rbc-agenda-time-cell .rbc-continues-after:after {
+  content: ' \BB';
+}
+.rbc-agenda-time-cell .rbc-continues-prior:before {
+  content: '\AB   ';
+}
+.rbc-agenda-date-cell,
+.rbc-agenda-time-cell {
+  white-space: nowrap;
+}
+.rbc-agenda-event-cell {
+  width: 100%;
+}
+.rbc-time-column {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-direction: column;
+  min-height: 100%;
+}
+.rbc-time-column .rbc-timeslot-group {
+  -ms-flex: 1;
+      -webkit-box-flex: 1;
+          flex: 1;
+}
+.rbc-timeslot-group {
+  border-bottom: 1px solid #DDD;
+  min-height: 40px;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-flow: column nowrap;
+}
+.rbc-time-gutter,
+.rbc-header-gutter {
+  -ms-flex: none;
+      -webkit-box-flex: 0;
+          flex: none;
+}
+.rbc-label {
+  padding: 0 5px;
+}
+.rbc-day-slot {
+  position: relative;
+}
+.rbc-day-slot .rbc-event {
+  border: 1px solid #265985;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  max-height: 100%;
+  -ms-flex-flow: column wrap;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-flow: column wrap;
+  -ms-flex-align: start;
+      -webkit-box-align: start;
+          align-items: flex-start;
+  overflow: hidden;
+}
+.rbc-day-slot .rbc-event-label {
+  -ms-flex: none;
+      -webkit-box-flex: 0;
+          flex: none;
+  padding-right: 5px;
+  width: auto;
+}
+.rbc-day-slot .rbc-event-content {
+  width: 100%;
+  -ms-flex: 1 1 0px;
+      -webkit-box-flex: 1;
+          flex: 1 1 0;
+  word-wrap: break-word;
+  line-height: 1;
+  height: 100%;
+  min-height: 1em;
+}
+.rbc-day-slot .rbc-time-slot {
+  border-top: 1px solid #f7f7f7;
+}
+.rbc-time-slot {
+  -ms-flex: 1 0 0px;
+      -webkit-box-flex: 1;
+          flex: 1 0 0;
+}
+.rbc-time-slot.rbc-now {
+  font-weight: bold;
+}
+.rbc-day-header {
+  text-align: center;
+}
+.rbc-day-slot .rbc-event {
+  position: absolute;
+  z-index: 2;
+}
+.rbc-slot-selection {
+  z-index: 10;
+  position: absolute;
+  cursor: default;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 75%;
+  padding: 3px;
+}
+.rbc-time-view {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-direction: column;
+  -ms-flex: 1;
+      -webkit-box-flex: 1;
+          flex: 1;
+  width: 100%;
+  border: 1px solid #DDD;
+  min-height: 0;
+}
+.rbc-time-view .rbc-time-gutter {
+  white-space: nowrap;
+}
+.rbc-time-view .rbc-allday-cell {
+  width: 100%;
+  position: relative;
+}
+.rbc-time-view .rbc-allday-events {
+  position: relative;
+  z-index: 4;
+}
+.rbc-time-view .rbc-row {
+  min-height: 20px;
+}
+.rbc-time-header {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex: 0 0 auto;
+      -webkit-box-flex: 0;
+          flex: 0 0 auto;
+  -ms-flex-direction: column;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          flex-direction: column;
+}
+.rbc-time-header.rbc-overflowing {
+  border-right: 1px solid #DDD;
+}
+.rbc-rtl .rbc-time-header.rbc-overflowing {
+  border-right-width: 0;
+  border-left: 1px solid #DDD;
+}
+.rbc-time-header > .rbc-row > * + * {
+  border-left: 1px solid #DDD;
+}
+.rbc-rtl .rbc-time-header > .rbc-row > * + * {
+  border-left-width: 0;
+  border-right: 1px solid #DDD;
+}
+.rbc-time-header > .rbc-row:first-child {
+  border-bottom: 1px solid #DDD;
+}
+.rbc-time-header .rbc-gutter-cell {
+  -ms-flex: none;
+      -webkit-box-flex: 0;
+          flex: none;
+}
+.rbc-time-header > .rbc-gutter-cell + * {
+  width: 100%;
+}
+.rbc-time-content {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex: 1 0 0%;
+      -webkit-box-flex: 1;
+          flex: 1 0 0%;
+  -ms-flex-align: start;
+      -webkit-box-align: start;
+          align-items: flex-start;
+  width: 100%;
+  border-top: 2px solid #DDD;
+  overflow-y: auto;
+  position: relative;
+}
+.rbc-time-content > .rbc-time-gutter {
+  -ms-flex: none;
+      -webkit-box-flex: 0;
+          flex: none;
+}
+.rbc-time-content > * + * > * {
+  border-left: 1px solid #DDD;
+}
+.rbc-rtl .rbc-time-content > * + * > * {
+  border-left-width: 0;
+  border-right: 1px solid #DDD;
+}
+.rbc-time-content > .rbc-day-slot {
+  width: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.rbc-current-time-indicator {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  height: 1px;
+  background-color: #74ad31;
+  pointer-events: none;
+}
+.rbc-current-time-indicator::before {
+  display: block;
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  content: ' ';
+  background-color: #74ad31;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+}
+.rbc-rtl .rbc-current-time-indicator::before {
+  left: 0;
+  right: -3px;
+}
+</style></head>
+  <body cz-shortcut-listen="true">
+    <div id="root"><div data-reactroot=""><!-- react-empty: 2 --><!-- react-empty: 3 --><!-- react-empty: 4 --><!-- react-empty: 5 --><div><div class="burger-menu"><img id="menu-activator" src="./React App_files/burgerIcon.svg" height="40" width="auto"><ul class="burger-menu-list"><li><a class="burger-menu-list-items" href="http://localhost:3000/logout">Log Out</a></li><li><a class="burger-menu-list-items" href="http://localhost:3000/">Home</a></li></ul></div><ul><li class="list-item"><h1 class="page-title image-flex"></h1></li><li class="list-item"><a class="page-title image-flex symp-form-link" href="http://localhost:3000/symptomform"><!-- react-text: 19 -->How is your <!-- /react-text --><!-- react-text: 20 --> feeling today?<!-- /react-text --></a></li><li class="list-item"><div class="recharts-wrapper page-title image-flex" style="position: relative; cursor: default; width: 400px; height: 250px;"><svg class="recharts-surface" width="400" height="250" viewBox="0 0 400 250" version="1.1"><g class="recharts-layer recharts-x-axis"><g class="recharts-layer recharts-cartesian-axis"><line class="recharts-cartesian-axis-line" width="330" height="30" x="65" y="215" stroke="#666" fill="none" x1="65" y1="215" x2="395" y2="215"></line><g class="recharts-cartesian-axis-ticks"><g class="recharts-layer recharts-cartesian-axis-tick"><line class="recharts-cartesian-axis-tick-line" width="330" height="30" x="65" y="215" stroke="#666" fill="none" x1="65" y1="221" x2="65" y2="215"></line><text width="330" height="30" x="65" y="221" stroke="none" fill="#666" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle"><tspan x="65" dy="0.71em">4-20</tspan></text></g><g class="recharts-layer recharts-cartesian-axis-tick"><line class="recharts-cartesian-axis-tick-line" width="330" height="30" x="65" y="215" stroke="#666" fill="none" x1="230" y1="221" x2="230" y2="215"></line><text width="330" height="30" x="230" y="221" stroke="none" fill="#666" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle"><tspan x="230" dy="0.71em">4-21</tspan></text></g><g class="recharts-layer recharts-cartesian-axis-tick"><line class="recharts-cartesian-axis-tick-line" width="330" height="30" x="65" y="215" stroke="#666" fill="none" x1="395" y1="221" x2="395" y2="215"></line><text width="330" height="30" x="383.984375" y="221" stroke="none" fill="#666" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle"><tspan x="383.984375" dy="0.71em">4-22</tspan></text></g></g></g></g><g class="recharts-layer recharts-y-axis"><g class="recharts-layer recharts-cartesian-axis"><line class="recharts-cartesian-axis-line" width="60" height="210" x="5" y="5" stroke="#666" fill="none" x1="65" y1="5" x2="65" y2="215"></line><g class="recharts-cartesian-axis-ticks"><g class="recharts-layer recharts-cartesian-axis-tick"><line class="recharts-cartesian-axis-tick-line" width="60" height="210" x="5" y="5" stroke="#666" fill="none" x1="59" y1="215" x2="65" y2="215"></line><text width="60" height="210" x="59" y="215" stroke="none" fill="#666" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end"><tspan x="59" dy="0.355em">0</tspan></text></g><g class="recharts-layer recharts-cartesian-axis-tick"><line class="recharts-cartesian-axis-tick-line" width="60" height="210" x="5" y="5" stroke="#666" fill="none" x1="59" y1="131" x2="65" y2="131"></line><text width="60" height="210" x="59" y="131" stroke="none" fill="#666" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end"><tspan x="59" dy="0.355em">2</tspan></text></g><g class="recharts-layer recharts-cartesian-axis-tick"><line class="recharts-cartesian-axis-tick-line" width="60" height="210" x="5" y="5" stroke="#666" fill="none" x1="59" y1="5" x2="65" y2="5"></line><text width="60" height="210" x="59" y="9" stroke="none" fill="#666" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end"><tspan x="59" dy="0.355em">5</tspan></text></g></g></g></g><g class="recharts-layer recharts-area-graphical"><g class="recharts-layer recharts-area-chart-group"><g class="recharts-layer recharts-area-chart-shapes"><g class="recharts-layer recharts-area"><defs><clippath id="animationClipPath-recharts-area-3"><rect x="65" y="0" width="330" height="216"></rect></clippath></defs><g class="recharts-layer"><g class="recharts-layer" clip-path="url(#animationClipPath-recharts-area-3)"><g><path stroke="#F2F3F5" fill-opacity="1" fill="none" width="330" height="210" class="recharts-curve recharts-area-curve" d="M65,173C120,89,175,5,230,5C285,5,340,47,395,89"></path><path stroke="none" fill-opacity="1" fill="url(#colorUv)" width="330" height="210" class="recharts-curve recharts-area-area" d="M65,173C120,89,175,5,230,5C285,5,340,47,395,89L395,215C340,215,285,215,230,215C175,215,120,215,65,215Z"></path></g></g></g></g></g><g class="recharts-layer recharts-area-chart-dots"></g></g></g><defs><lineargradient id="colorUv" x1="0" y1="0" x2="0" y2="1"><!-- react-text: 71 -->// first offset determines % of first color gradient (same with 2nd) // second opacity is how transparent the color of the graph is<!-- /react-text --><stop offset="5%" stop-color="#27CECF" stop-opacity="0.9"></stop><stop offset="95%" stop-color="#27CECF" stop-opacity="0.1"></stop></lineargradient></defs></svg><div class="recharts-tooltip-wrapper" style="pointer-events: none; visibility: hidden; position: absolute; top: 0px; transform: translate(330.969px, 62px);"><div class="recharts-default-tooltip" style="margin: 0px; padding: 10px; background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); white-space: nowrap;"><p class="recharts-tooltip-label" style="margin: 0px;">4-22</p></div></div></div></li><li class="list-item symp-log-heading"><div class="image-flex page-title">'this.state(or props).symptom.name' Tracker</div></li><li class="list-item"><div class="list-flex page-title">4-20</div><div class="image-flex">desc1</div></li><li class="list-item"><div class="list-flex page-title">4-21</div><div class="image-flex">desc2</div></li><li class="list-item"><div class="list-flex page-title">4-22</div><div class="image-flex">desc3</div></li><li class="list-item"><div class="list-flex page-title">4-23</div><div class="image-flex">desc4</div></li><img height="300" src="./React App_files/tqv7o4h8btxxxavzuhhj.png"><img height="300" src="./React App_files/wessdduu0fg6h61csnvg.png"></ul></div><!-- react-empty: 93 --><!-- react-empty: 94 --></div></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start`.
+      To create a production bundle, use `npm run build`.
+    -->
+  <script type="text/javascript" src="./React App_files/bundle.js"></script><span id="recharts_measurement_span" style="position:absolute;top:-20000px;left:0px;padding:0px;margin:0px;border:none;white-space:pre;">0</span>
+
+</body></html>

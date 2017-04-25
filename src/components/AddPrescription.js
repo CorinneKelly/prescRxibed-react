@@ -23,6 +23,7 @@ class AddPrescription extends Component {
 		this.addfreqField = this.addfreqField.bind(this)
 		this.renderfreqFields = this.renderfreqFields.bind(this)
 		this.handleWeekdaysChange = this.handleWeekdaysChange.bind(this)
+		this.clearEmptyScheduleArrays = this.clearEmptyScheduleArrays.bind(this)
 
 		// sets default start date to today
 		let date = new Date()
@@ -35,7 +36,7 @@ class AddPrescription extends Component {
 				hours: [''],
 				weekdays: ['SU','MO','TU','WE','TH','FR','SA'],
 				month_days: [''],
-				startDate: today
+				start_date: today
 			},
 			prescription: {
 			},
@@ -75,8 +76,8 @@ class AddPrescription extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
-
+		this.clearEmptyScheduleArrays()
+		this.props.postPrescriptionEvent(this.state)
 	}
 
 
@@ -128,11 +129,13 @@ class AddPrescription extends Component {
 			return (
 
 				<ul className="stepThree">
-					<li className="freq">Frequency: <select className="list-flex-smaller" id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
-						<option value="daily">Daily</option>
-						<option value="weekly">Weekly</option>
-						<option value="monthly">Monthly</option>
-					</select> <br />
+					<li className="freq">Frequency: 
+						<select className="list-flex-smaller" id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
+							<option value="daily">Daily</option>
+							<option value="weekly">Weekly</option>
+							<option value="monthly">Monthly</option>
+						</select>
+					</li> <br />
 				</ul>
 			)
 		}else{
@@ -197,7 +200,7 @@ class AddPrescription extends Component {
 					  <label><Checkbox value="SA"/>Saturday</label>
 					  <label><Checkbox value="SU"/>Sunday</label>
 					</CheckboxGroup>
-					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+					<button className="continue-button list-flex" onClick={this.showNextStep}>Continue</button> <br />
 				</div>
 			)
 		}else{

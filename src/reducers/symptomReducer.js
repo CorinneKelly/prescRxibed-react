@@ -1,9 +1,15 @@
- export default (state={allSymptoms: []}, action) => {
+const INITIAL_STATE = {
+	allSymptoms: [],
+	specificSymptom: {}
+}
+
+export default (state=INITIAL_STATE, action) => {
   switch (action.type) {
     case "SET_SYMPTOMS":
-      return action.payload
+      return [...state.allSymptoms, action.payload]
     case "SET_SPECIFIC_SYMPTOM":
-    	return action.payload
+    	debugger
+    	return {...state, specificSymptom: action.payload}
     default:
       return state
   }
