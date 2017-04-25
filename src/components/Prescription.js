@@ -1,65 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-
-const fakeTest = [{
-			prescription: {
-				name: "Drug Name 1",
-				instructions: "Take drug 1 always nonstop",
-				dosage: 2,
-				units: "pills",
-				quantity: 60,
-				refills: 3,
-				doctor: "dr. sassafrass"
-			},
-			schedule: {
-				start_date: "2017-04-19",
-				end_date: "2017-07-19",
-				frequency: "daily",
-				hours: ["09:00", "09:30"],
-				weekdays: [],
-				month_days: [],
-				expiration_date: "2018-04-19"
-			}
-		}, {
-			prescription: {
-				name: "Drug Name #2",
-				instructions: "Take This only sometimes",
-				dosage: 5,
-				units: "mg",
-				quantity: 20,
-				refills: 0,
-				doctor: "dr. bob"
-			},
-			schedule: {
-				start_date: "2017-04-20",
-				end_date: "2017-05-16",
-				frequency: "weekly",
-				hours: ["07:00", "11:00", "20:00"],
-				weekdays: ["Monday", "Wednesday"],
-				month_days: [],
-				expiration_date: "2018-04-19"
-			}
-		}, {
-			prescription: {
-				name: "Drug Name #3",
-				instructions: "Take This monthly",
-				dosage: 7,
-				units: "mL",
-				quantity: 200,
-				refills: 3,
-				doctor: "dr. joe"
-			},
-			schedule: {
-				start_date: "2017-04-21",
-				end_date: "2018-05-20",
-				frequency: "monthly",
-				hours: ["09:00", "10:00"],
-				weekdays: [],
-				month_days: [1, 15],
-				expiration_date: "2018-04-19"
-			}
-		}
-		]
+import { connect } from 'react-redux'
+import BurgerMenu from './BurgerMenu'
 
 class Prescription extends Component {
 
@@ -77,7 +19,6 @@ class Prescription extends Component {
 	}
 
 	showSchedule(){
-		//display calendar with scheduled doses
 		this.setState({
 			display: "schedule"
 		})
@@ -96,9 +37,27 @@ class Prescription extends Component {
 	}
 
 	renderDetails(){
-		//retrieve and format info about Rx (dose, instructions,
-		//when bottle will be empty, expiration date, # pills left, # refills left, doctor's name)
+		var currRx = this.props.prescription.allPrescriptions[this.props.match.params.prescriptionId]
+		return (
+			<div>
+				<li className="list-item">
+					<div className="image-flex">Dosage: {currRx.dosage} {currRx.units}</div>
+				</li>
 
+				<li className="list-item">
+					<div className="image-flex">Instructions: {currRx.instructions}</div>
+				</li>
+
+				<li className="list-item">
+					<div className="image-flex">{currRx.refills} refill(s) left</div>
+				</li>
+
+				<li className="list-item">
+					{currRx.doctor !== null ? currRx.doctor : null}
+				</li>
+
+			</div>
+		)
 	}
 
 	showSymptoms(){
@@ -132,12 +91,115 @@ class Prescription extends Component {
 		})
 	}
 
-	renderDrugInfo(){
-		//retrieve and format info about med from drug database api
-
-	}
 
 	render() {
+		return (
+			<div>
+				<BurgerMenu />
+				<ul className="prescription-page-list">
+					<li className="list-item">
+						<img className="image-flex" id="urmum" src="../calendarDkBlue.svg" />
+						<button className="list-flex pres-page-list-item" onClick={this.showSchedule}>Check Dosage Schedule</button>
+					</li>
+					{this.renderSchedule()}
+					
+					<li className="list-item">
+						<img className="image-flex" src="../rxBottleDkBlue.svg" />
+						<button className="list-flex pres-page-list-item" onClick={this.showDetails}> Prescription Details </button>
+					</li>
+					{this.renderDetails()}
+					
+					<li className="list-item">
+						<img className="image-flex" src="../symptomTrackerDkBlue.svg" />
+						<button className="list-flex pres-page-list-item" onClick={this.showSymptoms}> Symptom Tracker </button>
+					</li>
+					{this.renderSymptoms()}
+					
+				</ul>
+
+			</div>
+		)
+	}
+}
+
+
+const mapStateToProps = (state) => {
+	return {
+		prescription: state.prescription
+	}
+}
+
+export default connect(mapStateToProps)(Prescription)
+
+
+
+
+
+
+
+
+// const fakeTest = [{
+// 			prescription: {
+// 				name: "Drug Name 1",
+// 				instructions: "Take drug 1 always nonstop",
+// 				dosage: 2,
+// 				units: "pills",
+// 				quantity: 60,
+// 				refills: 3,
+// 				doctor: "dr. sassafrass"
+// 			},
+// 			schedule: {
+// 				start_date: "2017-04-19",
+// 				end_date: "2017-07-19",
+// 				frequency: "daily",
+// 				hours: ["09:00", "09:30"],
+// 				weekdays: [],
+// 				month_days: [],
+// 				expiration_date: "2018-04-19"
+// 			}
+// 		}, {
+// 			prescription: {
+// 				name: "Drug Name #2",
+// 				instructions: "Take This only sometimes",
+// 				dosage: 5,
+// 				units: "mg",
+// 				quantity: 20,
+// 				refills: 0,
+// 				doctor: "dr. bob"
+// 			},
+// 			schedule: {
+// 				start_date: "2017-04-20",
+// 				end_date: "2017-05-16",
+// 				frequency: "weekly",
+// 				hours: ["07:00", "11:00", "20:00"],
+// 				weekdays: ["Monday", "Wednesday"],
+// 				month_days: [],
+// 				expiration_date: "2018-04-19"
+// 			}
+// 		}, {
+// 			prescription: {
+// 				name: "Drug Name #3",
+// 				instructions: "Take This monthly",
+// 				dosage: 7,
+// 				units: "mL",
+// 				quantity: 200,
+// 				refills: 3,
+// 				doctor: "dr. joe"
+// 			},
+// 			schedule: {
+// 				start_date: "2017-04-21",
+// 				end_date: "2018-05-20",
+// 				frequency: "monthly",
+// 				hours: ["09:00", "10:00"],
+// 				weekdays: [],
+// 				month_days: [1, 15],
+// 				expiration_date: "2018-04-19"
+// 			}
+// 		}
+// 		]
+
+
+
 		// first map under nextDose: this.props.prescriptions
 
 		// function nextHour(argument) {
@@ -217,32 +279,3 @@ class Prescription extends Component {
 		// debugger
 
 					//need to retrieve next scheduled dose info to include in next line
-		return (
-			<div>
-				<ul className="prescription-page-list">
-					<li className="list-item">
-						<img className="image-flex" src="calendarDkBlue.svg" />
-						<button className="list-flex pres-page-list-item" onClick={this.showSchedule}>Check Dosage Schedule</button>
-					</li>
-					{this.renderSchedule()}
-					
-					<li className="list-item">
-						<img className="image-flex" src="rxBottleDkBlue.svg" />
-						<button className="list-flex pres-page-list-item" onClick={this.showDetails}> Prescription Details </button>
-					</li>
-					{this.renderDetails()}
-					
-					<li className="list-item">
-						<img className="image-flex" src="symptomTrackerDkBlue.svg" />
-						<button className="list-flex pres-page-list-item" onClick={this.showSymptoms}> Symptom Tracker </button>
-					</li>
-					{this.renderSymptoms()}
-					
-				</ul>
-
-			</div>
-		)
-	}
-}
-
-export default Prescription

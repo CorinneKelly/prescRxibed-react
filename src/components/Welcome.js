@@ -6,6 +6,15 @@ import { getJWTToken } from '../actions/account'
 import { connect } from 'react-redux'
 
 class Welcome extends Component {
+	constructor(){
+		super()
+		this.handleClick = this.handleClick.bind(this)
+	}
+
+	handleClick(){
+		event.preventDefault
+	}
+
 	render(){
 		return (
 			<div className="welcome-wrapper" >
@@ -18,7 +27,8 @@ class Welcome extends Component {
 										class="google-login"
 										scope="profile"
 										responseHandler={this.props.getJWTToken}
-										buttonText="Connect With Google"/>
+										buttonText="Connect With Google"
+										/>
 
 			</div>
 		)

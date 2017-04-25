@@ -8,6 +8,8 @@ import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import { store } from '../index'
 
+
+
 class Home extends Component {
 	constructor (){
 		super()
@@ -16,10 +18,15 @@ class Home extends Component {
 			schedOpen: false,
 
 			presImage: "closedBottlePink.svg",
-			schedImage: "calendarPink.svg"
+
+			schedImage: "closedBottlePink.svg"
 		}
 		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
 		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
+	}
+
+	componentWillMount(){
+		this.props.getPrescriptions()
 	}
 
 	handleOnClickSchedule(event) {
@@ -93,6 +100,9 @@ class Home extends Component {
 				presOpen: !this.state.presOpen,
 				schedOpen: false,
 				presImage: "openBottlePink.svg",
+
+				schedImage: "closedBottlePink.svg"
+
 			})
 
 		} else {
@@ -129,9 +139,9 @@ class Home extends Component {
 		return (
 			<div className="home-wrapper" >
 				<ul className="home-list">
-					<li className="list-item home-list-item">
-						<img className="image-flex" src="add-pillPink.svg" width="90" height="85" />
-						<a href="/add-prescription" className="list-flex" id="add-pres-link" >
+					<li className="list-item">
+						<img className="image-flex" src="add-pillPink.svg" height="90" />
+						<button className="list-flex" ><a href="/add-prescription" id="add-pres-link" >
 						Add a Prescription
 						</a>
 					</li>

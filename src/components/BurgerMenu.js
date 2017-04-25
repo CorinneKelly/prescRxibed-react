@@ -38,7 +38,7 @@ class BurgerMenu extends Component {
 		return (
 			<div className={"burger-menu"}>
 				<img id="menu-activator" src={this.state.menuIcon} height="40" width="auto" onClick={this.exposeBurgerMenu} />			
-				<MenuItem className="burger-menu-items" />
+				<MenuItem />
 			</div>
 		)
 	}

@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux'
 import { postPrescriptionEvent } from '../actions/prescription'
 import { connect } from 'react-redux'
 import BurgerMenu from './BurgerMenu'
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
-
+import { Checkbox, CheckboxGroup } from 'react-checkbox-group'
 
 
 
@@ -32,9 +31,9 @@ class AddPrescription extends Component {
 		this.state = {
 			step: 1,
 			schedule: {
-				frequency: "daily",
+				frequency: 'daily',
 				hours: [''],
-				weekdays: ["SU","MO","TU","WE","TH",'FR','SA'],
+				weekdays: ['SU','MO','TU','WE','TH','FR','SA'],
 				month_days: [''],
 				startDate: today
 			},
@@ -49,11 +48,11 @@ class AddPrescription extends Component {
 			case "daily":
 				schedule["weekdays"] = []
 				schedule["month_days"] = []
-				break;
+				break
 			case "weekly":
 				schedule["hours"] = []
 				schedule["month_days"] = []
-				break;
+				break
 			case "monthly":
 				schedule["hours"] = []
 				schedule["weekdays"] = []
@@ -75,33 +74,8 @@ class AddPrescription extends Component {
 	}
 
 	handleSubmit(event) {
-
 		event.preventDefault()
-
-		let fakeState = {
-			prescription: {
-				name: "DrugName",
-				instructions: "Take This",
-				dosage: 2,
-				units: "pills",
-				quantity: 60,
-				refills: 3,
-				doctor: ""
-			},
-			schedule: {
-				start_date: "2017-04-19",
-				end_date: "2017-07-19",
-				frequency: "Daily",
-				// format time with double digits "09"
-				hours: ["9:00", "12:00", "18:00"],
-				weekdays: [],
-				// need to specify a time of day
-				month_days: [],
-				expiration_date: "2018-04-19"
-			}
-		}
 		this.props.postPrescriptionEvent(fakeState)//should pass in this.state instead of fakeState
-
 
 	}
 
@@ -152,13 +126,14 @@ class AddPrescription extends Component {
 	renderStepThree() {
 		if(this.state.step === 3) {
 			return (
-				<div className="stepThree" >
-					Frequency <select id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
+
+				<ul className="stepThree">
+					<li className="freq">Frequency: <select className="list-flex-smaller" id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
 						<option value="daily">Daily</option>
 						<option value="weekly">Weekly</option>
 						<option value="monthly">Monthly</option>
 					</select> <br />
-				</div>
+				</ul>
 			)
 		}else{
 			return null
@@ -196,9 +171,9 @@ class AddPrescription extends Component {
 			let inputs = this.state.schedule[freqField]
 			let mappedInputs = inputs.map((input, i)=>{
 				if (freqField === "hours"){
-					return <input type="time"  id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} />
+					return <li className="list-item add-pres-list-item"><input type="time" className="list-flex add-pres-input" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")}/></li>
 				} else {
-					return <input type="number" min="1" max="31" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} />
+					return <li className="list-item add-pres-list-item"><input type="number" className="list-flex add-pres-input" min="1" max="31" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} /></li>
 				}
 			})
 			return(
@@ -273,11 +248,14 @@ class AddPrescription extends Component {
 	renderStepFour() {
 		if(this.state.step === 4) {
 			return(
-				<ul>
-					<p>This section is optional, feel free to skip it by clicking "I'm done"</p>
-					<input className="list-item add-pres-list-item" type="text" placeholder="Name of Doctor" name="prescription[doctor]" /><br />
-					Expiration Date <input className="list-item add-pres-list-item" type="date" name="schedule[expiration]" /><br />
-					<input className="list-flex" type="submit" value="I'm Done" />
+
+				<ul className="stepFour">
+					<p className="freq">This section is optional, feel free to skip it by clicking "I'm done"</p>
+					<li className='list-item add-pres-list-item'><input className="list-flex add-pres-input" type="text" placeholder="Name of Doctor" name="prescription[doctor]" /></li>
+					<li className="freq">Expiration Date:</li>
+					<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="date" name="schedule[expiration]" /></li>
+					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
+					<li className="freq"><button className="list-flex-smaller" onClick={this.handleSubmit}>I'm Done </button></li>
 				</ul>
 			)
 		} else {
