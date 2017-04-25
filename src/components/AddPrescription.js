@@ -92,7 +92,7 @@ class AddPrescription extends Component {
 
 					<li className="list-item add-pres-list-item">
 						<div className="start-date">Start date:  </div>
-						<input className="list-flex add-pres-input" type="date" value={this.state.schedule.startDate} name="schedule[startDate]" onChange={this.handleInputChange.bind(this, "startDate", "schedule")} />
+						<input className="list-flex add-pres-input" type="date" value={this.state.schedule.start_date} name="schedule[start_date]" onChange={this.handleInputChange.bind(this, "start_date", "schedule")} />
 					</li>
 
 					<li className="list-item">
@@ -129,7 +129,7 @@ class AddPrescription extends Component {
 			return (
 
 				<ul className="stepThree">
-					<li className="freq">Frequency: 
+					<li className="freq">Frequency:
 						<select className="list-flex-smaller" id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
 							<option value="daily">Daily</option>
 							<option value="weekly">Weekly</option>
