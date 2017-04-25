@@ -6,16 +6,10 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
-import moment from 'moment'
-
-
-
-
 
 class Symptom extends Component {
 	constructor(){
 		super()
-
 	}
 
 	componentWillMount(){
