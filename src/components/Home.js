@@ -8,13 +8,13 @@ import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import { store } from '../index'
 
+
 class Home extends Component {
 	constructor (){
 		super()
 		this.state = {
 			presOpen: false,
 			schedOpen: false,
-
 			presImage: "closedBottlePink.svg",
 			schedImage: "calendarPink.svg"
 		}
@@ -121,7 +121,7 @@ class Home extends Component {
 		} else if (this.state.schedOpen) {
 			return <li><FullSchedule /></li>
 		} else {
-			return null	
+			return null
 		}
 	}
 

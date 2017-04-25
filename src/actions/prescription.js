@@ -5,6 +5,7 @@ import { store } from '../index'
 
 
 export const postPrescriptionEvent = (prescriptionData) => {
+  let config = setAuthHeader()
   return (dispatch) => {
     let config = setAuthHeader()
     axios
@@ -14,6 +15,30 @@ export const postPrescriptionEvent = (prescriptionData) => {
       store.dispatch(push('/')),
       alert("You just added a prescription!")
     )
+  }
+}
+
+
+export const getEvents = () => {
+  let config = setAuthHeader()
+  return (dispatch) => {
+    axios
+    .get('http://localhost:4000/v1/events', config)
+    .then((response)=>{
+      let events = response.data.response.items.map((event)=>{
+        return {
+          start: event.start.dateTime,
+          end: event.end.dateTime,
+          title: event.summary
+        }
+      })
+      dispatch({
+        type: 'GET_EVENTS',
+        payload: {
+          events: events
+        }
+      })
+    })
   }
 }
 
@@ -34,3 +59,4 @@ export const getPrescriptions = () => {
     })
   }
 }
+
