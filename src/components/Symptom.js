@@ -6,6 +6,7 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
+import moment from 'moment'
 
 
 
@@ -36,6 +37,15 @@ class Symptom extends Component {
           </li>
         )
       })
+ 			var symptomImages = this.props.symptom.symptomLogs.map((log) => {
+				 let imageDate = moment(log.created_at).format("MMM-DD")
+				 return	log.uploadedFiles.map((file) =>{
+						return (<li>
+							<div className="list-flex">{imageDate}</div>
+							<Image className="image-flex" cloudName="prescriptionmanager" publicId={`${file.url}`} height="300" crop="scale" />
+						</li>)
+					})
+				})
       var severityData = this.props.symptom.symptomLogs.map((symptom) => {
         return {date: moment(symptom.created_at).format("MM-DD"), uv: symptom.severity}
       })
@@ -43,21 +53,16 @@ class Symptom extends Component {
     else {
       var symptomDescList =	"no logs"
       var severityData = []
+      var symptomImages = ""
     }
 
-
-
-
-		var symptomImages = ["tqv7o4h8btxxxavzuhhj.png", "wessdduu0fg6h61csnvg.png"].map((image) => {
-			return <Image cloudName="prescriptionmanager" publicId={`http://res.cloudinary.com/prescriptionmanager/image/upload/${image}`} height="300" crop="scale" />
-		})
 	  return(
 
 	  	<div>
 	  		<BurgerMenu />
 	  		<ul>
 		  		<li className="list-item">
-		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.name}</h1>
+		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.name || "no name"}</h1>
 	  			</li>
 
 		  		<li className="list-item">

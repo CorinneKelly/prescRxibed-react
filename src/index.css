@@ -92,6 +92,7 @@ body {
 	transition: transform 1s ease-in-out;
 	/*border-color: #D0E7F0;*/
 	margin-right: 50px;
+
 }
 
 .home-list-item:hover .pres-page-list-item:hover{
@@ -109,8 +110,8 @@ body {
 	margin-right: 50px;
 	flex: 60%;
 	background-color: #31375D;
-
-	
+	list-style-type: none;
+	list-style: none;
 	color: #F2F3F5;
 	font-size: 1.5em;
 	text-decoration: none;
