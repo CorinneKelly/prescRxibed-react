@@ -55,7 +55,7 @@ class Symptom extends Component {
 	  		<BurgerMenu />
 	  		<ul>
 		  		<li className="list-item">
-		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.specificSymptom.name}</h1>
+		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.name}</h1>
 	  			</li>
 	  			
 		  		<li className="list-item">
