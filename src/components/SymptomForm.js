@@ -28,6 +28,12 @@ class SymptomForm extends Component {
 		this.handleInputChange = this.handleInputChange.bind(this)
 	}
 
+	componentWillMount(){
+		this.setState({
+			prescriptionId: this.props.match.params.prescriptionId
+		})
+	}
+
 	outputUpdate(event) {
 		event.preventDefault()
 		this.setState({
@@ -85,7 +91,6 @@ class SymptomForm extends Component {
 
 	handleSubmit(event){
 		event.preventDefault()
-		debugger
 		this.props.postSymptomEvent(this.state, this.props.match.params.prescriptionId)
 	}
 

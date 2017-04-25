@@ -8,7 +8,7 @@ export const postSymptomEvent = (symptomData, prescriptionId) => {
   return (dispatch) => {
     let config = setAuthHeader()
     axios
-    .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData}, config)
+    .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData, prescriptionId: prescriptionId}, config)
     .then(
         console.log("success"),
         store.dispatch(push(`/prescriptions/${prescriptionId}`)),
