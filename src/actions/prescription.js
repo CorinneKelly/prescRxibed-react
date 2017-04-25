@@ -3,15 +3,39 @@ import { push } from 'react-router-redux'
 import { setAuthHeader } from './account'
 import { store } from '../index'
 
-let config = setAuthHeader()
 
 export const postPrescriptionEvent = (prescriptionData) => {
+  let config = setAuthHeader()
   return (dispatch) => {
     axios
     .post('http://localhost:4000/v1/prescriptions', {prescriptionData: prescriptionData}, config)
     .then(
       store.dispatch(push('/'))
     )
+  }
+}
+
+
+export const getEvents = () => {
+  let config = setAuthHeader()
+  return (dispatch) => {
+    axios
+    .get('http://localhost:4000/v1/events', config)
+    .then((response)=>{
+      let events = response.data.response.items.map((event)=>{
+        return {
+          start: event.start.dateTime,
+          end: event.end.dateTime,
+          title: event.summary
+        }
+      })
+      dispatch({
+        type: 'GET_EVENTS',
+        payload: {
+          events: events
+        }
+      })
+    })
   }
 }
 
@@ -31,22 +55,4 @@ export const getPrescriptions = () => {
     })
   }
 }
-
-// export function getJWTToken(response) {
-//   return (dispatch) => {
-//     axios
-//     .post('http://localhost:4000/v1/sessions', {account: {googleToken: response.Zi.access_token, googleId: response.El, name: response.w3.U3}})
-//     .then(function(response){
-//       let token = response.data.jwt
-//       localStorage.setItem('token', token)
-//       dispatch({
-//         type: 'SET_TOKEN',
-//         payload: {
-//           token: token,
-//           fullname: response.data.fullname
-//         }
-//       })
-//     })
-//   }
-// }
 

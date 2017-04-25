@@ -1,18 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
 import BurgerMenu from './BurgerMenu'
-// import GoogleCalendar from 'react-google-calendar-events-list'
+import moment from 'moment'
+import BigCalendar from 'react-big-calendar'
+BigCalendar.momentLocalizer(moment)
+import { getEvents } from '../actions/prescription'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+require('react-big-calendar/lib/css/react-big-calendar.css')
 
-class FullSchedule extends React.Component {
+class FullSchedule extends Component {
+	constructor () {
+		super()
+
+	}
+	componentWillMount () {
+		this.props.getEvents()
+	}
+
 	render() {
 		return (
-			<BurgerMenu />
-		// <GoogleCalendar 
-			// 	calendarId: {this.props.userEmail},
-			// 	description: "?"
-
-			// />
+			<BigCalendar
+				style={{height: '420px'}}
+				events={this.props.events.events}
+			/>
 		)
 	}
 }
 
-export default FullSchedule
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    getEvents},
+    dispatch
+  )
+}
+
+const mapStateToProps = (state) => {
+  return {events: state.events}
+}
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(FullSchedule)
