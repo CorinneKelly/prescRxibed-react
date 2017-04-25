@@ -5,7 +5,6 @@ import SymptomListItem from './SymptomListItem'
 class Symptoms extends Component {
 
 	render() {
-		debugger
 		var symptoms = this.props.symptom.allSymptoms.map((symp, index) => {
 			return (
 				<SymptomListItem
