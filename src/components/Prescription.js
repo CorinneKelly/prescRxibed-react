@@ -5,6 +5,7 @@ import BurgerMenu from './BurgerMenu'
 import Symptoms from './Symptoms'
 import { bindActionCreators } from 'redux'
 import { getSymptoms } from '../actions/symptom'
+import { getPrescription } from '../actions/prescription'
 
 
 class Prescription extends Component {
@@ -41,8 +42,9 @@ class Prescription extends Component {
 	}
 
 	renderDetails(){
+		this.props.getPrescription(this.state.prescriptionId)
 		if (this.state.display === "presDetails") {
-			var currRx = this.props.prescription.allPrescriptions[this.props.match.params.prescriptionId]
+			var currRx = this.props.prescription.specificPrescription
 			return (
 				<div>
 					<li className="list-item">
@@ -120,7 +122,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getSymptoms
+		getSymptoms, getPrescription
 	}, dispatch)
 }
 

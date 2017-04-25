@@ -6,7 +6,6 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
-import moment from 'moment'
 
 
 
@@ -49,11 +48,13 @@ class Symptom extends Component {
       var severityData = this.props.symptom.symptomLogs.map((symptom) => {
         return {date: moment(symptom.created_at).format("MM-DD"), uv: symptom.severity}
       })
+      var name = this.props.symptom.specificSymptom.name
     }
     else {
       var symptomDescList =	"no logs"
       var severityData = []
       var symptomImages = ""
+      var name = "no name"
     }
 
 	  return(
@@ -62,11 +63,11 @@ class Symptom extends Component {
 	  		<BurgerMenu />
 	  		<ul>
 		  		<li className="list-item">
-		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.name || "no name"}</h1>
+		  			<h1 className="page-title image-flex">{name}</h1>
 	  			</li>
 
 		  		<li className="list-item">
-			  		<a className="page-title image-flex symp-form-link" href="/symptomform">How is your {this.props.symptom.specificSymptom.name} feeling today?</a>
+			  		<a className="page-title image-flex symp-form-link" href="/symptomform">How is your {name} feeling today?</a>
 		  		</li>
 
 		  		<li className="list-item">
@@ -88,7 +89,7 @@ class Symptom extends Component {
 					</li>
 					<li className="list-item symp-log-heading">
 						<div className="image-flex page-title">
-							{this.props.symptom.specificSymptom.name} Tracker
+							{name} Tracker
 						</div>
 					</li>
 						{symptomDescList}
