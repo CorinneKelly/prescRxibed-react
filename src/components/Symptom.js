@@ -6,7 +6,8 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
-import moment from 'moment'
+import { Link } from 'react-router-dom'
+
 
 
 
@@ -49,24 +50,30 @@ class Symptom extends Component {
       var severityData = this.props.symptom.symptomLogs.map((symptom) => {
         return {date: moment(symptom.created_at).format("MM-DD"), uv: symptom.severity}
       })
+      var name = this.props.symptom.specificSymptom.name
+      var symptomId = this.props.symptom.specificSymptom.id
     }
     else {
       var symptomDescList =	"no logs"
       var severityData = []
       var symptomImages = ""
+      var name = "no name"
+      var symptomId = null
     }
-
+    debugger
 	  return(
 
 	  	<div>
 	  		<BurgerMenu />
 	  		<ul>
 		  		<li className="list-item">
-		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.name || "no name"}</h1>
+		  			<h1 className="page-title image-flex">{name}</h1>
 	  			</li>
 
 		  		<li className="list-item">
-			  		<a className="page-title image-flex symp-form-link" href="/symptomform">How is your {this.props.symptom.specificSymptom.name} feeling today?</a>
+            <Link className="page-title image-flex" to={`/symptoms/${symptomId}/addLog`}>
+              How is your {name} feeling today?
+            </Link>
 		  		</li>
 
 		  		<li className="list-item">
@@ -88,7 +95,7 @@ class Symptom extends Component {
 					</li>
 					<li className="list-item symp-log-heading">
 						<div className="image-flex page-title">
-							{this.props.symptom.specificSymptom.name} Tracker
+							{name} Tracker
 						</div>
 					</li>
 						{symptomDescList}
