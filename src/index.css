@@ -115,7 +115,7 @@ body {
 	font-size: 1.5em;
 	text-decoration: none;
 	vertical-align: text-bottom;
-
+}
 
 
 .list-flex-smaller {
@@ -203,6 +203,7 @@ button {
 
 	.add-pres-input::placeholder {
 		color: #93708D;
+		font-size: 1.5em;
 
 	}
 

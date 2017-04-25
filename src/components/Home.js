@@ -5,9 +5,8 @@ import FullSchedule from './FullSchedule'
 import { connect } from 'react-redux'
 import { getPrescriptions } from '../actions/prescription'
 import { bindActionCreators } from 'redux'
-
-
-
+import { push } from 'react-router-redux'
+import { store } from '../index'
 
 class Home extends Component {
 	constructor (){
@@ -23,12 +22,9 @@ class Home extends Component {
 		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
 	}
 
-	componentWillMount(){
-		this.props.getPrescriptions()
-	}
-
 	handleOnClickSchedule(event) {
 		event.preventDefault()
+
 		if (!this.state.schedOpen) {
 			document.getElementById("sched-image").animate([
 		    { transform: `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`},
@@ -72,6 +68,7 @@ class Home extends Component {
 
 	handleOnClickPrescriptions(event) {
 		event.preventDefault()
+		this.props.getPrescriptions()
 
 		if (!this.state.presOpen) {
 			document.getElementById("pres-image").animate([
@@ -115,32 +112,13 @@ class Home extends Component {
 	}
 
 	showPrescriptions(){
-		// if (this.state.presOpen){
-			// this.setState({
-			// 	schedOpen: false
-			// })
-			return <Prescriptions />
-			// prescriptions will return a list of <li>prescriptions</li>
-		// } else if(this.state.presOpen){
-		// 	// this.setState({
-		// 	// 	schedOpen: false
-		// 	// })
-		// 	return <Prescriptions />
-		// } else {
-		// 	return null
-		// }
+		return <Prescriptions />
 	}
 
 	showSchedule(){
 		if (this.state.schedOpen){
-			// this.setState({
-			// 	presOpen: false
-			// })
 			return <li><FullSchedule /></li>
 		} else if (this.state.schedOpen) {
-			// this.setState({
-			// 	presOpen: false
-			// })
 			return <li><FullSchedule /></li>
 		} else {
 			return null	
@@ -148,7 +126,6 @@ class Home extends Component {
 	}
 
 	render(){
-
 		return (
 			<div className="home-wrapper" >
 				<ul className="home-list">

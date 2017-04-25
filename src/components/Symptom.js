@@ -3,6 +3,10 @@ import { AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts'
 import { Image } from 'cloudinary-react'
 import BurgerMenu from './BurgerMenu'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getSymptom } from '../actions/symptom'
+
 
 
 const data = 
@@ -18,14 +22,19 @@ const data =
 ]
 
 class Symptom extends Component {
+	constructor(){
+		super()
+		this.setState({
+			symptomId: this.props.match.params.symptomId
+		})
+	}
 
-  
-// h1: this.props.symptom.name
-// for new symptoms onClick will assign Id and then go to that specific symptomform/id page
-	// symptom list will be mapped from: this.props.symptoms.description
-// this.props.symptom.images. will be used in symptomImages Map
+	componentWillMount(){
+		this.props.getSymptom(this.state.symptomId)
+	}
 
 	render() {
+		debugger
 
 		var symptomDescList =	[{description: "desc1", date: "4-20"}, {description: "desc2",  date: "4-21"}, {description: "desc3",  date: "4-22"}, {description: "desc4",  date: "4-23"}].map((symptom) => {
 			return (
@@ -87,4 +96,10 @@ class Symptom extends Component {
 	}
 }
 
-export default Symptom
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		getSymptom
+	}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Symptom)
