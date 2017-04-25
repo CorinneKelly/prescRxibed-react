@@ -8,7 +8,6 @@ export default (state=INITIAL_STATE, action) => {
     case "SET_SYMPTOMS":
       return action.payload
     case "SET_SPECIFIC_SYMPTOM":
-    	debugger
     	return action.payload
     default:
       return state

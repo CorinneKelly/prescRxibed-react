@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const SymptomListItem = (props) => {
-	debugger
   return (
     <li className="list-item">
       <Link className="list-flex" to={`/symptoms/${props.idx}`}>

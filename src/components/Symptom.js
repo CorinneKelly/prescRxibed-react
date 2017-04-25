@@ -31,7 +31,6 @@ class Symptom extends Component {
 	}
 
 	render() {
-		debugger
 
 		var symptomDescList =	[{description: "desc1", date: "4-20"}, {description: "desc2",  date: "4-21"}, {description: "desc3",  date: "4-22"}, {description: "desc4",  date: "4-23"}].map((symptom) => {
 			return (
@@ -81,7 +80,7 @@ class Symptom extends Component {
 					</li>
 					<li className="list-item symp-log-heading">
 						<div className="image-flex page-title">
-							'this.state(or props).symptom.name' Tracker
+							{this.props.symptom.specificSymptom.name} Tracker
 						</div>
 					</li>
 						{symptomDescList}
