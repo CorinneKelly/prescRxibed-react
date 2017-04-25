@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts'
 import { Image } from 'cloudinary-react'
 import BurgerMenu from './BurgerMenu'
-
+import moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
@@ -10,45 +10,34 @@ import moment from 'moment'
 
 
 
-const data = 
 
-[
- // {date: '', uv: 1}
-      // {date: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-      {date: "4-20", uv: 1},
-      // date: this.props.dateOfEntry, uv: this.props.symptom.severity?
-      {date: "4-21", uv: 5},
-      {date: "4-22", uv: 3}
-			// uv= upper value
-]
 
 class Symptom extends Component {
 	constructor(){
 		super()
+
 	}
 
 	componentWillMount(){
-		this.props.getSymptom(this.props.match.params.symptomId)
+    this.props.getSymptom(this.props.match.params.symptomId)
 	}
 
 	render() {
 
-		var symptomDescList =	[{description: "desc1", date: "4-20"}, {description: "desc2",  date: "4-21"}, {description: "desc3",  date: "4-22"}, {description: "desc4",  date: "4-23"}].map((symptom) => {
-			return (
-				<li className="list-item">
-					<div className="list-flex page-title">
-						{symptom.date}
-					</div>
-					<div className="image-flex">
-						{symptom.description}
-					</div>
-				</li>
-			)
-		})
-
-
-		if (this.props.symptom.symptomLogs){
-			var symptomImages = this.props.symptom.symptomLogs.map((log) => {
+    if (this.props.symptom.symptomLogs){
+      var symptomDescList =	this.props.symptom.symptomLogs.map((symptom) => {
+        return (
+          <li className="list-item">
+            <div className="list-flex page-title">
+              {moment(symptom.created_at).format("MMM-DD")}
+            </div>
+            <div className="image-flex">
+              {symptom.description}
+            </div>
+          </li>
+        )
+      })
+ 			var symptomImages = this.props.symptom.symptomLogs.map((log) => {
 				 let imageDate = moment(log.created_at).format("MMM-DD")
 				 return	log.uploadedFiles.map((file) =>{
 						return (<li>
@@ -57,25 +46,31 @@ class Symptom extends Component {
 						</li>)
 					})
 				})
-			} else {
-				var symptomImages = ""
-			}
-
+      var severityData = this.props.symptom.symptomLogs.map((symptom) => {
+        return {date: moment(symptom.created_at).format("MM-DD"), uv: symptom.severity}
+      })
+    }
+    else {
+      var symptomDescList =	"no logs"
+      var severityData = []
+      var symptomImages = ""
+    }
 
 	  return(
+
 	  	<div>
 	  		<BurgerMenu />
 	  		<ul>
 		  		<li className="list-item">
 		  			<h1 className="page-title image-flex">{this.props.symptom.specificSymptom.name || "no name"}</h1>
 	  			</li>
-	  			
+
 		  		<li className="list-item">
 			  		<a className="page-title image-flex symp-form-link" href="/symptomform">How is your {this.props.symptom.specificSymptom.name} feeling today?</a>
 		  		</li>
-		  		
+
 		  		<li className="list-item">
-						<AreaChart className="page-title image-flex" width={400} height={250} data={data} >
+						<AreaChart className="page-title image-flex" width={400} height={250} data={severityData} >
 						  <defs>
 						    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
 						    	// first offset determines % of first color gradient (same with 2nd)
