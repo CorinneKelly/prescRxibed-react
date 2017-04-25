@@ -6,10 +6,10 @@ const INITIAL_STATE = {
 export default (state=INITIAL_STATE, action) => {
   switch (action.type) {
     case "SET_SYMPTOMS":
-      return [...state.allSymptoms, action.payload]
+      return action.payload
     case "SET_SPECIFIC_SYMPTOM":
     	debugger
-    	return {...state, specificSymptom: action.payload}
+    	return action.payload
     default:
       return state
   }

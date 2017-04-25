@@ -4,14 +4,14 @@ import { setAuthHeader } from './account'
 import { store } from '../index'
 
 
-export const postSymptomEvent = (symptomData, prescriptionId) => {
+export const postSymptomEvent = (symptomData) => {
   return (dispatch) => {
     let config = setAuthHeader()
     axios
-    .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData, prescriptionId: prescriptionId}, config)
+    .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData}, config)
     .then(
         console.log("success"),
-        store.dispatch(push(`/prescriptions/${prescriptionId}`)),
+        store.dispatch(push(`/prescriptions/${symptomData.prescriptionId}`)),
         alert("You just added a symptom!")
     )
   }
