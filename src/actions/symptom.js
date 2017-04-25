@@ -47,7 +47,8 @@ export const getSymptom = (symptomId) => {
       dispatch({
         type: 'SET_SPECIFIC_SYMPTOM',
         payload: {
-          specificSymptom: specificSymptom
+          specificSymptom: specificSymptom.symptom,
+          symptomLogs: specificSymptom.symptomLogs
         }
       })
     })
