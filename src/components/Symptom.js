@@ -6,6 +6,8 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
+import { Link } from 'react-router-dom'
+
 
 
 
@@ -49,14 +51,16 @@ class Symptom extends Component {
         return {date: moment(symptom.created_at).format("MM-DD"), uv: symptom.severity}
       })
       var name = this.props.symptom.specificSymptom.name
+      var symptomId = this.props.symptom.specificSymptom.id
     }
     else {
       var symptomDescList =	"no logs"
       var severityData = []
       var symptomImages = ""
       var name = "no name"
+      var symptomId = null
     }
-
+    debugger
 	  return(
 
 	  	<div>
@@ -67,7 +71,9 @@ class Symptom extends Component {
 	  			</li>
 
 		  		<li className="list-item">
-			  		<a className="page-title image-flex symp-form-link" href="/symptomform">How is your {name} feeling today?</a>
+            <Link className="page-title image-flex" to={`/symptoms/${symptomId}/addLog`}>
+              How is your {name} feeling today?
+            </Link>
 		  		</li>
 
 		  		<li className="list-item">
