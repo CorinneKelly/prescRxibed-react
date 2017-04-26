@@ -1,6 +1,6 @@
  const INITIAL_STATE = {
- 	token: localStorage.getItem('token'), 
- 	email: null, 
+ 	token: localStorage.getItem('token'),
+ 	email: null,
  	expiresAt: localStorage.getItem('expiresAt')
  }
 
@@ -9,6 +9,7 @@
     case "SET_TOKEN":
     	localStorage.setItem('token', action.payload.token)
     	localStorage.setItem('expiresAt', action.payload.expiresAt)
+    	localStorage.setItem('email', action.payload.email)
       return action.payload
 
     case "EXPIRE_SESSION":

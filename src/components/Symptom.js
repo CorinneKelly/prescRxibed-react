@@ -8,15 +8,9 @@ import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
 import { Link } from 'react-router-dom'
 
-
-
-
-
-
 class Symptom extends Component {
 	constructor(){
 		super()
-
 	}
 
 	componentWillMount(){
