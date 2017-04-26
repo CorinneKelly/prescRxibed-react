@@ -7,6 +7,10 @@ import { getPrescriptions, deletePrescription } from '../actions/prescription'
 import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import { store } from '../index'
+import '../stylesheets/home.css'
+
+const imgPath = "images/home/"
+
 
 
 class Home extends Component {
@@ -15,8 +19,8 @@ class Home extends Component {
 		this.state = {
 			presOpen: false,
 			schedOpen: false,
-			presImage: "closedBottlePink.svg",
-			schedImage: "calendarPink.svg"
+			presImage: `${imgPath}closedBottlePink.svg`,
+			schedImage: `${imgPath}calendarPink.svg`
 		}
 		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
 		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
@@ -53,7 +57,7 @@ class Home extends Component {
 			this.setState({
 				presOpen: false,
 				schedOpen: !this.state.schedOpen,
-				presImage: "closedBottlePink.svg"
+				presImage: `${imgPath}closedBottlePink.svg`
 			})
 
 			document.getElementById("pres-image").animate([
@@ -107,7 +111,7 @@ class Home extends Component {
 			this.setState ({
 				presOpen: !this.state.presOpen,
 				schedOpen: false,
-				presImage: "openBottlePink.svg",
+				presImage: `${imgPath}openBottlePink.svg`,
 			})
 
 		} else {
@@ -120,7 +124,7 @@ class Home extends Component {
 				    fill: "forwards"
 				  })
 			this.setState({
-				presImage: "closedBottlePink.svg",
+				presImage: `${imgPath}closedBottlePink.svg`,
 				presOpen: !this.state.presOpen
 			})
 		}
@@ -141,25 +145,27 @@ class Home extends Component {
 		return (
 			<div className="home-wrapper" >
 				<ul className="home-list">
-					<li className="list-item home-list-item">
-						<img className="image-flex" src="add-pillPink.svg" width="90" height="85" />
-						<a href="/add-prescription" className="list-flex" id="add-pres-link" >
-						Add a Prescription
-						</a>
+					<li className="list-item">
+						<img className="flex-auto" src={`${imgPath}addpillPink.svg`} width="90" height="85" />
+						<button className="flex-60 main-item-format" >
+							<a href="/add-prescription" className="add-pres-link" >
+								Add a Prescription
+							</a>
+						</button>
 					</li>
 
-					<li className="list-item home-list-item">
-						<img className="image-flex" id="pres-image" width="90" src={this.state.presImage}  />
-						<button className="list-flex" onClick={this.handleOnClickPrescriptions} >
-						Your Prescriptions
+					<li className="list-item">
+						<img className="flex-auto" id="pres-image" width="90" height="85" src={this.state.presImage}  />
+						<button className="flex-60 main-item-format" onClick={this.handleOnClickPrescriptions} >
+							Your Prescriptions
 						</button>
 					</li>
 							{this.state.presOpen ? <Prescriptions handleDelete={this.handleDelete} handleOnMouseOverPres={this.handleOnMouseOverPres} handleOnMouseOutPres={this.handleOnMouseOutPres} /> : null}
 
-					<li className="list-item home-list-item">
-						<img className="image-flex" id="sched-image" width="90" src={this.state.schedImage} />
-						<button className="list-flex" onClick={this.handleOnClickSchedule} >
-						Schedule
+					<li className="list-item">
+						<img className="flex-auto" id="sched-image" width="90" height="85" src={this.state.schedImage} />
+						<button className="flex-60 main-item-format" onClick={this.handleOnClickSchedule} >
+							Schedule
 						</button>
 					</li>
 							{this.showSchedule()}

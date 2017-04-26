@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import MenuItem from './MenuItem'
+import '../stylesheets/burgerMenu.css'
+
+const imgPath = "images/burgerMenu/"
 
 class BurgerMenu extends Component {
 
@@ -7,7 +10,7 @@ class BurgerMenu extends Component {
 		super(props)
 		  this.state = {
 	      menuOpened: false,
-	      menuIcon: "../burgerIcon.svg"
+	      menuIcon: `${imgPath}burgerIcon.svg`
 	    }
 
 	    this.exposeBurgerMenu = this.exposeBurgerMenu.bind(this)
@@ -19,13 +22,13 @@ class BurgerMenu extends Component {
       document.getElementById("root").style.transform = "translate(0, 0)"
       this.setState({
         menuOpened: false,
-        menuIcon: "../burgerIcon.svg"
+        menuIcon: `${imgPath}burgerIcon.svg`
       })      
     } else {
       document.getElementById("root").style.transform = "translate(200px, 0)"
       this.setState({
         menuOpened: true,
-        menuIcon: "../x.svg"
+        menuIcon: `${imgPath}x.svg`
       })
       
     }

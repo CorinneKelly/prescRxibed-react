@@ -1,0 +1,33 @@
+.prescription-main-list-item {
+  background-color: #31375D;
+  color: #EEB5B7;
+  font-size: 20px;
+  margin-bottom: 30px;
+  border: none;
+  border-radius: 5px;
+  outline: 0;
+  margin-left: 20px;
+}
+
+	.prescription-main-list-item:hover {
+    background-color: #F2F3F5;
+    color: #27CECF;
+	}
+
+.new-symptom-link {
+	text-decoration: none;
+	color: #EEB5B7;
+}
+
+.symp-list-link {
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+  outline: 0;
+}
+
+  .symp-list-link:hover {
+    background-color: #F2F3F5;
+    color: #31375D;
+  }

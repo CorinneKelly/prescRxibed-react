@@ -5,7 +5,7 @@ import { postPrescriptionEvent } from '../actions/prescription'
 import { connect } from 'react-redux'
 import BurgerMenu from './BurgerMenu'
 import { Checkbox, CheckboxGroup } from 'react-checkbox-group'
-
+import '../stylesheets/addPrescription.css'
 
 
 class AddPrescription extends Component {
@@ -84,23 +84,25 @@ class AddPrescription extends Component {
 	renderStepOne() {
 		if(this.state.step === 1) {
 			return(
-				<ul className="stepOne" >
+				<ul className="ul-format-addPres">
 
-					<li className="list-item add-pres-list-item">
-						<input className="list-flex add-pres-input" type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} />
+					<li className="list-item list-item-margin">
+						<input className="flex-60 list-item-field" type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} required />
 					</li>
 
-					<li className="list-item add-pres-list-item">
-						<div className="start-date">Start date:  </div>
-						<input className="list-flex add-pres-input" type="date" value={this.state.schedule.start_date} name="schedule[start_date]" onChange={this.handleInputChange.bind(this, "start_date", "schedule")} />
+					<li className="list-item list-item-margin">
+						<div className="flex-auto">Start date:  </div>
+						<input className="flex-60 list-item-field" type="date" value={this.state.schedule.start_date} name="schedule[start_date]" onChange={this.handleInputChange.bind(this, "start_date", "schedule")} />
 					</li>
 
-					<li className="list-item">
-						<input className="list-flex add-pres-input" type="textarea" placeholder="Instructions" name="prescription[instructions]" onChange={this.handleInputChange.bind(this, "instructions", "prescription")} /><br />
+					<li className="list-item list-item-margin">
+						<input className="flex-60 list-item-field" type="textarea" placeholder="Instructions" name="prescription[instructions]" onChange={this.handleInputChange.bind(this, "instructions", "prescription")} /><br />
 					</li>
 
-					<li className="list-item">
-						<button className="list-flex" onClick={this.showNextStep}>Continue</button> <br />
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.showNextStep}>
+							Continue
+						</button>
 					</li>
 				</ul>
 			)
@@ -112,12 +114,35 @@ class AddPrescription extends Component {
 	renderStepTwo() {
 		if(this.state.step === 2) {
 			return (
-			<ul className="stepTwo" >
-				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="# per dose?" name="prescription[dosage]" onChange={this.handleInputChange.bind(this, "dosage", "prescription")} /></li>
-				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="text" placeholder="units (pill, mL, etc.)" name="prescription[units]" onChange={this.handleInputChange.bind(this, "units", "prescription")} /> </li>
-				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="amount per bottle?" name="prescription[quantity]" onChange={this.handleInputChange.bind(this, "quantity", "prescription")} /></li>
-				<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="number" placeholder="# of refills?" name="prescription[refills]" onChange={this.handleInputChange.bind(this, "refills", "prescription")} /></li>
-				<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.showNextStep}>Continue</button> </li>
+			<ul className="ul-format-addPres" >
+				<li className="list-item list-item-margin">
+					<input className="flex-60 list-item-field" type="number" placeholder="# per dose?" name="prescription[dosage]" onChange={this.handleInputChange.bind(this, "dosage", "prescription")} />
+				</li>
+				
+				<li className="list-item list-item-margin">
+					<input className="flex-60 list-item-field" type="text" placeholder="units (pill, mL, etc.)" name="prescription[units]" onChange={this.handleInputChange.bind(this, "units", "prescription")} /> 
+				</li>
+				
+				<li className="list-item list-item-margin">
+					<input className="flex-60 list-item-field" type="number" placeholder="amount per bottle?" name="prescription[quantity]" onChange={this.handleInputChange.bind(this, "quantity", "prescription")} />
+				</li>
+				
+				<li className="list-item list-item-margin">
+					<input className="flex-60 list-item-field" type="number" placeholder="# of refills?" name="prescription[refills]" onChange={this.handleInputChange.bind(this, "refills", "prescription")} />
+				</li>
+				
+				<li className="list-item list-item-margin">
+					<button className="button-format flex-auto list-item-field" onClick={this.showNextStep}>
+						Continue
+					</button>
+				</li>
+				
+				<li className="list-item list-item-margin">
+					<button className="button-format flex-auto list-item-field" onClick={this.backButton}>
+						Go Back
+					</button>
+				</li>
+
 			</ul>)
 		} else {
 		return null
@@ -127,15 +152,18 @@ class AddPrescription extends Component {
 	renderStepThree() {
 		if(this.state.step === 3) {
 			return (
+				<ul className="ul-format-addPres">
+					<li className="list-item list-item-margin">
+						<div className="list-text flex-auto">
+							Frequency:
+						</div>
 
-				<ul className="stepThree">
-					<li className="freq">Frequency:
-						<select className="list-flex-smaller" id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
+						<select className="flex-60 list-item-field" id="frequency" name="schedule[frequency]" value={this.state.schedule.frequency} onChange={this.handleFrequency}>
 							<option value="daily">Daily</option>
 							<option value="weekly">Weekly</option>
 							<option value="monthly">Monthly</option>
 						</select>
-					</li> <br />
+					</li>
 				</ul>
 			)
 		}else{
@@ -149,11 +177,32 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.schedule.frequency  === "daily") {
 			return(
 
-				<ul className="dailyFrequency" id="dailyFrequency">
-					<li className="list-item add-pres-list-item">Time of dose: </li>
+				<ul className="ul-format-addPres">
+					<li className="list-item list-item-margin">
+						<div className="list-text flex-auto" >
+							Time of dose: 
+						</div>
 					{this.renderfreqFields("hours")}
-					<button onClick={this.addfreqField.bind(null,"hours")}>Add Another Time</button><br />
-					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
+					</li>
+
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.addfreqField.bind(null,"hours")}>
+							Add Another Time
+						</button>
+					</li>
+					
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.showNextStep}>
+							Continue
+						</button>
+					</li>
+					
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.backButton}>
+							Go Back
+						</button>
+					</li>
+
 				</ul>
 			)
 		}else{
@@ -174,9 +223,11 @@ class AddPrescription extends Component {
 			let inputs = this.state.schedule[freqField]
 			let mappedInputs = inputs.map((input, i)=>{
 				if (freqField === "hours"){
-					return <li className="list-item add-pres-list-item"><input type="time" className="list-flex add-pres-input" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")}/></li>
+					return <input type="time" className="flex-auto list-item-field" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")}/>
+						
 				} else {
-					return <li className="list-item add-pres-list-item"><input type="number" className="list-flex add-pres-input" min="1" max="31" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} /></li>
+					return <input type="number" className="flex-auto list-item-field" min="1" max="31" id={i} value={inputs[i]} onChange={this.handleInputChange.bind(this, freqField, "schedule")} />
+						
 				}
 			})
 			return(
@@ -190,18 +241,29 @@ class AddPrescription extends Component {
 			let weekdays = this.state.schedule.weekdays
 			return(
 
-				<div>
+				<ul className="ul-format-addPres">
 					<CheckboxGroup name="weekdays" value={weekdays} onChange={this.handleWeekdaysChange}>
-					  <label><Checkbox value="MO"/>Monday</label>
-					  <label><Checkbox value="TU"/>Tuesday</label>
-					  <label><Checkbox value="WE"/>Wednesday</label>
-					  <label><Checkbox value="TH"/>Thursday</label>
-					  <label><Checkbox value="FR"/>Friday</label>
-					  <label><Checkbox value="SA"/>Saturday</label>
-					  <label><Checkbox value="SU"/>Sunday</label>
+					  <li className="list-item list-item-margin"><Checkbox value="MO"/>Monday</li>
+					  <li className="list-item list-item-margin"><Checkbox value="TU"/>Tuesday</li>
+					  <li className="list-item list-item-margin"><Checkbox value="WE"/>Wednesday</li>
+					  <li className="list-item list-item-margin"><Checkbox value="TH"/>Thursday</li>
+					  <li className="list-item list-item-margin"><Checkbox value="FR"/>Friday</li>
+					  <li className="list-item list-item-margin"><Checkbox value="SA"/>Saturday</li>
+					  <li className="list-item list-item-margin"><Checkbox value="SU"/>Sunday</li>
 					</CheckboxGroup>
-					<button className="continue-button list-flex" onClick={this.showNextStep}>Continue</button> <br />
-				</div>
+					
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.showNextStep}>
+							Continue
+						</button>
+					</li>
+					
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.backButton}>
+							Go Back
+						</button>
+					</li>
+				</ul>
 			)
 		}else{
 			return null
@@ -214,34 +276,36 @@ class AddPrescription extends Component {
 		});
 	}
 
-	// renderStepThreeMonthly() {
-	// 	if(this.state.step === 3 && this.state.schedule.frequency === "monthly") {
-	// 		return(
-	// 			<div className="monthlyFrequency" >
-	//
-	// 				Choose dates:<br/> <input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
-	// 				<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
-	// 				<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} /><br/>
-	// 				<input type="number" min="1" max="31" name="schedule[monthDates][]" onChange={this.handleInputChange.bind(this, "monthDates", "schedule")} />
-	// 				<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
-	// 			</div>
-	// 		)
-	// 	} else {
-	// 		return null
-	// 	}
-	//
-	// }
-
 	renderStepThreeMonthly() {
 		if(this.state.step === 3 && this.state.schedule.frequency  === "monthly") {
 			return(
 
-				<div className="monthlyFrequency" id="monthlyFrequency">
-					Day of dose:<br/>
-					{this.renderfreqFields("month_days")}
-					<button onClick={this.addfreqField.bind(null, "month_days")}>Add Another Day</button><br />
-					<button className="continue-button" onClick={this.showNextStep}>Continue</button> <br />
-				</div>
+				<ul className="ul-format-addPres">
+					<li className="list-item list-item-margin">
+						<div className="flex-auto list-text" >
+							Day of dose:
+						</div>
+						{this.renderfreqFields("month_days")}
+					</li>
+
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.addfreqField.bind(null, "month_days")}>
+							Add Another Day
+						</button>
+					</li>
+					
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.showNextStep}>
+							Continue
+						</button>
+					</li>
+					
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.backButton}>
+							Go Back
+						</button>
+					</li>
+				</ul>
 			)
 		}else{
 			return null
@@ -252,13 +316,33 @@ class AddPrescription extends Component {
 		if(this.state.step === 4) {
 			return(
 
-				<ul className="stepFour">
-					<p className="freq">This section is optional, feel free to skip it by clicking "I'm done"</p>
-					<li className='list-item add-pres-list-item'><input className="list-flex add-pres-input" type="text" placeholder="Name of Doctor" name="prescription[doctor]" /></li>
-					<li className="freq">Expiration Date:</li>
-					<li className="list-item add-pres-list-item"><input className="list-flex add-pres-input" type="date" name="schedule[expiration]" /></li>
-					<li className="list-item add-pres-list-item"><button className="list-flex" onClick={this.backButton}>Go Back</button></li>
-					<li className="freq"><button className="list-flex-smaller" onClick={this.handleSubmit}>I'm Done </button></li>
+				<ul className="ul-format-addPres">
+					<li className='list-item list-item-margin'>
+						<div className="list-text flex-auto">Feel free to skip this section</div>
+					</li>
+
+					<li className="list-item list-item-margin">
+						<input className="flex-60 list-item-field" type="text" placeholder="Name of Doctor" name="prescription[doctor]" />
+					</li>
+
+					<li className="list-item list-item-margin">
+						<div className="flex-auto list-text"> 
+							Expires on:
+						</div>
+						<input className="flex-60 list-item-field" type="date" name="schedule[expiration]" />
+					</li>
+					
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-60 list-item-field" onClick={this.backButton}>
+						Go Back
+						</button>
+					</li>
+
+					<li className="list-item list-item-margin">
+						<button className="button-format flex-auto list-item-field" onClick={this.handleSubmit}>
+							I'm Done 
+						</button>
+					</li>
 				</ul>
 			)
 		} else {
@@ -323,7 +407,7 @@ class AddPrescription extends Component {
 					{this.renderStepThreeMonthly()}
 					{this.renderStepFour()}
 
-					<button className="list-flex" onClick={this.backButton}>Go Back</button>
+					
 				</form>
 			</div>
 

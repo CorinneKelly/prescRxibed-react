@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { connect } from 'react-redux'
 import BurgerMenu from './BurgerMenu'
 import Symptoms from './Symptoms'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptoms } from '../actions/symptom'
 import { getPrescription } from '../actions/prescription'
+import '../stylesheets/prescription.css'
 
+const imgPath = "../images/prescription/"
 
 class Prescription extends Component {
 
@@ -22,9 +25,21 @@ class Prescription extends Component {
 		this.renderDetails = this.renderDetails.bind(this)
 	}
 
+	handleDelete(sympId){
+		this.props.deletesymp(sympId)
+	}
+
+	handleOnMouseOverSymp(sympId, deleteImage){
+		document.getElementById(`symp-list-item${sympId}`).setAttribute('src', deleteImage)
+	}
+
+	handleOnMouseOutSymp(sympId, originalImage){
+		document.getElementById(`symp-list-item${sympId}`).setAttribute('src', originalImage)
+	}
+
 	componentWillMount(){
 		this.setState({
-			prescriptionId: this.props.match.params.prescriptionId
+			sympId: this.props.match.params.sympId
 		})
 	}
 
@@ -48,15 +63,15 @@ class Prescription extends Component {
 			return (
 				<div>
 					<li className="list-item">
-						<div className="image-flex">Dosage: {currRx.dosage} {currRx.units}</div>
+						<div className="flex-auto">Dosage: {currRx.dosage} {currRx.units}</div>
 					</li>
 
 					<li className="list-item">
-						<div className="image-flex">Instructions: {currRx.instructions}</div>
+						<div className="flex-auto">Instructions: {currRx.instructions}</div>
 					</li>
 
 					<li className="list-item">
-						<div className="image-flex">{currRx.refills} refill(s) left</div>
+						<div className="flex-auto">{currRx.refills} refill(s) left</div>
 					</li>
 
 					<li className="list-item">
@@ -81,7 +96,10 @@ class Prescription extends Component {
 				<div>
 					<Symptoms prescriptionId={this.state.prescriptionId} />
 					<li className="list-item">
-						<a className="image-flex" href={`/prescriptions/${this.state.prescriptionId}/newsymptom`}>Add New Symptom</a>
+						<img className="flex-auto" src={`${imgPath}addSymptom.svg`} />
+						<Link className="flex-60 new-symptom-link symp-list-link" to={`/prescriptions/${this.state.prescriptionId}/newsymptom`}>
+							Add New Symptom
+						</Link>
 					</li>
 				</div>)
 
@@ -96,14 +114,14 @@ class Prescription extends Component {
 				<BurgerMenu />
 				<ul>
 					<li className="list-item  pres-page-list-item">
-						<img className="image-flex" src="../rxBottleBrightBlue.svg" />
-						<button className="list-flex" onClick={this.showDetails}> Prescription Details </button>
+						<img className="flex-auto" src={`${imgPath}rxBottleBrightBlue.svg`} />
+						<button className="flex-60 prescription-main-list-item" onClick={this.showDetails}> Prescription Details </button>
 					</li>
 					{this.renderDetails()}
 					
 					<li className="list-item  pres-page-list-item">
-						<img className="image-flex" src="../symptomTrackerBrightBlue.svg" />
-						<button className="list-flex" onClick={this.showSymptoms}> Symptom Tracker </button>
+						<img className="flex-auto" src={`${imgPath}symptomTrackerBrightBlue.svg`} />
+						<button className="flex-60 prescription-main-list-item" onClick={this.showSymptoms}> Symptom Tracker </button>
 					</li>
 					{this.renderSymptoms()}
 					

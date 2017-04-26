@@ -1,4 +1,67 @@
-.Welcome {
+.main-item-format {
+  background-color: #31375D;
+  color: #27CECF;
+  height: 100px;
+  font-size: 20px;
+  margin-bottom: 30px;
+  border: none;
+  border-radius: 5px;
+  outline: 0;
+  text-decoration: none;
+}
+
+  .main-item-format:hover {
+    background-color: #F2F3F5;
+    color: #31375D;
+  }
+
+.add-pres-link {
+  text-decoration: none;
+  color: #27CECF;
+}
+
+.list-item-fade {
+  animation: FadeIn 1s linear;
+  animation-fill-mode: both;
+}
+
+.prescription-list-link {
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+  outline: 0;
+}
+
+  .prescription-list-link:hover {
+    background-color: #F2F3F5;
+    color: #31375D;
+}
+
+.blue-font {
+  color: #27CECF;
+}
+
+.white-font {
+  color: #F2F3F5;
+}
+
+@keyframes FadeIn { 
+  0% {
+    opacity: 0;
+    transform: scale(.1);
+  }
+
+  85% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/*.Welcome {
   margin-top: 40px;
 }
 
@@ -39,3 +102,4 @@
   background-image: linear-gradient(top bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
+*/
