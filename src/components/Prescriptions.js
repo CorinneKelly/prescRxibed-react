@@ -18,7 +18,6 @@ class Prescriptions extends Component {
 	}
 
 	render() {
-		// debugger
 		var prescriptions = this.props.prescription.allPrescriptions.map((pres, index) => {
 			
 			return (

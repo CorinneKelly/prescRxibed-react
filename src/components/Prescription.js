@@ -18,7 +18,8 @@ class Prescription extends Component {
 		super()
 
 		this.state = {
-			display: ""
+			display: "",
+			prescriptionId: ""
 		}
 
 		this.showDetails = this.showDetails.bind(this)
@@ -40,10 +41,11 @@ class Prescription extends Component {
 
 	componentWillMount(){
 		this.setState({
-			sympId: this.props.match.params.sympId
+			prescriptionId: this.props.match.params.prescriptionId
 		})
-		this.props.forceLogout(this.props.account.expiresAt)
 
+		this.props.forceLogout(this.props.account.expiresAt)
+		this.props.getPrescription(this.props.match.params.prescriptionId)
 	}
 
 
@@ -62,7 +64,6 @@ class Prescription extends Component {
 	}
 
 	renderDetails(){
-		this.props.getPrescription(this.state.prescriptionId)
 		if (this.state.display === "presDetails") {
 			var currRx = this.props.prescription.specificPrescription
 			return (
@@ -99,12 +100,12 @@ class Prescription extends Component {
 		if (this.state.display === "symptoms"){
 			return (
 				<div>
-					<Symptoms prescriptionId={this.state.prescriptionId} />
+					<Symptoms handleDelete={this.handleDelete} handleOnMouseOverSymp={this.handleOnMouseOverSymp} handleOnMouseOutSymp={this.handleOnMouseOutSymp} />
 					<li className="list-item">
 						<img className="flex-auto" src={`${imgPath}addSymptom.svg`} />
-						<Link className="flex-60 new-symptom-link symp-list-link" to={`/prescriptions/${this.state.prescriptionId}/newsymptom`}>
+						<a className="flex-60 new-symptom-link symp-list-link" href={`/prescriptions/${this.state.prescriptionId}/newsymptom`}>
 							Add New Symptom
-						</Link>
+						</a>
 					</li>
 				</div>)
 
@@ -126,7 +127,9 @@ class Prescription extends Component {
 
 					<li className="list-item  pres-page-list-item">
 						<img className="flex-auto" src={`${imgPath}symptomTrackerBrightBlue.svg`} />
-						<button className="flex-60 prescription-main-list-item" onClick={this.showSymptoms}> Symptom Tracker </button>
+						<button className="flex-60 prescription-main-list-item" onClick={this.showSymptoms}>
+							Symptom Tracker 
+						</button>
 					</li>
 					{this.renderSymptoms()}
 

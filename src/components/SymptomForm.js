@@ -113,7 +113,7 @@ class SymptomForm extends Component {
 				var currUploads = ""
 			}
 
-			if (this.state.name){
+			if (this.props.symptom.specificSymptom.name){
 				var title = <h1 className="page-title">
 				How does your {this.state.name} feel today?</h1>
 			} else {

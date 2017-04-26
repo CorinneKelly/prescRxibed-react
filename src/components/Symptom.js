@@ -60,7 +60,6 @@ class Symptom extends Component {
       var name = "no name"
       var symptomId = null
     }
-    debugger
 	  return(
 
 	  	<div>
