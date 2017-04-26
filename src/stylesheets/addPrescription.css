@@ -1,0 +1,35 @@
+.list-item-margin {
+	margin: 20px 0;
+}
+
+.list-item-field {
+	background-color: #F2F3F5;
+	color: #31375D;
+	height: 50px;
+	font-size: 20px;
+}
+
+.list-item-field::placeholder {
+	color: #93708D;
+}
+
+.ul-format-addPres {
+	margin-top: 60px;
+}
+
+.button-format {
+	background-color: #27CECF;
+	color: #31375D;
+	height: 75px;
+	border: none;
+	outline: 0;
+}
+
+	.button-format:hover {
+		background-color: #EEB5B7;
+	}
+
+.list-text {
+	font-size: 20px;
+	text-align: left;
+}

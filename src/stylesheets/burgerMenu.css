@@ -1,0 +1,31 @@
+.burger-menu {
+	top: 0;
+	position: absolute;
+	left: -200px;
+	width: 200px;
+	height: 100%;
+	text-align: left;
+	background-color: #93708D;
+}
+
+#menu-activator {
+	position: fixed;
+	top: 15px;
+	left: 15px;
+}
+
+
+.burger-menu-list-items {
+	text-decoration: none;
+	color: #F2F3F5;
+	margin: 20px 0;
+}
+
+	.burger-menu-list-items:hover{
+		color: #27CECF;
+	}
+
+.burger-menu-list {
+	list-style: none;
+	color: #31375D;
+}
