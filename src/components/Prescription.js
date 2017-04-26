@@ -6,6 +6,7 @@ import Symptoms from './Symptoms'
 import { bindActionCreators } from 'redux'
 import { getSymptoms } from '../actions/symptom'
 import { getPrescription } from '../actions/prescription'
+import { forceLogout } from '../actions/account'
 
 
 class Prescription extends Component {
@@ -26,18 +27,22 @@ class Prescription extends Component {
 		this.setState({
 			prescriptionId: this.props.match.params.prescriptionId
 		})
+		this.props.forceLogout(this.props.account.expiresAt)
+
 	}
+
+
 
 	showDetails(){
 		if (this.state.display === "presDetails") {
 			this.setState({
 				display: ""
 			})
-			
+
 		} else {
 			this.setState({
 				display: "presDetails"
-			})			
+			})
 		}
 	}
 
@@ -65,7 +70,7 @@ class Prescription extends Component {
 
 				</div>
 			)}
-		
+
 	}
 
 	showSymptoms(){
@@ -100,13 +105,13 @@ class Prescription extends Component {
 						<button className="list-flex" onClick={this.showDetails}> Prescription Details </button>
 					</li>
 					{this.renderDetails()}
-					
+
 					<li className="list-item  pres-page-list-item">
 						<img className="image-flex" src="../symptomTrackerBrightBlue.svg" />
 						<button className="list-flex" onClick={this.showSymptoms}> Symptom Tracker </button>
 					</li>
 					{this.renderSymptoms()}
-					
+
 				</ul>
 
 			</div>
@@ -116,13 +121,14 @@ class Prescription extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		prescription: state.prescription
+		prescription: state.prescription,
+		account: state.account
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getSymptoms, getPrescription
+		getSymptoms, getPrescription, forceLogout
 	}, dispatch)
 }
 

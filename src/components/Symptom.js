@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
 import { Link } from 'react-router-dom'
+import { forceLogout } from '../actions/account'
+
 
 class Symptom extends Component {
 	constructor(){
@@ -15,8 +17,12 @@ class Symptom extends Component {
 
 	componentWillMount(){
     this.props.getSymptom(this.props.match.params.symptomId)
+    this.props.forceLogout(this.props.account.expiresAt)
+
 	}
 
+
+	
 	render() {
 
     if (this.props.symptom.symptomLogs){
@@ -103,13 +109,15 @@ class Symptom extends Component {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getSymptom
+		getSymptom,
+    forceLogout
 	}, dispatch)
 }
 
 const mapStateToProps = (state) => {
 	return {
-		symptom: state.symptom
+		symptom: state.symptom,
+    account: state.account
 	}
 }
 

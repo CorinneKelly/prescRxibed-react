@@ -7,6 +7,8 @@ import { getPrescriptions } from '../actions/prescription'
 import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import { store } from '../index'
+import { forceLogout } from '../actions/account'
+
 
 
 class Home extends Component {
@@ -21,6 +23,10 @@ class Home extends Component {
 		this.handleOnClickPrescriptions = this.handleOnClickPrescriptions.bind(this)
 		this.handleOnClickSchedule = this.handleOnClickSchedule.bind(this)
 	}
+
+	componentWillMount(){
+    this.props.forceLogout(this.props.account.expiresAt)
+  }
 
 	handleOnClickSchedule(event) {
 		event.preventDefault()
@@ -158,11 +164,18 @@ class Home extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		account: state.account
+	}
+}
+
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getPrescriptions
+		getPrescriptions,
+		forceLogout
 	}, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

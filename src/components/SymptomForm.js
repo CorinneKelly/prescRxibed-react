@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { postSymptomEvent } from '../actions/symptom'
+import { forceLogout } from '../actions/account'
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
@@ -34,6 +35,7 @@ class SymptomForm extends Component {
 			symptomId: this.props.match.params.symptomId
 
 		})
+		this.props.forceLogout(this.props.account.expiresAt)
 	}
 
 	outputUpdate(event) {
@@ -173,14 +175,16 @@ class SymptomForm extends Component {
 
 	const mapDispatchToProps = (dispatch) => {
 	  return bindActionCreators({
-	    postSymptomEvent
+	    postSymptomEvent,
+			forceLogout
 	  }, dispatch)
 	}
 
 
 	const mapStateToProps = (state) => {
 		return {
-			symptom: state.symptom
+			symptom: state.symptom,
+			account: state.account
 		}
 	}
 

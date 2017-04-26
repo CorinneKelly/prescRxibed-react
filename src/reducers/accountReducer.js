@@ -1,10 +1,12 @@
- const INITIAL_STATE = {
- 	token: localStorage.getItem('token'),
- 	email: null,
- 	expiresAt: localStorage.getItem('expiresAt')
+ const initial = () => {
+ 	return {
+    token: localStorage.getItem('token'),
+    email: localStorage.getItem('email'),
+ 	  expiresAt: localStorage.getItem('expiresAt')
+  }
  }
 
- export default (state=INITIAL_STATE, action) => {
+ export default (state=initial(), action) => {
   switch (action.type) {
     case "SET_TOKEN":
     	localStorage.setItem('token', action.payload.token)
@@ -14,7 +16,7 @@
 
     case "EXPIRE_SESSION":
     	localStorage.clear()
-    	return INITIAL_STATE
+    	return initial()
     default:
       return state
   }
