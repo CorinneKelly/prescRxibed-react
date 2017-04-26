@@ -17,8 +17,7 @@ class Symptoms extends Component {
 	}
 
 	render() {
-		debugger
-		var symptoms = this.props.symptom.allSymptoms.map((symp, index) => {
+		var symptoms = this.props.prescription.symptoms.map((symp, index) => {
 			return (
 				<SymptomListItem
 					symptomDetails={symp}

@@ -45,7 +45,7 @@ class Prescription extends Component {
 		})
 
 		this.props.forceLogout(this.props.account.expiresAt)
-		this.props.getPrescription(this.state.prescriptionId)
+		this.props.getPrescription(this.props.match.params.prescriptionId)
 	}
 
 
