@@ -48,7 +48,6 @@ export const getPrescriptions = () => {
     axios
     .get('http://localhost:4000/v1/prescriptions', config)
     .then(function(response){
-    	console.log("you hit that thing, its just a matter of time")
     	let allPrescriptions = response.data
       dispatch({
         type: 'SET_PRESCRIPTIONS',

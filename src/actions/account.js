@@ -11,7 +11,7 @@ export function getJWTToken(response) {
     .post('http://localhost:4000/v1/sessions', {account: {googleToken: response.Zi.access_token, googleId: response.El, name: response.w3.U3}})
     .then(function(response){
       let token = response.data.jwt
-      let secondsToExpiration =  (moment().unix() + 60000)
+      let secondsToExpiration =  (moment().unix() + 60*60*1000)
 
       dispatch({
         type: 'SET_TOKEN',

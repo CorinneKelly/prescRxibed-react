@@ -23,8 +23,8 @@ class Symptoms extends Component {
 				<SymptomListItem
 					symptomDetails={symp}
 					idx={symp.id}
-					handleOnMouseOverPres={this.getMouseOver()}
-					handleOnMouseOutPres={this.getMouseOut()}
+					handleOnMouseOverSymp={this.getMouseOver()}
+					handleOnMouseOutSymp={this.getMouseOut()}
 					handleDelete={this.getHandleDelete()}
 					imageSource={index%2 ? "pillBlue.svg" : "pillWhiteish.svg"}
 					deleteImageSource={index%2 ? "deleteCanBrBlue.svg" : "deleteCanWhite.svg"}

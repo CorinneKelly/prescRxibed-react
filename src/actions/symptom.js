@@ -42,7 +42,7 @@ export const getSymptoms = (prescriptionId) => {
     axios
     .get(`http://localhost:4000/v1/prescriptions/${prescriptionId}`, config)
     .then(function(response){
-        console.log(response)
+        console.log("get symptoms worked")
         let allSymptoms = response.data
 
       dispatch({
