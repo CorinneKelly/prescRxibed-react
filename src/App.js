@@ -7,6 +7,8 @@ import './App.css'
 import Home from './components/Home'
 import Welcome from './components/Welcome'
 import BurgerMenu from './components/BurgerMenu'
+import { forceLogout } from './actions/account'
+
 
 class App extends Component {
 
@@ -17,13 +19,16 @@ class App extends Component {
       return <Welcome />
     }
   }
-  
 
-  
+  componentWillMount(){
+    this.props.forceLogout(this.props.account.expiresAt)
+  }
+
+
 
   render() {
     return (
-        
+
       <div className="App" >
         <BurgerMenu />
         {this.isLoggedIn()}
@@ -36,5 +41,10 @@ const mapStateToProps = (state) => {
   return {account: state.account}
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    forceLogout
+	  }, dispatch)
+}
 
-export const ConnectedApp = connect(mapStateToProps)(App)
+export const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)

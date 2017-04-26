@@ -8,10 +8,9 @@ import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import { store } from '../index'
 import '../stylesheets/home.css'
+import { forceLogout } from '../actions/account'
 
 const imgPath = "images/home/"
-
-
 
 class Home extends Component {
 	constructor (){
@@ -40,6 +39,10 @@ class Home extends Component {
 	handleOnMouseOutPres(prescriptionId, originalImage){
 		document.getElementById(`pres-list-item${prescriptionId}`).setAttribute('src', originalImage)
 	}
+
+	componentWillMount(){
+    this.props.forceLogout(this.props.account.expiresAt)
+  }
 
 	handleOnClickSchedule(event) {
 		event.preventDefault()
@@ -176,11 +179,17 @@ class Home extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		account: state.account
+	}
+}
+
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getPrescriptions, deletePrescription
+		getPrescriptions, deletePrescription, forceLogout
 	}, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

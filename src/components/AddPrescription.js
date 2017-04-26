@@ -2,6 +2,7 @@ import moment from 'moment'
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { postPrescriptionEvent } from '../actions/prescription'
+import { forceLogout } from '../actions/account'
 import { connect } from 'react-redux'
 import BurgerMenu from './BurgerMenu'
 import { Checkbox, CheckboxGroup } from 'react-checkbox-group'
@@ -42,6 +43,11 @@ class AddPrescription extends Component {
 			},
 		}
 	}
+
+	componentWillMount(){
+		this.props.forceLogout(this.props.account.expiresAt)
+	}
+
 
 	clearEmptyScheduleArrays(){
 		let schedule = this.state.schedule
@@ -418,11 +424,14 @@ class AddPrescription extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    postPrescriptionEvent
+    postPrescriptionEvent,
+		forceLogout
 	  }, dispatch)
 }
 
+const mapStateToProps = (state) => {
+  return {account: state.account}
+}
 
 
-
-export default connect(null, mapDispatchToProps)(AddPrescription)
+export default connect(mapStateToProps, mapDispatchToProps)(AddPrescription)
