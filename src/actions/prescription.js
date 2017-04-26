@@ -60,3 +60,23 @@ export const getPrescriptions = () => {
   }
 }
 
+export const getPrescription = (prescriptionId) => {
+  return (dispatch) => {
+    let config = setAuthHeader()
+    axios
+    .get(`http://localhost:4000/v1/prescriptions/${prescriptionId}`, config)
+    .then(function(response){
+      console.log("you hit that thing, its just a matter of time")
+      let data = response.data
+      dispatch({
+        type: 'SET_PRESCRIPTION',
+        payload: {
+          symptoms: data.symptoms,
+          specificPrescription: data.prescription
+
+        }
+      })
+    })
+  }
+}
+

@@ -55,6 +55,7 @@ ReactDOM.render(
         <Route exact path='/prescriptions/:prescriptionId/newsymptom' component={SymptomForm} />
         <Route exact path='/prescriptions/:prescriptionId' component={Prescription} />
         <Route exact path='/symptoms/:symptomId' component={Symptom} />
+        <Route exact path='/symptoms/:symptomId/addLog' component={SymptomForm} />
         <Route exact path='/home' component={Home} />
         <Route component={NotFound} />
       </div>
