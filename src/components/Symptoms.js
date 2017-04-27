@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SymptomListItem from './SymptomListItem'
 
+const presImgPath = "../images/prescription/"
+const homeImgPath = "../images/home/"
+
 class Symptoms extends Component {
 
 	getHandleDelete(){
@@ -21,13 +24,13 @@ class Symptoms extends Component {
 			return (
 				<SymptomListItem
 					symptomDetails={symp}
-					idx={symp.id}
+					sympID={symp.id}
 					handleOnMouseOverSymp={this.getMouseOver()}
 					handleOnMouseOutSymp={this.getMouseOut()}
 					handleDelete={this.getHandleDelete()}
-					imageSource={index%2 ? "pillBlue.svg" : "pillWhiteish.svg"}
-					deleteImageSource={index%2 ? "deleteCanBrBlue.svg" : "deleteCanWhite.svg"}
-					className={index%2 ? "blue-font" : "white-font"}
+					originalImageSource={index%2 ? `${presImgPath}heartSympPurple.svg` : `${presImgPath}heartSympWhite.svg`}
+					deleteImageSource={index%2 ? `${presImgPath}deleteCanPurple.svg` : `${homeImgPath}deleteCanWhite.svg`}
+					className={index%2 ? "purple-font" : "white-font"}
 				/>)
 		})
 

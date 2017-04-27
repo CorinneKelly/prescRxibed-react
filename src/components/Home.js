@@ -7,8 +7,8 @@ import { getPrescriptions, deletePrescription } from '../actions/prescription'
 import { bindActionCreators } from 'redux'
 import { push } from 'react-router-redux'
 import { store } from '../index'
-import '../stylesheets/home.css'
 import { forceLogout } from '../actions/account'
+import '../stylesheets/home.css'
 
 const imgPath = "images/home/"
 

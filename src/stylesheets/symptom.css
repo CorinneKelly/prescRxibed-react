@@ -1,0 +1,29 @@
+.symp-new-log-link {
+	text-decoration: none;
+	color: #D0E7F0;
+	margin-bottom: 20px;
+	padding: 10px;
+	font-size: 20px
+}
+
+.add-log-item:hover {
+	color: #EEB5B7;
+}
+
+.symp-log-item {
+	margin-bottom: 20px;
+}
+
+.text-align-left {
+	text-align: left;
+}
+
+.symp-log-desc {
+	text-align: justify;
+	padding: 15px;
+}
+
+.symp-log-image {
+	margin: 10px;
+}
+
