@@ -9,10 +9,7 @@ import { connect } from 'react-redux'
 require('react-big-calendar/lib/css/react-big-calendar.css')
 
 class FullSchedule extends Component {
-	constructor () {
-		super()
 
-	}
 	componentWillMount () {
 		this.props.getEvents()
 	}
