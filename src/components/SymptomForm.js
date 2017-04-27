@@ -139,6 +139,9 @@ class SymptomForm extends Component {
 		return (
 			<div className="symptom-form-wrapper">
 				<BurgerMenu />
+				<div className="list-item">
+		        <h1 className="flex-auto">PrescR<sub>x</sub>ibed</h1>
+				</div>
 				{title}
 				<form onSubmit={this.handleSubmit} >
 					<ul>
