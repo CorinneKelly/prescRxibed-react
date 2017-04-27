@@ -92,13 +92,14 @@ class Symptom extends Component {
 	  	<div>
 	  		<BurgerMenu />
 	  		<ul>
-		  		<li className="list-item" >
-		  			<h1 className="page-title flex-auto">{name}</h1>
-		  		</li>
+		  		<li className="list-item">
+		        <h1 className="flex-auto">PrescR<sub>x</sub>ibed</h1>
+					</li>
+
 		  		<li className="list-item" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} >
 
 		  			<img className="flex-auto" id="add-new-log-img" height="80px" src={`${sympImgPath}addSymptomLtBlue.svg`} />
-            <Link className="symp-new-log-link flex-60" to={`/symptoms/${symptomId}/addLog`} >
+            <Link className="symp-new-log-link flex-auto" to={`/symptoms/${symptomId}/addLog`} >
               {this.state.newLogLink? this.state.newLogLink : `How is your ${this.props.symptom.specificSymptom.name} today?`}
             </Link>
 		  		</li>

@@ -147,6 +147,10 @@ class Home extends Component {
 			<div className="home-wrapper" >
 				<ul className="home-list">
 					<li className="list-item">
+		        <h1 className="flex-auto">PrescR<sub>x</sub>ibed</h1>
+					</li>
+					
+					<li className="list-item">
 						<img className="flex-auto" src={`${imgPath}addpillPink.svg`} width="90" height="85" />
 						<button className="flex-60 main-item-format" >
 							<a href="/add-prescription" className="add-pres-link" >
