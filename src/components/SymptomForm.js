@@ -19,6 +19,7 @@ class SymptomForm extends Component {
 			severity: 10,
 			description: '',
 			uploadedFiles: [],
+			message: false
 		}
 		this.outputUpdate = this.outputUpdate.bind(this)
 		this.symptomTextDesc = this.symptomTextDesc.bind(this)
@@ -27,6 +28,7 @@ class SymptomForm extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleImageUpload = this.handleImageUpload.bind(this)
 		this.handleInputChange = this.handleInputChange.bind(this)
+		this.postSymptom = this.postSymptom.bind(this)
 	}
 
 	componentWillMount(){
@@ -96,6 +98,13 @@ class SymptomForm extends Component {
 
 	handleSubmit(event){
 		event.preventDefault()
+		this.setState({
+			message: true
+		})
+		setTimeout(()=>{this.postSymptom(), 3000})
+	}
+
+	postSymptom(){
 		this.props.postSymptomEvent(this.state)
 	}
 
@@ -151,7 +160,7 @@ class SymptomForm extends Component {
 
 								<div>Drag & drop</div>
 								<div>or click</div>
-								<div>to upload multiple files!</div>
+								<div>to upload multiple images!</div>
 							</Dropzone>
 
 						</li>
@@ -167,10 +176,11 @@ class SymptomForm extends Component {
 							}
 						</li>
 						<li className="list-item" >
-							<input className="button-format flex-auto" type="submit" onSubmit={this.handleSubmit} value="Finished" />
+							<input className="button-format flex-auto" type="submit" value="Finished" />
 						</li>
 					</ul>
 				</form>
+				{this.state.message ? "Your symptoms have been updated" : null}
 			</div>
 		)
 	}

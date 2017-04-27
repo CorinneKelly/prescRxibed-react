@@ -20,8 +20,8 @@ class MenuItem extends Component {
 
 		return (
 			<ul className="burger-menu-list" >
-				<li ><a className="burger-menu-list-items" href="/logout" onClick={this.handleLogoutCallBack}>Log Out</a></li>
 				<li><a className="burger-menu-list-items" href="/">Home</a></li>
+				<li ><a className="burger-menu-list-items" href="/logout" onClick={this.handleLogoutCallBack}>Log Out</a></li>
 			</ul>
 		)
 	}

@@ -15,15 +15,21 @@
     color: #31375D;
   }
 
+  .main-item-format a:hover{
+    background-color: #F2F3F5;
+    color: #31375D;  
+  }
+
 .add-pres-link {
   text-decoration: none;
   color: #27CECF;
 }
 
-.list-item-fade {
+
+/*.list-item-fade {
   animation: FadeIn 1s linear;
   animation-fill-mode: both;
-}
+}*/
 
 .prescription-list-link {
   text-decoration: none;

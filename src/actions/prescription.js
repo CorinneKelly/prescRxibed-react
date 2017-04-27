@@ -13,7 +13,6 @@ export const postPrescriptionEvent = (prescriptionData) => {
     .then(
 
       store.dispatch(push('/')),
-      alert("You just added a prescription!")
     )
   }
 }
@@ -82,7 +81,6 @@ export const getPrescription = (prescriptionId) => {
 export const deletePrescription = (prescriptionId) => {
     let config = setAuthHeader()
     config.headers['Content-Type'] = 'application/json'
-    // debugger
   return (dispatch) => {
     axios
     .delete(`http://localhost:4000/v1/prescriptions/${prescriptionId}`, config, 'Access-Control-Allow-Origin')
@@ -97,7 +95,7 @@ export const deletePrescription = (prescriptionId) => {
       })
     })
     .then(
-      // store.dispatch(push('/presciptions'))
+      store.dispatch(push('/'))
     )
   }
 }

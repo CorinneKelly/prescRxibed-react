@@ -5,7 +5,7 @@ import Symptoms from './Symptoms'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getSymptoms } from '../actions/symptom'
+import { getSymptoms, deleteSymp } from '../actions/symptom'
 import { getPrescription } from '../actions/prescription'
 import '../stylesheets/prescription.css'
 import { forceLogout } from '../actions/account'
@@ -32,7 +32,7 @@ class Prescription extends Component {
 	}
 
 	handleDelete(sympId){
-		this.props.deletesymp(sympId)
+		this.props.deleteSymp(sympId)
 	}
 
 	handleOnMouseOverSymp(sympId, deleteImage){
@@ -155,7 +155,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		getSymptoms, getPrescription, forceLogout
+		getSymptoms, getPrescription, forceLogout, deleteSymp
 	}, dispatch)
 }
 
