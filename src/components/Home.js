@@ -135,9 +135,7 @@ class Home extends Component {
 
 
 	showSchedule(){
-		if (this.state.schedOpen){
-			return <li><FullSchedule /></li>
-		} else if (this.state.schedOpen) {
+		if (this.state.schedOpen) {
 			return <li><FullSchedule /></li>
 		} else {
 			return null
