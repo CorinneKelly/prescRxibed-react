@@ -8,6 +8,7 @@ import request from 'superagent'
 import BurgerMenu from './BurgerMenu'
 import '../stylesheets/symptomform.css'
 
+
 const CLOUDINARY_UPLOAD_PRESET = 'AddSymptomImg'
 const CLOUDINARY_UPLOAD_URL = 'https:api.cloudinary.com/v1_1/prescriptionmanager/upload'
 
@@ -127,12 +128,12 @@ class SymptomForm extends Component {
 
 			if (this.props.symptom.specificSymptom.name){
 				var title = <h1 className="page-title">
-				How does your {this.state.name} feel today?</h1>
+				How is your {this.state.name} today?</h1>
 			} else {
 				var title = <h1 className="page-title">
-				How does your
+				How is your
 					<input type="text" className="symptom-name-input" placeholder="Symptom Name" onChange={this.handleInputChange}/>
-				feel today</h1>
+				 today?</h1>
 			}
 
 		return (
