@@ -99,10 +99,10 @@ class AddPrescription extends Component {
 	renderStepOne() {
 		if(this.state.step === 1) {
 			return(
-				<ul className="ul-format-addPres">
+				<ul >
 
 					<li className="list-item list-item-margin">
-						<input className="flex-60 list-item-field" type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} required />
+						<input className="flex-60 list-item-field" type="text" placeholder="Name of medicine" name="prescription[name]" onChange={this.handleInputChange.bind(this, "name", "prescription")} />
 					</li>
 
 					<li className="list-item list-item-margin">
@@ -129,7 +129,7 @@ class AddPrescription extends Component {
 	renderStepTwo() {
 		if(this.state.step === 2) {
 			return (
-			<ul className="ul-format-addPres" >
+			<ul  >
 				<li className="list-item list-item-margin">
 					<input className="flex-60 list-item-field" type="number" placeholder="# per dose?" name="prescription[dosage]" onChange={this.handleInputChange.bind(this, "dosage", "prescription")} />
 				</li>
@@ -167,7 +167,7 @@ class AddPrescription extends Component {
 	renderStepThree() {
 		if(this.state.step === 3) {
 			return (
-				<ul className="ul-format-addPres">
+				<ul >
 					<li className="list-item list-item-margin">
 						<div className="list-text flex-auto">
 							Frequency:
@@ -192,7 +192,7 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.schedule.frequency  === "daily") {
 			return(
 
-				<ul className="ul-format-addPres">
+				<ul >
 					<li className="list-item list-item-margin">
 						<div className="list-text flex-auto" >
 							Time of dose: 
@@ -256,7 +256,7 @@ class AddPrescription extends Component {
 			let weekdays = this.state.schedule.weekdays
 			return(
 
-				<ul className="ul-format-addPres">
+				<ul >
 					<CheckboxGroup name="weekdays" value={weekdays} onChange={this.handleWeekdaysChange}>
 					  <li className="list-item list-item-margin"><Checkbox value="MO"/>Monday</li>
 					  <li className="list-item list-item-margin"><Checkbox value="TU"/>Tuesday</li>
@@ -295,7 +295,7 @@ class AddPrescription extends Component {
 		if(this.state.step === 3 && this.state.schedule.frequency  === "monthly") {
 			return(
 
-				<ul className="ul-format-addPres">
+				<ul >
 					<li className="list-item list-item-margin">
 						<div className="flex-auto list-text" >
 							Day of dose:
@@ -331,7 +331,7 @@ class AddPrescription extends Component {
 		if(this.state.step === 4) {
 			return(
 
-				<ul className="ul-format-addPres">
+				<ul >
 					<li className='list-item list-item-margin'>
 						<div className="list-text flex-auto">Feel free to skip this section</div>
 					</li>
@@ -413,6 +413,9 @@ class AddPrescription extends Component {
 
 			<div className="add-presc-page">
 				<BurgerMenu />
+				<div className="list-item">
+	        <h1 className="flex-auto">PrescR<sub>x</sub>ibed</h1>
+				</div>
 				<form onSubmit={this.handleSubmit}>
 					{this.renderStepOne()}
 					{this.renderStepTwo()}

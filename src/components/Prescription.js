@@ -131,6 +131,10 @@ class Prescription extends Component {
 			<div >
 				<BurgerMenu />
 				<ul>
+					<li className="list-item">
+		        <h1 className="flex-auto">PrescR<sub>x</sub>ibed</h1>
+					</li>
+					
 					<li className="list-item  pres-page-list-item">
 						<img className="flex-auto" height="100px" src={`${imgPath}rxBottleBrightBlue.svg`} />
 						<button className="flex-60 prescription-main-list-item" onClick={this.showDetails}>

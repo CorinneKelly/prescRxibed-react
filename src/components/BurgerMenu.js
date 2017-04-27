@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import MenuItem from './MenuItem'
 import '../stylesheets/burgerMenu.css'
 
-const imgPath = "../images/burgerMenu/"
+const imgPath = "../../images/burgerMenu/"
 
 class BurgerMenu extends Component {
 
