@@ -25,6 +25,7 @@ class AddPrescription extends Component {
 		this.renderfreqFields = this.renderfreqFields.bind(this)
 		this.handleWeekdaysChange = this.handleWeekdaysChange.bind(this)
 		this.clearEmptyScheduleArrays = this.clearEmptyScheduleArrays.bind(this)
+		this.postScrip = this.postScrip.bind(this)
 
 		// sets default start date to today
 		let date = new Date()
@@ -39,6 +40,7 @@ class AddPrescription extends Component {
 				month_days: [''],
 				start_date: today
 			},
+			message: false,
 			prescription: {
 			},
 		}
@@ -83,6 +85,13 @@ class AddPrescription extends Component {
 	handleSubmit(event) {
 		event.preventDefault()
 		this.clearEmptyScheduleArrays()
+		this.setState({
+			message: true
+		})
+		setTimeout(()=>{this.postScrip()}, 3000)
+	}
+
+	postScrip(){
 		this.props.postPrescriptionEvent(this.state)
 	}
 
@@ -415,6 +424,8 @@ class AddPrescription extends Component {
 
 					
 				</form>
+				{this.state.message ? "Your prescriptions have been updated" : null}
+
 			</div>
 
 		)

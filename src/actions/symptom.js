@@ -4,36 +4,7 @@ import { setAuthHeader } from './account'
 import { store } from '../index'
 
 
-export const postSymptomEvent = (symptomData) => {
-  return (dispatch) => {
-    let config = setAuthHeader()
-    if (symptomData.prescriptionId){
-      axios
-      .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData}, config)
-      .then(
-          console.log("success"),
-          store.dispatch(push(`/prescriptions/${symptomData.prescriptionId}`)),
-          alert("You just added a symptom!")
-      )
-    } else {
-      axios
-      .post('http://localhost:4000/v1/symptom_logs', {symptomData: symptomData}, config)
-      .then(function(response) {
-          console.log("success")
-          let specificSymptom = response.data
-          dispatch({
-            type: 'SET_SPECIFIC_SYMPTOM',
-            payload: {
-              specificSymptom: specificSymptom.symptom,
-              symptomLogs: specificSymptom.symptomLogs
-            }
-          })
-          store.dispatch(push(`/symptoms/${symptomData.symptomId}`))
-          alert("You just added a symptom Log!")
-      })
-    }
-  }
-}
+
 
 
 export const getSymptoms = (prescriptionId) => {
@@ -67,6 +38,25 @@ export const getSymptom = (symptomId) => {
         payload: {
           specificSymptom: specificSymptom.symptom,
           symptomLogs: specificSymptom.symptomLogs
+        }
+      })
+    })
+  }
+}
+
+export const deleteSymp = (sympID) => {
+  let config = setAuthHeader()
+  config.headers['Content-Type'] = 'application/json'
+  return (dispatch) => {
+    axios
+    .delete(`http://localhost:4000/v1/symptoms/${sympID}`, config, 'Access-Control-Allow-Origin')
+    .then(function(response){
+      console.log("delet symp request went thru")
+      let allSymptoms = response.data
+      dispatch({
+        type: 'SET_SYMPTOMS',
+        payload: {
+          allSymptoms: allSymptoms
         }
       })
     })

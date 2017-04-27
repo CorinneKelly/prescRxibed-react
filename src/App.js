@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import GoogleLogin from 'react-google-login'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import './App.css'
 import Home from './components/Home'
 import Welcome from './components/Welcome'
 import BurgerMenu from './components/BurgerMenu'
@@ -23,8 +22,6 @@ class App extends Component {
   componentWillMount(){
     this.props.forceLogout(this.props.account.expiresAt)
   }
-
-
 
   render() {
     return (

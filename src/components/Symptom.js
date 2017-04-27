@@ -20,6 +20,7 @@ class Symptom extends Component {
 		this.state = {
 			newLogLink: ""
 		}
+		this.originalState = this.originalState.bind(this)
 		this.onMouseOver = this.onMouseOver.bind(this)
 		this.onMouseOut = this.onMouseOut.bind(this)
 	}
@@ -27,9 +28,10 @@ class Symptom extends Component {
 	componentWillMount(){
     this.props.getSymptom(this.props.match.params.symptomId)
     this.props.forceLogout(this.props.account.expiresAt)
-		this.setState({
-			newLogLink: `How does your ${this.props.symptom.specificSymptom.name} feel today?`
-		})
+		// this.setState({
+		// 	newLogLink: `How does your ${this.props.symptom.specificSymptom.name} feel today?`
+		// })
+  // //   debugger
 	}
 
 	onMouseOver(){
@@ -100,6 +102,7 @@ class Symptom extends Component {
 		  		</li>
 
 		  		<li className="list-item" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} >
+		  			
 		  			<img className="flex-auto" id="add-new-log-img" height="80px" src={`${sympImgPath}addSymptomLtBlue.svg`} />
             <Link className="symp-new-log-link flex-60" to={`/symptoms/${symptomId}/addLog`} >
               {this.state.newLogLink}
