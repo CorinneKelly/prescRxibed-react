@@ -13,7 +13,6 @@ export const postSymptomEvent = (symptomData) => {
       .then(
           console.log("success for new symptom"),
           store.dispatch(push(`/prescriptions/${symptomData.prescriptionId}`)),
-          alert("You just added a symptom!")
       )
     } else {
       axios
@@ -28,7 +27,6 @@ export const postSymptomEvent = (symptomData) => {
             }
           })
           store.dispatch(push(`/symptoms/${symptomData.symptomId}`))
-          alert("You just added a symptom Log!")
       })
     }
   }
@@ -65,6 +63,25 @@ export const getSymptom = (symptomId) => {
         payload: {
           symptom: specificSymptom.symptom,
           symptomLogs: specificSymptom.symptomLogs
+        }
+      })
+    })
+  }
+}
+
+export const deleteSymp = (sympID) => {
+  let config = setAuthHeader()
+  config.headers['Content-Type'] = 'application/json'
+  return (dispatch) => {
+    axios
+    .delete(`http://localhost:4000/v1/symptoms/${sympID}`, config, 'Access-Control-Allow-Origin')
+    .then(function(response){
+      console.log("delet symp request went thru")
+      let allSymptoms = response.data
+      dispatch({
+        type: 'SET_SYMPTOMS',
+        payload: {
+          allSymptoms: allSymptoms
         }
       })
     })

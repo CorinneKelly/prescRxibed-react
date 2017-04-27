@@ -12,7 +12,6 @@ export const postPrescriptionEvent = (prescriptionData) => {
     .post('http://localhost:4000/v1/prescriptions', {prescriptionData: prescriptionData}, config)
     .then(
       store.dispatch(push('/')),
-      alert("You just added a prescription!")
     )
   }
 }
