@@ -44,12 +44,13 @@ class Prescription extends Component {
 	}
 
 	componentWillMount(){
+		let prescriptionId = this.props.match.params.prescriptionId
 		this.setState({
-			prescriptionId: this.props.match.params.prescriptionId
+			prescriptionId: prescriptionId
 		})
-
 		this.props.forceLogout(this.props.account.expiresAt)
-		this.props.getPrescription(this.props.match.params.prescriptionId)
+		this.props.getPrescription(prescriptionId)
+		this.props.getSymptoms(prescriptionId)
 	}
 
 
@@ -95,9 +96,16 @@ class Prescription extends Component {
 
 	showSymptoms(){
 		this.props.getSymptoms(this.state.prescriptionId)
-		this.setState({
-			display: "symptoms"
-		})
+		if (this.state.display === "symptoms") {
+				this.setState({
+						display: ""
+				})
+
+		} else {
+				this.setState({
+						display: "symptoms"
+				})
+		}
 	}
 
 	renderSymptoms(){
@@ -124,17 +132,17 @@ class Prescription extends Component {
 				<BurgerMenu />
 				<ul>
 					<li className="list-item  pres-page-list-item">
-						<img className="flex-auto" src={`${imgPath}rxBottleBrightBlue.svg`} />
+						<img className="flex-auto" height="100px" src={`${imgPath}rxBottleBrightBlue.svg`} />
 						<button className="flex-60 prescription-main-list-item" onClick={this.showDetails}>
-							Prescription Details 
+							Prescription Details
 						</button>
 					</li>
 					{this.renderDetails()}
 
 					<li className="list-item  pres-page-list-item">
-						<img className="flex-auto" src={`${imgPath}symptomTrackerBrightBlue.svg`} />
+						<img className="flex-auto" height="100px" src={`${imgPath}symptomTrackerBrightBlue.svg`} />
 						<button className="flex-60 prescription-main-list-item" onClick={this.showSymptoms}>
-							Symptom Tracker 
+							Symptom Tracker
 						</button>
 					</li>
 					{this.renderSymptoms()}
@@ -149,6 +157,7 @@ class Prescription extends Component {
 const mapStateToProps = (state) => {
 	return {
 		prescription: state.prescription,
+		symptom: state.symptom,
 		account: state.account
 	}
 }

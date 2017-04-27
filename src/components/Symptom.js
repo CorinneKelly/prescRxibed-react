@@ -27,9 +27,9 @@ class Symptom extends Component {
 	componentWillMount(){
     this.props.getSymptom(this.props.match.params.symptomId)
     this.props.forceLogout(this.props.account.expiresAt)
-		this.setState({
-			newLogLink: `How does your ${this.props.symptom.specificSymptom.name} feel today?`
-		})
+		// this.setState({
+		// 	newLogLink: `How does your ${this.props.symptom.specificSymptom.name} feel today?`
+		// })
 	}
 
 	onMouseOver(){
@@ -44,13 +44,13 @@ class Symptom extends Component {
 		document.getElementById("add-new-log-img").setAttribute('src', `${sympImgPath}addSymptomLtBlue.svg`)
 		document.querySelector(".symp-new-log-link").style.color = "#D0E7F0"
 		this.setState({
-			newLogLink: `How does your ${this.props.symptom.specificSymptom.name} feel today?`
+			newLogLink: `How is your ${this.props.symptom.specificSymptom.name} today?`
 		})
 	}
 
 	render() {
 
-    if (this.props.symptom.symptomLogs){
+    if (this.props.symptom.symptomLogs.length > 0){
       var symptomDescList =	this.props.symptom.symptomLogs.map((symptom) => {
 			 let symptomImages = symptom.uploadedFiles.map((file) =>{
 					return (
@@ -76,7 +76,7 @@ class Symptom extends Component {
          </div>
         )
       })
- 			
+
       var severityData = this.props.symptom.symptomLogs.map((symptom) => {
         return {date: moment(symptom.created_at).format("MM-DD"), uv: symptom.severity}
       })
@@ -84,10 +84,10 @@ class Symptom extends Component {
       var symptomId = this.props.symptom.specificSymptom.id
     }
     else {
-      var symptomDescList =	"no logs"
+      var symptomDescList =	""
       var severityData = []
       var symptomImages = ""
-      var name = "no name"
+      var name = ""
       var symptomId = null
     }
 	  return(
@@ -98,11 +98,10 @@ class Symptom extends Component {
 		  		<li className="list-item" >
 		  			<h1 className="page-title flex-auto">{name}</h1>
 		  		</li>
-
 		  		<li className="list-item" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} >
 		  			<img className="flex-auto" id="add-new-log-img" height="80px" src={`${sympImgPath}addSymptomLtBlue.svg`} />
             <Link className="symp-new-log-link flex-60" to={`/symptoms/${symptomId}/addLog`} >
-              {this.state.newLogLink}
+              {this.state.newLogLink? this.state.newLogLink : `How is your ${this.props.symptom.specificSymptom.name} today?`}
             </Link>
 		  		</li>
 

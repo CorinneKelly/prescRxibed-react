@@ -11,7 +11,6 @@ export const postPrescriptionEvent = (prescriptionData) => {
     axios
     .post('http://localhost:4000/v1/prescriptions', {prescriptionData: prescriptionData}, config)
     .then(
-
       store.dispatch(push('/')),
       alert("You just added a prescription!")
     )
@@ -51,9 +50,7 @@ export const getPrescriptions = () => {
     	let allPrescriptions = response.data
       dispatch({
         type: 'SET_PRESCRIPTIONS',
-        payload: {
-          allPrescriptions: allPrescriptions
-        }
+        payload: allPrescriptions
       })
     })
   }
@@ -69,11 +66,7 @@ export const getPrescription = (prescriptionId) => {
       let data = response.data
       dispatch({
         type: 'SET_PRESCRIPTION',
-        payload: {
-          symptoms: data.symptoms,
-          specificPrescription: data.prescription
-
-        }
+        payload: data.prescription
       })
     })
   }
@@ -82,7 +75,6 @@ export const getPrescription = (prescriptionId) => {
 export const deletePrescription = (prescriptionId) => {
     let config = setAuthHeader()
     config.headers['Content-Type'] = 'application/json'
-    // debugger
   return (dispatch) => {
     axios
     .delete(`http://localhost:4000/v1/prescriptions/${prescriptionId}`, config, 'Access-Control-Allow-Origin')
@@ -91,14 +83,8 @@ export const deletePrescription = (prescriptionId) => {
       let allPrescriptions = response.data
       dispatch({
         type: 'SET_PRESCRIPTIONS',
-        payload: {
-          allPrescriptions: allPrescriptions
-        }
+        payload: allPrescriptions
       })
     })
-    .then(
-      // store.dispatch(push('/presciptions'))
-    )
   }
 }
-

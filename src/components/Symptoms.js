@@ -20,7 +20,7 @@ class Symptoms extends Component {
 	}
 
 	render() {
-		var symptoms = this.props.prescription.symptoms.map((symp, index) => {
+		var symptoms = this.props.symptoms.allSymptoms.map((symp, index) => {
 			return (
 				<SymptomListItem
 					symptomDetails={symp}
@@ -47,10 +47,9 @@ class Symptoms extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		symptom: state.symptom,
+		symptoms: state.symptom,
 		prescription: state.prescription
 	}
 }
 
 export default connect(mapStateToProps)(Symptoms)
-

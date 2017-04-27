@@ -11,7 +11,7 @@ export const postSymptomEvent = (symptomData) => {
       axios
       .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData}, config)
       .then(
-          console.log("success"),
+          console.log("success for new symptom"),
           store.dispatch(push(`/prescriptions/${symptomData.prescriptionId}`)),
           alert("You just added a symptom!")
       )
@@ -19,12 +19,11 @@ export const postSymptomEvent = (symptomData) => {
       axios
       .post('http://localhost:4000/v1/symptom_logs', {symptomData: symptomData}, config)
       .then(function(response) {
-          console.log("success")
           let specificSymptom = response.data
           dispatch({
             type: 'SET_SPECIFIC_SYMPTOM',
             payload: {
-              specificSymptom: specificSymptom.symptom,
+              symptom: specificSymptom.symptom,
               symptomLogs: specificSymptom.symptomLogs
             }
           })
@@ -43,13 +42,11 @@ export const getSymptoms = (prescriptionId) => {
     .get(`http://localhost:4000/v1/prescriptions/${prescriptionId}`, config)
     .then(function(response){
         console.log("get symptoms worked")
-        let allSymptoms = response.data
+        let allSymptoms = response.data.symptoms
 
       dispatch({
         type: 'SET_SYMPTOMS',
-        payload: {
-          allSymptoms: allSymptoms
-        }
+        payload: allSymptoms
       })
     })
   }
@@ -62,10 +59,11 @@ export const getSymptom = (symptomId) => {
     .get(`http://localhost:4000/v1/symptoms/${symptomId}`, config)
     .then(function(response){
       let specificSymptom = response.data
+      console.log(specificSymptom)
       dispatch({
         type: 'SET_SPECIFIC_SYMPTOM',
         payload: {
-          specificSymptom: specificSymptom.symptom,
+          symptom: specificSymptom.symptom,
           symptomLogs: specificSymptom.symptomLogs
         }
       })
