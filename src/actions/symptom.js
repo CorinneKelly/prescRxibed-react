@@ -9,14 +9,14 @@ export const postSymptomEvent = (symptomData) => {
     let config = setAuthHeader()
     if (symptomData.prescriptionId){
       axios
-      .post('http://localhost:4000/v1/symptoms', {symptomData: symptomData}, config)
+      .post('https://prescrxibed-rails-api.herokuapp.com/v1/symptoms', {symptomData: symptomData}, config)
       .then(
           console.log("success for new symptom"),
           store.dispatch(push(`/prescriptions/${symptomData.prescriptionId}`)),
       )
     } else {
       axios
-      .post('http://localhost:4000/v1/symptom_logs', {symptomData: symptomData}, config)
+      .post('https://prescrxibed-rails-api.herokuapp.com/v1/symptom_logs', {symptomData: symptomData}, config)
       .then(function(response) {
           let specificSymptom = response.data
           dispatch({
@@ -37,7 +37,7 @@ export const getSymptoms = (prescriptionId) => {
   return (dispatch) => {
     let config = setAuthHeader()
     axios
-    .get(`http://localhost:4000/v1/prescriptions/${prescriptionId}`, config)
+    .get(`https://prescrxibed-rails-api.herokuapp.com/v1/prescriptions/${prescriptionId}`, config)
     .then(function(response){
         console.log("get symptoms worked")
         let allSymptoms = response.data.symptoms
@@ -54,7 +54,7 @@ export const getSymptom = (symptomId) => {
   return (dispatch) => {
     let config = setAuthHeader()
     axios
-    .get(`http://localhost:4000/v1/symptoms/${symptomId}`, config)
+    .get(`https://prescrxibed-rails-api.herokuapp.com/v1/symptoms/${symptomId}`, config)
     .then(function(response){
       let specificSymptom = response.data
       console.log(specificSymptom)
@@ -74,7 +74,7 @@ export const deleteSymp = (sympID) => {
   config.headers['Content-Type'] = 'application/json'
   return (dispatch) => {
     axios
-    .delete(`http://localhost:4000/v1/symptoms/${sympID}`, config, 'Access-Control-Allow-Origin')
+    .delete(`https://prescrxibed-rails-api.herokuapp.com/v1/symptoms/${sympID}`, config, 'Access-Control-Allow-Origin')
     .then(function(response){
       console.log("delet symp request went thru")
       let allSymptoms = response.data

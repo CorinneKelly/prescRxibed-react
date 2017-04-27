@@ -63,6 +63,18 @@ body {
 		background-color: #27CECF;
 	}
 
+.notification {
+	z-index: 1000;
+	height: 1000px;
+	width: 1000px;
+	background-color: #31375D;
+	color: #F2F3F5;
+	font-size: 60px;
+	margin-top: 300px;
+}
+
+
+
 /*dkblu: #31375D*/
 /*lt purple #93708D*/
 /*ltblue #D0E7F0*/

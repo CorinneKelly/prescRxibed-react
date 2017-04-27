@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import BurgerMenu from './BurgerMenu'
 import { Checkbox, CheckboxGroup } from 'react-checkbox-group'
 import '../stylesheets/addPrescription.css'
+import Notification from './Notification'
 
 
 class AddPrescription extends Component {
@@ -88,7 +89,7 @@ class AddPrescription extends Component {
 		this.setState({
 			message: true
 		})
-		setTimeout(()=>{this.postScrip()}, 3000)
+		setTimeout(()=>{this.postScrip()}, 2000)
 	}
 
 	postScrip(){
@@ -333,7 +334,7 @@ class AddPrescription extends Component {
 
 				<ul >
 					<li className='list-item list-item-margin'>
-						<div className="list-text flex-auto">Feel free to skip this section</div>
+						<div className="flex-auto">Feel free to skip this section</div>
 					</li>
 
 					<li className="list-item list-item-margin">
@@ -412,6 +413,7 @@ class AddPrescription extends Component {
 		return (
 
 			<div className="add-presc-page">
+				{this.state.message ? <Notification /> : null}
 				<BurgerMenu />
 				<div className="list-item">
 	        <h1 className="flex-auto">PrescR<sub>x</sub>ibed</h1>
@@ -427,7 +429,7 @@ class AddPrescription extends Component {
 
 					
 				</form>
-				{this.state.message ? "Your prescriptions have been updated" : null}
+
 
 			</div>
 
