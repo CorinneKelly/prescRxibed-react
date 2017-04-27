@@ -19,19 +19,28 @@ class Welcome extends Component {
 	render(){
 		return (
 			<div className="welcome-wrapper" >
-        <h1>PrescR<sub>x</sub>ibed</h1>
+			<ul>
+			<li className="list-item">
+				<div className="flex-auto">
+	        <h1>PrescR<sub>x</sub>ibed</h1>
 
-        <h3>Connect with Google</h3>
-        <h3>to start managing your prescriptions</h3>
+	        <h3>Connect with Google</h3>
+	        <h3>to start managing your prescriptions</h3>
+				</div>
+			</li>
 
-
-				<GoogleLogin socialId="60833227507-8v5bc1e54tjf098p279be3kn7prei20v.apps.googleusercontent.com"
+			<li className="list-item">
+				<div className="flex-auto">
+					<GoogleLogin socialId="60833227507-8v5bc1e54tjf098p279be3kn7prei20v.apps.googleusercontent.com"
 										class="google-login"
 										scope="profile"
 										responseHandler={this.props.getJWTToken}
 										buttonText="Connect With Google"
 										/>
+					</div>
 
+				</li>
+			</ul>
 			</div>
 		)
 	}

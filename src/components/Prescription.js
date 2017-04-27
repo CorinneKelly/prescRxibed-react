@@ -25,15 +25,15 @@ class Prescription extends Component {
 		this.showDetails = this.showDetails.bind(this)
 		this.showSymptoms = this.showSymptoms.bind(this)
 		this.renderDetails = this.renderDetails.bind(this)
-		this.handleDelete = this.handleDelete.bind(this)
+		// this.handleDelete = this.handleDelete.bind(this)
 		this.handleOnMouseOverSymp = this.handleOnMouseOverSymp.bind(this)
 		this.handleOnMouseOutSymp = this.handleOnMouseOutSymp.bind(this)
 
 	}
 
-	handleDelete(sympId){
-		this.props.deleteSymp(sympId)
-	}
+	// handleDelete(sympId){
+	// 	this.props.deleteSymp(sympId)
+	// }
 
 	handleOnMouseOverSymp(sympId, deleteImage){
 		document.getElementById(`symp-list-item${sympId}`).setAttribute('src', deleteImage)
@@ -112,7 +112,7 @@ class Prescription extends Component {
 		if (this.state.display === "symptoms"){
 			return (
 				<div>
-					<Symptoms handleDelete={this.handleDelete} handleOnMouseOverSymp={this.handleOnMouseOverSymp} handleOnMouseOutSymp={this.handleOnMouseOutSymp} />
+					<Symptoms handleOnMouseOverSymp={this.handleOnMouseOverSymp} handleOnMouseOutSymp={this.handleOnMouseOutSymp} />
 					<li className="list-item">
 						<img className="flex-auto" src={`${imgPath}addSymptomPeach.svg`} height="60px" width="60px" />
 						<a className="flex-60 new-symptom-link symp-list-link" href={`/prescriptions/${this.state.prescriptionId}/newsymptom`}>

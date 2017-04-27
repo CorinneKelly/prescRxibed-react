@@ -7,9 +7,9 @@ const homeImgPath = "../images/home/"
 
 class Symptoms extends Component {
 
-	getHandleDelete(){
-		return this.props.handleDelete
-	}
+	// getHandleDelete(){
+	// 	return this.props.handleDelete
+	// }
 
 	getMouseOver(){
 		return this.props.handleOnMouseOverSymp
@@ -27,7 +27,7 @@ class Symptoms extends Component {
 					sympID={symp.id}
 					handleOnMouseOverSymp={this.getMouseOver()}
 					handleOnMouseOutSymp={this.getMouseOut()}
-					handleDelete={this.getHandleDelete()}
+					// handleDelete={this.getHandleDelete()}
 					originalImageSource={index%2 ? `${presImgPath}heartSympPurple.svg` : `${presImgPath}heartSympWhite.svg`}
 					deleteImageSource={index%2 ? `${presImgPath}deleteCanPurple.svg` : `${homeImgPath}deleteCanWhite.svg`}
 					className={index%2 ? "purple-font" : "white-font"}
