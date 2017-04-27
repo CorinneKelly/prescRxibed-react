@@ -136,7 +136,7 @@ class Home extends Component {
 
 	showSchedule(){
 		if (this.state.schedOpen) {
-			return <li><FullSchedule /></li>
+			return <li className="list-item"><div className="flex-auto"><FullSchedule /></div></li>
 		} else {
 			return null
 		}
