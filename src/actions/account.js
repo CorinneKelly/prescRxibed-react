@@ -8,7 +8,7 @@ import { push } from 'react-router-redux'
 export function getJWTToken(response) {
   return (dispatch) => {
     axios
-    .post('http://localhost:4000/v1/sessions', {account: {googleToken: response.Zi.access_token, googleId: response.El, name: response.w3.U3}})
+    .post('https://prescrxibed-rails-api.herokuapp.com/v1/sessions', {account: {googleToken: response.Zi.access_token, googleId: response.El, name: response.w3.U3}})
     .then(function(response){
       let token = response.data.jwt
       let secondsToExpiration =  (moment().unix() + 60*60*1000)

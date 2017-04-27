@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone'
 import request from 'superagent'
 import BurgerMenu from './BurgerMenu'
 import '../stylesheets/symptomform.css'
+import Notification from './Notification'
 
 
 const CLOUDINARY_UPLOAD_PRESET = 'AddSymptomImg'
@@ -102,7 +103,7 @@ class SymptomForm extends Component {
 		this.setState({
 			message: true
 		})
-		setTimeout(()=>{this.postSymptom(), 3000})
+		setTimeout(()=>{this.postSymptom()}, 2000)
 	}
 
 	postSymptom(){
@@ -138,6 +139,7 @@ class SymptomForm extends Component {
 
 		return (
 			<div className="symptom-form-wrapper">
+				{this.state.message ? <Notification /> : null}
 				<BurgerMenu />
 				<div className="list-item">
 		        <h1 className="flex-auto">PrescR<sub>x</sub>ibed</h1>
@@ -184,7 +186,7 @@ class SymptomForm extends Component {
 						</li>
 					</ul>
 				</form>
-				{this.state.message ? "Your symptoms have been updated" : null}
+				
 			</div>
 		)
 	}
