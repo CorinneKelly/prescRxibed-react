@@ -25,6 +25,10 @@ class Prescription extends Component {
 		this.showDetails = this.showDetails.bind(this)
 		this.showSymptoms = this.showSymptoms.bind(this)
 		this.renderDetails = this.renderDetails.bind(this)
+		this.handleDelete = this.handleDelete.bind(this)
+		this.handleOnMouseOverSymp = this.handleOnMouseOverSymp.bind(this)
+		this.handleOnMouseOutSymp = this.handleOnMouseOutSymp.bind(this)
+
 	}
 
 	handleDelete(sympId){
@@ -102,7 +106,7 @@ class Prescription extends Component {
 				<div>
 					<Symptoms handleDelete={this.handleDelete} handleOnMouseOverSymp={this.handleOnMouseOverSymp} handleOnMouseOutSymp={this.handleOnMouseOutSymp} />
 					<li className="list-item">
-						<img className="flex-auto" src={`${imgPath}addSymptom.svg`} />
+						<img className="flex-auto" src={`${imgPath}addSymptomPeach.svg`} height="60px" width="60px" />
 						<a className="flex-60 new-symptom-link symp-list-link" href={`/prescriptions/${this.state.prescriptionId}/newsymptom`}>
 							Add New Symptom
 						</a>
@@ -121,7 +125,9 @@ class Prescription extends Component {
 				<ul>
 					<li className="list-item  pres-page-list-item">
 						<img className="flex-auto" src={`${imgPath}rxBottleBrightBlue.svg`} />
-						<button className="flex-60 prescription-main-list-item" onClick={this.showDetails}> Prescription Details </button>
+						<button className="flex-60 prescription-main-list-item" onClick={this.showDetails}>
+							Prescription Details 
+						</button>
 					</li>
 					{this.renderDetails()}
 

@@ -1,0 +1,113 @@
+/*new symptom form*/
+.page-title {
+	text-align: center;
+}
+
+.symptom-name-input {
+	background-color: #F2F3F5;
+  color: #31375D;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  outline: 1;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+	.symptom-name-input::placeholder {
+	  color: #93708D
+	}
+
+.current-severity-text {
+	text-align: center;
+	color: #27CECF;
+}
+
+input[type='range'] {
+	-webkit-appearance: none;
+	width: 100%;
+	background: transparent;
+	padding: 0 20px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 25px;
+  width: 10px;
+  border-radius: 5px;
+  background: #EEB5B7;
+  cursor: pointer;
+  margin-top: -10px; 
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; 
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 7px;
+  cursor: ew-resize;
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+  background: #27CECF;
+  border-radius: 1.3px;
+}
+
+.symp-log-input {
+	background-color: #F2F3F5;
+	color: #31375D;
+	height: 150px;
+	font-size: 20px;
+	border-radius: 5px;
+	margin-top: 20px;
+	outline: 0;
+	border: none;
+}
+
+#dropzone {
+	height: 75px;
+
+	border: 2px dashed #F2F3F5;
+	padding: 20px 10px 20px 0;
+	margin: 20px 10px 20px 0;
+	border-radius: 5px;
+}
+
+	#dropzone:hover {
+		border: 2px solid #27CECF;
+		color: #27CECF;
+	}
+
+	#dropzone:focus {
+		border: 2px solid #27CECF;
+		color: #EEB5B7;
+	}
+
+.img-delete-button {
+	background-color: #93708D;
+	color: #F2F3F5;
+	height: 20px;
+	border: none;
+	outline: 0;
+	margin: 10px 0 20px 0;
+	border-radius: 5px
+}
+
+	.img-delete-button:hover {
+		background-color: #F2F3F5;
+		color: #93708D;
+	}
+
+.uploaded-file {
+	margin: 0 20px;
+ }
+
+.uploaded-file-title {
+	padding: 0 20px;
+ }
+
+.upload-list-item {
+	text-align: center;
+}

@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login-component';
 import { bindActionCreators } from 'redux'
 import { getJWTToken } from '../actions/account'
 import { connect } from 'react-redux'
+import '../stylesheets/welcome.css'
 
 class Welcome extends Component {
 	constructor(){
@@ -18,9 +19,10 @@ class Welcome extends Component {
 	render(){
 		return (
 			<div className="welcome-wrapper" >
-        <h1>Welcome to Your Prescription Tracker</h1>
+        <h1>PrescR<sub>x</sub>ibed</h1>
 
-        <h3>Connect with Google to start managing your prescriptions</h3>
+        <h3>Connect with Google</h3>
+        <h3>to start managing your prescriptions</h3>
 
 
 				<GoogleLogin socialId="60833227507-8v5bc1e54tjf098p279be3kn7prei20v.apps.googleusercontent.com"

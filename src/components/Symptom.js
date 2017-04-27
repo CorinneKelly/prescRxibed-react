@@ -8,45 +8,75 @@ import { bindActionCreators } from 'redux'
 import { getSymptom } from '../actions/symptom'
 import { Link } from 'react-router-dom'
 import { forceLogout } from '../actions/account'
+import '../stylesheets/symptom.css'
 
+const sympImgPath = '/images/symptom/'
+const presImgPath = '/images/prescription/'
 
 class Symptom extends Component {
+
 	constructor(){
 		super()
+		this.state = {
+			newLogLink: ""
+		}
+		this.onMouseOver = this.onMouseOver.bind(this)
+		this.onMouseOut = this.onMouseOut.bind(this)
 	}
 
 	componentWillMount(){
     this.props.getSymptom(this.props.match.params.symptomId)
     this.props.forceLogout(this.props.account.expiresAt)
-
+		this.setState({
+			newLogLink: `How does your ${this.props.symptom.specificSymptom.name} feel today?`
+		})
 	}
 
+	onMouseOver(){
+		document.getElementById("add-new-log-img").setAttribute('src', `${presImgPath}addSymptomPeach.svg`)
+		document.querySelector(".symp-new-log-link").style.color = "#EEB5B7"
+		this.setState({
+			newLogLink: `Click to add a new log about your ${this.props.symptom.specificSymptom.name}`
+		})
+	}
 
-	
+	onMouseOut(){
+		document.getElementById("add-new-log-img").setAttribute('src', `${sympImgPath}addSymptomLtBlue.svg`)
+		document.querySelector(".symp-new-log-link").style.color = "#D0E7F0"
+		this.setState({
+			newLogLink: `How does your ${this.props.symptom.specificSymptom.name} feel today?`
+		})
+	}
+
 	render() {
 
     if (this.props.symptom.symptomLogs){
       var symptomDescList =	this.props.symptom.symptomLogs.map((symptom) => {
+			 let symptomImages = symptom.uploadedFiles.map((file) =>{
+					return (
+					<div className="flex-auto">
+						<Image height="100px" className="flex-auto symp-log-image" cloudName="prescriptionmanager" publicId={`${file.url}`} />
+          </div>)
+				})
         return (
-          <li className="list-item">
-            <div className="list-flex page-title">
-              {moment(symptom.created_at).format("MMM-DD")}
-            </div>
-            <div className="image-flex">
-              {symptom.description}
-            </div>
-          </li>
+        	<div>
+	          <li className="list-item symp-log-item">
+	            <div className="flex-auto">
+	              {moment(symptom.created_at).format("MMM DD")}
+	            </div>
+
+	            <div className="flex-60 symp-log-desc">
+	              {symptom.description}
+	            </div>
+	          </li>
+
+	          <li className="list-item symp-log-item">
+	          	{symptomImages}
+	          </li>
+         </div>
         )
       })
- 			var symptomImages = this.props.symptom.symptomLogs.map((log) => {
-				 let imageDate = moment(log.created_at).format("MMM-DD")
-				 return	log.uploadedFiles.map((file) =>{
-						return (<li>
-							<div className="list-flex">{imageDate}</div>
-							<Image className="image-flex" cloudName="prescriptionmanager" publicId={`${file.url}`} height="300" crop="scale" />
-						</li>)
-					})
-				})
+ 			
       var severityData = this.props.symptom.symptomLogs.map((symptom) => {
         return {date: moment(symptom.created_at).format("MM-DD"), uv: symptom.severity}
       })
@@ -65,18 +95,24 @@ class Symptom extends Component {
 	  	<div>
 	  		<BurgerMenu />
 	  		<ul>
-		  		<li className="list-item">
-		  			<h1 className="page-title image-flex">{name}</h1>
-	  			</li>
+		  		<li className="list-item" >
+		  			<h1 className="page-title flex-auto">{name}</h1>
+		  		</li>
 
-		  		<li className="list-item">
-            <Link className="page-title image-flex" to={`/symptoms/${symptomId}/addLog`}>
-              How is your {name} feeling today?
+		  		<li className="list-item" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} >
+		  			<img className="flex-auto" id="add-new-log-img" height="80px" src={`${sympImgPath}addSymptomLtBlue.svg`} />
+            <Link className="symp-new-log-link flex-60" to={`/symptoms/${symptomId}/addLog`} >
+              {this.state.newLogLink}
             </Link>
 		  		</li>
 
 		  		<li className="list-item">
-						<AreaChart className="page-title image-flex" width={400} height={250} data={severityData} >
+		  			<div className="flex-auto">Symptom Severity Over Time</div>
+		  		</li>
+
+		  		<li className="list-item">
+
+						<AreaChart className="page-title flex-auto" width={400} height={250} data={severityData} >
 						  <defs>
 						    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
 						    	// first offset determines % of first color gradient (same with 2nd)
@@ -87,16 +123,18 @@ class Symptom extends Component {
 
 						  </defs>
 						  <XAxis dataKey="date" />
-						  <YAxis type="number" domain={[0, 5]} />
+						  <YAxis type="number" domain={[0, 10]} />
 						  <Tooltip />
 						  <Area type="monotone" dataKey="uv" stroke="#F2F3F5" fillOpacity={1} fill="url(#colorUv)" />
 						</AreaChart>
 					</li>
-					<li className="list-item symp-log-heading">
-						<div className="image-flex page-title">
+
+					<li className="list-item">
+						<h3 className="flex-auto">
 							{name} Tracker
-						</div>
+						</h3>
 					</li>
+
 						{symptomDescList}
 						{symptomImages}
 				</ul>

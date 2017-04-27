@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
 import BurgerMenu from './BurgerMenu'
+import '../stylesheets/symptomform.css'
 
 const CLOUDINARY_UPLOAD_PRESET = 'AddSymptomImg'
 const CLOUDINARY_UPLOAD_URL = 'https:api.cloudinary.com/v1_1/prescriptionmanager/upload'
@@ -15,7 +16,7 @@ class SymptomForm extends Component {
 	constructor() {
 		super()
 		this.state = {
-			severity: 5,
+			severity: 10,
 			description: '',
 			uploadedFiles: [],
 		}
@@ -102,10 +103,12 @@ class SymptomForm extends Component {
 			if (this.state.uploadedFiles.length > 0) {
 				var currUploads = this.state.uploadedFiles.map((file) => {
 					return (
-						<div className="image-flex" >
-							{`${file.fileName}`} <br/>
-							<img src={`${file.url}`} /><br/>
-							<button className="list-flex" onClick={this.deleteImgPreview} value={`${file.fileName}`}>DELETE</button>
+						<div className="flex-auto uploaded-file" >
+							<h5 className="uploaded-file-title">
+								{`${file.fileName}`}
+							</h5>
+							<img className="flex-auto" src={`${file.url}`} /><br/>
+							<button className="flex-auto img-delete-button" onClick={this.deleteImgPreview} value={`${file.fileName}`}>DELETE</button>
 						</div>
 					)
 				})
@@ -119,7 +122,7 @@ class SymptomForm extends Component {
 			} else {
 				var title = <h1 className="page-title">
 				How does your
-				<input type="text" onChange={this.handleInputChange}/>
+					<input type="text" className="symptom-name-input" placeholder="Symptom Name" onChange={this.handleInputChange}/>
 				feel today</h1>
 			}
 
@@ -130,13 +133,13 @@ class SymptomForm extends Component {
 				<form onSubmit={this.handleSubmit} >
 					<ul>
 						<li className="list-item" >
-							<label className="curr-severity-text" htmlFor="currSev">Current Severity:</label>
-							<input className="curr-severity-text" type="range" id="currSev" min="0" max="5" step="1" onChange={this.outputUpdate} />
-							<output className="curr-severity-text" htmlFor="currSev" id="symp-severity">{this.state.severity}</output><br />
+							<label className="curr-severity-text flex-auto" htmlFor="currSev">Current Severity:</label>
+							<input className="curr-severity-input flex-auto" type="range" id="currSev" min="1" max="10" step="1" onChange={this.outputUpdate} />
+							<output className="curr-severity-text flex-auto" htmlFor="currSev" id="symp-severity">{this.state.severity}</output><br />
 						</li>
 
 						<li className="list-item" >
-							<textarea className="add-pres-input" rows="10" placeholder="Tell me how you feel" onChange={this.symptomTextDesc} />
+							<textarea className="symp-log-input flex-auto" placeholder="Tell me how you feel" onChange={this.symptomTextDesc} />
 						</li>
 
 						<li className="list-item upload-list-item" >
@@ -144,10 +147,11 @@ class SymptomForm extends Component {
 								multiple={true}
 								accept="image/*"
 								onDrop={this.handleImageUpload}
-								className="image-flex" id="dropzone" >
+								className="flex-60" id="dropzone" >
 
-								<p>Drag & drop image</p>
-								<p>or click to select file</p>
+								<div>Drag & drop</div>
+								<div>or click</div>
+								<div>to upload multiple files!</div>
 							</Dropzone>
 
 						</li>
@@ -155,15 +159,15 @@ class SymptomForm extends Component {
 						<li className="list-item" >
 							{this.state.uploadedFiles.length === 0 ? null :
 								<div>
-									<p>You just uploaded:</p>
-										<div className="list-item">
-											{currUploads}
-										</div>
+									<h3 className="flex-auto upload-list-title">You just uploaded:</h3>
+									<li className="list-item">
+										{currUploads}
+									</li>
 								</div>
 							}
 						</li>
 						<li className="list-item" >
-							<input className="symptom-submit" type="submit" onSubmit={this.handleSubmit} value="Finished" />
+							<input className="button-format flex-auto" type="submit" onSubmit={this.handleSubmit} value="Finished" />
 						</li>
 					</ul>
 				</form>
@@ -171,7 +175,6 @@ class SymptomForm extends Component {
 		)
 	}
 }
-
 
 	const mapDispatchToProps = (dispatch) => {
 	  return bindActionCreators({
